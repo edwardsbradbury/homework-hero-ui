@@ -5,7 +5,8 @@ export const userReducer = createSlice({
   initialState: {
     value: {
       loggedIn: false,
-      name: '',
+      f_name: '',
+      l_name: '',
       id: null,
       type: 'client',
     }},
@@ -15,5 +16,7 @@ export const userReducer = createSlice({
     },
   }
 });
+
+export const {login} = userReducer.actions;
 
 export default userReducer.reducer;

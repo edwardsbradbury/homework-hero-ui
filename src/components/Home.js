@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
 import Nav from './Nav';
 import Splash from './Splash';
 import Dashboard from './Dashboard';
@@ -19,35 +19,6 @@ function Home() {
       {mode === 'register' && <Register />}
     </div>
   )
-  // if (loggedIn) {
-  //   return (
-  //     <div id='home'>
-  //       <Nav />
-  //       <Dashboard />
-  //     </div>
-  //   )
-  // } else if (mode === 'splash') {
-  //   return (
-  //     <div id='home'>
-  //       <Nav />
-  //       <Splash />
-  //     </div>
-  //   )
-  // } else if (mode === 'login') {
-  //   return (
-  //     <div id='home'>
-  //       <Nav />
-  //       <Login />
-  //     </div>
-  //   )
-  // } else if (mode === 'register') {
-  //   return (
-  //     <div id='home'>
-  //       <Nav />
-  //       <Register />
-  //     </div>
-  //   )
-  // }
 }
 
 export default Home;

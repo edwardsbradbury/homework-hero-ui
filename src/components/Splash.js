@@ -19,7 +19,7 @@ function Splash() {
       tuition will help you achieve a goal in your Personal
       Education Plan, your school may even pay for 10-12
       lessons.</p>
-      <img src={require('../assets/splash_bg.jpeg')} alt='Image of girl at desk with textbooks and notepad, looking frustrated'></img>
+      <img src={require('../assets/splash_bg.jpeg')} alt='Girl at desk with textbooks and notepad, looking frustrated'></img>
       <h2>Don't despair, we can help!</h2>
       <button onClick={() => {dispatch(changeMode({mode: 'register'}))}}>Get help</button>
     </div>
