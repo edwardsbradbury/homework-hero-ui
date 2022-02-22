@@ -1,20 +1,24 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import Login from './Login';
 import Splash from './Splash';
 import Dashboard from './Dashboard';
+import Login from './Login';
+import Register from './Register';
 
 function Home() {
-  const loggedIn = useSelector((state) => state.user.value.loggedIn);
-  console.log(loggedIn);
+  const homeState = useSelector((state) => state);
+  const loggedIn = homeState.user.value.loggedIn;
+  const mode = homeState.home.value.mode;
+  // console.log(loggedIn);
   if (loggedIn) {
     return <Dashboard />
-  } else {
+  } else if (mode === 'splash') {
     return <Splash />
+  } else if (mode === 'login') {
+    return <Login />
+  } else if (mode === 'register') {
+    return <Register />
   }
-  // return (
-  //   <h1>Homepage. Logged in =  {loggedIn}</h1>
-  // )
 }
 
 export default Home;

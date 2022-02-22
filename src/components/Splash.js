@@ -4,7 +4,6 @@ function Splash() {
   return (
     <div id='splash'>
       <h1>Struggling with your homework?</h1>
-      <img src={require('../assets/splash_bg.jpeg')}></img>
       <p>Do you have nobody you can ask for help?</p>
 
       <p>We can match you with tutors who will soon help
@@ -17,8 +16,9 @@ function Splash() {
       tuition will help you achieve a goal in your Personal
       Education Plan, your school may even pay for 10-12
       lessons.</p>
+      <img src={require('../assets/splash_bg.jpeg')} alt='Image of girl at desk with textbooks and notepad, looking frustrated'></img>
       <h2>Don't despair, we can help!</h2>
-      <button>Get help</button>
+      <button onClick={(event) => event}>Get help</button>
     </div>
   )
 }

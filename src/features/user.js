@@ -7,6 +7,7 @@ export const userReducer = createSlice({
       loggedIn: false,
       name: '',
       id: null,
+      type: 'client',
     }},
   reducers: {
     login: (state, action) => {

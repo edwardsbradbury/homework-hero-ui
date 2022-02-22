@@ -4,9 +4,14 @@ import {useDispatch} from 'react-redux';
 function Login() {
   return (
     <div id='Login'>
-      <form onSubmit={this.login}>
-        <input type='text' value='' onChange={this.handleChange} />
-        <button></button>
+      <h1>Login</h1>
+      <form>
+        <label>Email address </label>
+        <input type='text' placeholder='you@website.com'></input>
+        <label>Password </label>
+        <input type='password'></input>
+        <br />
+        <button>Forgotten password?</button>
         <input type='submit' value='Login'/>
       </form>
     </div>
