@@ -13,4 +13,6 @@ export const homeReducer = createSlice({
   }
 });
 
+export const {changeMode} = homeReducer.actions;
+
 export default homeReducer.reducer;

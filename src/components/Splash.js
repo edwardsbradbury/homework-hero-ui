@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { changeMode } from '../features/home';
 
 function Splash() {
+  const dispatch = useDispatch();
   return (
     <div id='splash'>
       <h1>Struggling with your homework?</h1>
@@ -18,7 +21,7 @@ function Splash() {
       lessons.</p>
       <img src={require('../assets/splash_bg.jpeg')} alt='Image of girl at desk with textbooks and notepad, looking frustrated'></img>
       <h2>Don't despair, we can help!</h2>
-      <button onClick={(event) => event}>Get help</button>
+      <button onClick={() => {dispatch(changeMode({mode: 'register'}))}}>Get help</button>
     </div>
   )
 }
