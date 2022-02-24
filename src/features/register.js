@@ -10,7 +10,7 @@ export const registerFormReducer = createSlice({
       dob: null,
       email2: null,
       password: null,
-      conf_password: null
+      confPassword: null
     }},
   reducers: {
     updateForm: (state, action) => {
