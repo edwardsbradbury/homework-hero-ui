@@ -148,6 +148,7 @@ function Register() {
   function submitRegistration() {
     // console.log('Sending registration data');
     API().post('register', {
+      userType: userType,
       first: forename,
       last: lastname,
       email1: userEmail,
