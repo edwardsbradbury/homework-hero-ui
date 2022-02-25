@@ -42,7 +42,7 @@ function Register() {
 
   function allFieldsAreFilled() {
     return (forename && lastname && userEmail && dob && secondEmail && password && confPassword && tcBoxChecked) ? true : false;
-  }
+  };
   
   function checkAge(date) {
 
@@ -70,7 +70,7 @@ function Register() {
       return true;
     }
 
-  }
+  };
   
   function checkForm(e) {
     e.preventDefault();
@@ -97,59 +97,53 @@ function Register() {
 
     if (!forename) {
       errorObj.forenameMissing = 'Please enter your first name';
+    } else if (!nameRegex.test(forename)) {
+      errorObj.forenameInvalid = 'Names can only contain letters and hyphens';
     }
     
     if (!lastname) {
       errorObj.lastnameMissing = 'Please enter your last name';
+    } else if (!nameRegex.test(lastname)) {
+      errorObj.lastnameInvalid = 'Names can only contain letters and hyphens';
     }
 
     if (!userEmail) {
       errorObj.userEmailMissing = 'Please enter your personal email address';
+    } else if (!emailRegex.test(userEmail)) {
+      errorObj.userEmailInvalid = 'The personal email address you entered is not valid. Please enter a valid email address';
     }
 
     if (!dob) {
       errorObj.dobMissing = 'Please enter your date of birth';
+    } else if (!checkAge(dob)) {
+      errorObj.dobInvalid = `The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`;
     }
 
     if (!secondEmail) {
       errorObj.secondEmailMissing = `Please enter your ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address`;
+    } else if (!emailRegex.test(secondEmail)) {
+      errorObj.secondEmailInvalid = `The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`;
     }
 
     if (!password) {
       errorObj.passwordMissing = 'Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
+    } else if (!passwordRegex.match(password)) {
+      errorObj.passwordInvalid = 'Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
     }
 
     if (!confPassword) {
       errorObj.confPasswordMissing = 'Please re-enter the password for confirmation';
+    } else if (confPassword !== password) {
+      errorObj.confPasswordInvalid = 'The confirmation password should be the same as the password';
     }
 
     if (!tcBoxChecked) {
       errorObj.tcBoxUnchecked = 'Please read and agree to the terms and conditions';
     }
 
-    if (!nameRegex.test(forename)) {
-      errorObj.forenameInvalid = 'Names can only contain letters and hyphens';
-    }
-
-    if (!nameRegex.test(lastname)) {
-      errorObj.lastnameInvalid = 'Names can only contain letters and hyphens';
-    }
-
-    if (!emailRegex.test(userEmail)) {
-      errorObj.userEmailInvalid = 'The personal email address you entered is not valid. Please enter a valid email address';
-    }
-
-    if (!checkAge(dob)) {
-      errorObj.dobInvalid = `The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`;
-    }
-
-    if (!emailRegex.test(secondEmail)) {
-      errorObj.secondEmailInvalid = `The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`;
-    }
-
     setErrors(errorObj);
 
-  }
+  };
 
   function submitRegistration() {
     // console.log('Sending registration data');
@@ -162,7 +156,7 @@ function Register() {
       password: password,
       confPassword: confPassword
     }).then(response => console.log(response.data)).catch(error => console.log(error));
-  }
+  };
 
 
   return (
@@ -178,7 +172,7 @@ function Register() {
         {errors.lastnameMissing && <p>{errors.lastnameMissing}</p>}
         {errors.lastnameInvalid && <p>{errors.lastnameInvalid}</p>}
         <label htmlFor='userEmail'>Email address </label>
-        <input id='userEmail' type='email' placeholder='you@website.com' value={userEmail} onChange={(e) => setEmail(e.target.value.trim())}></input>
+        <input id='userEmail' type='text' placeholder='you@website.com' value={userEmail} onChange={(e) => setEmail(e.target.value.trim())}></input>
         {errors.userEmailMissing && <p>{errors.userEmailMissing}</p>}
         {errors.userEmailInvalid && <p>{errors.userEmailInvalid}</p>}
         <br />
@@ -187,16 +181,16 @@ function Register() {
         {errors.dobMissing && <p>{errors.dobMissing}</p>}
         {errors.dobInvalid && <p>{errors.dobInvalid}</p>}
         <label htmlFor='secondEmail'>{emailLabel} </label>
-        <input id='secondEmail' type='email' placeholder={emailPlaceholder} value={secondEmail} onChange={(e) => setSecondEmail(e.target.value.trim())}></input>
+        <input id='secondEmail' type='text' placeholder={emailPlaceholder} value={secondEmail} onChange={(e) => setSecondEmail(e.target.value.trim())}></input>
         {errors.secondEmailMissing && <p>{errors.secondEmailMissing}</p>}
         {errors.secondEmailInvalid && <p>{errors.secondEmailInvalid}</p>}
         <br />
         <label htmlFor='password'>Password </label>
-        <input id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value.trim())}></input>
+        <input id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}
         {errors.passwordInvalid && <p>{errors.passwordInvalid}</p>}
         <label htmlFor='confPass'>Confirm password </label>
-        <input id='confPass' type='password' value={confPassword} onChange={(e) => setConfPassword(e.target.value.trim())}></input>
+        <input id='confPass' type='password' value={confPassword} onChange={(e) => setConfPassword(e.target.value)}></input>
         {errors.confPasswordMissing && <p>{errors.confPasswordMissing}</p>}
         {errors.confPasswordInvalid && <p>{errors.confPasswordInvalid}</p>}
         <br />
