@@ -40,7 +40,7 @@ function Login() {
   };
   
   function submitLogin() {
-    API().post({
+    API().post('login', {
       email: email,
       password: password
     }).then(
