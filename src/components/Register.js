@@ -127,7 +127,7 @@ function Register() {
 
     if (!password) {
       errorObj.passwordMissing = 'Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
-    } else if (!passwordRegex.match(password)) {
+    } else if (!passwordRegex.test(password)) {
       errorObj.passwordInvalid = 'Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
     }
 
