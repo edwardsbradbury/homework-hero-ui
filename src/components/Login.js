@@ -44,7 +44,6 @@ function Login() {
       email: email,
       password: password
     }).then(
-      // (response) => console.log(response.data)
       (response) => {
         if (response.data.outcome === 'success') {
           dispatch(changeMode({mode: 'dashboard'}));
