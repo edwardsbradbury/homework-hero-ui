@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeMode } from '../features/home'
+import { changeMode } from '../features/home';
+import API from '../features/API';
+import {logout} from '../features/user';
 
 function Nav() {
   const user_data = useSelector((state) => state.user.value);
@@ -9,6 +11,21 @@ function Nav() {
   const question_prompt = user_type === 'client' ? 'Ask a question' : 'Browse questions';
   const search_prompt = user_type === 'client' ? 'Search for tutors' : 'Search for clients';
   const dispatch = useDispatch();
+
+  function logout() {
+    API().get('logout')
+    .then(response => {
+      dispatch(changeMode({mode: 'splash'}));
+      dispatch(logout({
+        loggedIn: false,
+        id: null,
+        type: 'client',
+        forename: '',
+        lastname: ''
+      }));
+    })
+    .catch(error => console.log(error));
+  }
 
   return (
     <div id='nav'>
@@ -25,6 +42,7 @@ function Nav() {
         <button onClick={() => dispatch(changeMode({mode: 'search'}))}>{search_prompt}</button>
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</button>}
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</button>}
+        {loggedIn && <buton onClick={() => logout}>Logout</buton>}
       </nav>
     </div>
   )

@@ -6,15 +6,11 @@ import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import userReducer from './features/user.js';
 import homeReducer from './features/home.js';
-import registerFormReducer from './features/home.js';
-import loginFormReducer from './features/home.js';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    home: homeReducer,
-    registerForm: registerFormReducer,
-    loginForm: loginFormReducer
+    home: homeReducer
   }
 });
 

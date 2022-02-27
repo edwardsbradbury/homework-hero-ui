@@ -9,10 +9,10 @@ function Register() {
   const dispatch = useDispatch();
   const [today] = useState(new Date());
   today.setHours(0,0,0,0);
-  const nameRegex = useState(/^[a-zA-Z]+(-[a-zA-Z]+)*$/);
-  const emailRegex = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-  const acEmailRegex = useState(/^[\w!#$%&'*+\/=?^`{|}~-]+(?:\.[\w!#$%&'*+\/=?`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:ac\.uk)$/);
-  const passwordRegex = useState(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+  const [nameRegex] = useState(/^[a-zA-Z]+(-[a-zA-Z]+)*$/);
+  const [emailRegex] = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  const [acEmailRegex] = useState(/^[\w!#$%&'*+\/=?^`{|}~-]+(?:\.[\w!#$%&'*+\/=?`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:ac\.uk)$/);
+  const [passwordRegex] = useState(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
   const [userType, setUserType] = useState(useSelector((state) => state.user.value.type));
   const [emailLabel, setEmailLabel]  = useState(userType === 'client' ? `Designated teacher's email address` : `Personal tutor's email address`);
   const [emailPlaceholder, setEmailPlaceholder] = useState(userType === 'client' ? 'teacher@school.ac.uk' : 'tutor@university.ac.uk');
@@ -115,63 +115,48 @@ function Register() {
     }
 
     if (!forename) {
-      // errorObj.forenameMissing = 'Please enter your first name';
       errorObj.forenameMissing = forenameMissing;
     } else if (!nameRegex.test(forename)) {
-      // errorObj.forenameInvalid = 'Names can only contain letters and hyphens';
       errorObj.forenameInvalid = forenameInvalid;
     }
     
     if (!lastname) {
-      // errorObj.lastnameMissing = 'Please enter your last name';
       errorObj.lastnameMissing = lastnameMissing;
     } else if (!nameRegex.test(lastname)) {
-      // errorObj.lastnameInvalid = 'Names can only contain letters and hyphens';
       errorObj.lastnameInvalid = lastnameInvalid;
     }
 
     if (!userEmail) {
-      // errorObj.userEmailMissing = 'Please enter your personal email address';
       errorObj.userEmailMissing = userEmailMissing;
     } else if (!emailRegex.test(userEmail)) {
-      // errorObj.userEmailInvalid = 'The personal email address you entered is not valid. Please enter a valid email address';
       errorObj.userEmailInvalid = userEmailInvalid;
     }
 
     if (!dob) {
-      // errorObj.dobMissing = 'Please enter your date of birth';
       errorObj.dobMissing = dobMissing;
     } else if (!checkAge(dob)) {
-      // errorObj.dobInvalid = `The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`;
       errorObj.dobInvalid = dobInvalid;
     }
 
     if (!secondEmail) {
-      // errorObj.secondEmailMissing = `Please enter your ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address`;
       errorObj.secondEmailMissing = secondEmailMissing;
     } else if (!emailRegex.test(secondEmail)) {
-      // errorObj.secondEmailInvalid = `The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`;
       errorObj.secondEmailInvalid = secondEmailInvalid;
     }
 
     if (!password) {
-      // errorObj.passwordMissing = 'Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
       errorObj.passwordMissing = passwordMissing;
     } else if (!passwordRegex.test(password)) {
-      // errorObj.passwordInvalid = 'Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
       errorObj.passwordInvalid = passwordInvalid;
     }
 
     if (!confPassword) {
-      // errorObj.confPasswordMissing = 'Please re-enter the password for confirmation';
       errorObj.confPasswordMissing = confPasswordMissing;
-    } else if (confPassword !== password) {
-      // errorObj.confPasswordInvalid = 'The confirmation password should be the same as the password';
+    } else if (!confPasswordValid) {
       errorObj.confPasswordInvalid = confPasswordInvalid;
     }
 
     if (!tcBoxChecked) {
-      // errorObj.tcBoxUnchecked = 'Please read and agree to the terms and conditions';
       errorObj.tcBoxUnchecked = tcBoxUnchecked;
     }
 
