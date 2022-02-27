@@ -192,15 +192,15 @@ function Register() {
     })
     .then(response => {
       if (response.data.outcome === 'success') {
-        // useDispatch(login(
-        //   {
-        //     loggedIn: true,
-        //     id: response.data.userId,
-        //     userType: userType,
-        //     forename: forename,
-        //     lastname: lastname,
-        //   }
-        // ))
+        dispatch(login(
+          {
+            loggedIn: true,
+            id: response.data.userId,
+            userType: userType,
+            forename: forename,
+            lastname: lastname,
+          }
+        ))
       } else if (Array.isArray(response.data.error)) {
         console.log('Server validation errors');
       } else {
