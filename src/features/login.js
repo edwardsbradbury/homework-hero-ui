@@ -1,4 +1,12 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import API from './API'
+
+export const submitLogin = createAsyncThunk(
+  'login/submitLogin',
+  async ({userData}) => {
+    return API().post('/register', userData);
+  }
+);
 
 export const loginFormReducer = createSlice({
   name: 'loginForm',
@@ -11,6 +19,9 @@ export const loginFormReducer = createSlice({
     updateForm: (state, action) => {
       state.value = action.payload;
     },
+  },
+  extraReducers: {
+
   }
 });
 

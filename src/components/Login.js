@@ -44,7 +44,20 @@ function Login() {
       email: email,
       password: password
     }).then(
-      (response) => console.log(response.data)
+      // (response) => console.log(response.data)
+      (response) => {
+        if (response.data.outcome === 'success') {
+          dispatch(login(
+            {
+              loggedIn: true,
+              id: response.data.userId,
+              type: response.data.userType,
+              forename: response.data.first,
+              lastname: response.data.last
+            }
+          ));
+        }
+      }
     ).catch(
       (error) => console.log(error));
   };

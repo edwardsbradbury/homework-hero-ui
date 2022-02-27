@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import API from '../features/API';
+import {login} from '../features/user';
+import {changeMode} from '../features/home';
 
 function Register() {
 
+  const dispatch = useDispatch();
   const [today] = useState(new Date());
   today.setHours(0,0,0,0);
-  const [nameRegex] = useState(/^[a-zA-Z]+(-[a-zA-Z]+)*$/);
-  const [emailRegex] = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-  const [acEmailRegex] = useState(/^[\w!#$%&'*+\/=?^`{|}~-]+(?:\.[\w!#$%&'*+\/=?`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:ac\.uk)$/);
-  const [passwordRegex] = useState(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+  const nameRegex = useState(/^[a-zA-Z]+(-[a-zA-Z]+)*$/);
+  const emailRegex = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  const acEmailRegex = useState(/^[\w!#$%&'*+\/=?^`{|}~-]+(?:\.[\w!#$%&'*+\/=?`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:ac\.uk)$/);
+  const passwordRegex = useState(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
   const [userType, setUserType] = useState(useSelector((state) => state.user.value.type));
   const [emailLabel, setEmailLabel]  = useState(userType === 'client' ? `Designated teacher's email address` : `Personal tutor's email address`);
   const [emailPlaceholder, setEmailPlaceholder] = useState(userType === 'client' ? 'teacher@school.ac.uk' : 'tutor@university.ac.uk');
@@ -21,6 +24,21 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [tcBoxChecked, setTcBoxChecked] = useState(false);
+  const forenameMissing = useState('Please enter your first name');
+  const forenameInvalid = useState('Names can only contain letters and hyphens');
+  const lastnameMissing = useState('Please enter your last name');
+  const lastnameInvalid = useState('Names can only contain letters and hyphens');
+  const userEmailMissing = useState('Please enter your personal email address');
+  const userEmailInvalid = useState('The personal email address you entered is not valid. Please enter a valid email address');
+  const dobMissing = useState('Please enter your date of birth');
+  const dobInvalid = useState(`The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`);
+  const secondEmailMissing = useState(`Please enter your ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address`);
+  const secondEmailInvalid = useState(`The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`);
+  const passwordMissing = useState('Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol');
+  const passwordInvalid = useState('Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol');
+  const confPasswordMissing = useState('Please re-enter the password for confirmation');
+  const confPasswordInvalid = useState('The confirmation password should be the same as the password');
+  const tcBoxUnchecked = useState('Please read and agree to the terms and conditions');
   let errorsObj = {
     forenameMissing: '',
     forenameInvalid: '',
@@ -36,10 +54,11 @@ function Register() {
     passwordInvalid: '',
     confPasswordMissing: '',
     confPasswordInvalid: '',
-    tcBoxUnchecked: ''
+    tcBoxUnchecked: '',
+    badResponse: '',
   }
   const [errors, setErrors] = useState(errorsObj);
-
+  
   function allFieldsAreFilled() {
     return (forename && lastname && userEmail && dob && secondEmail && password && confPassword && tcBoxChecked) ? true : false;
   };
@@ -96,49 +115,64 @@ function Register() {
     }
 
     if (!forename) {
-      errorObj.forenameMissing = 'Please enter your first name';
+      // errorObj.forenameMissing = 'Please enter your first name';
+      errorObj.forenameMissing = forenameMissing;
     } else if (!nameRegex.test(forename)) {
-      errorObj.forenameInvalid = 'Names can only contain letters and hyphens';
+      // errorObj.forenameInvalid = 'Names can only contain letters and hyphens';
+      errorObj.forenameInvalid = forenameInvalid;
     }
     
     if (!lastname) {
-      errorObj.lastnameMissing = 'Please enter your last name';
+      // errorObj.lastnameMissing = 'Please enter your last name';
+      errorObj.lastnameMissing = lastnameMissing;
     } else if (!nameRegex.test(lastname)) {
-      errorObj.lastnameInvalid = 'Names can only contain letters and hyphens';
+      // errorObj.lastnameInvalid = 'Names can only contain letters and hyphens';
+      errorObj.lastnameInvalid = lastnameInvalid;
     }
 
     if (!userEmail) {
-      errorObj.userEmailMissing = 'Please enter your personal email address';
+      // errorObj.userEmailMissing = 'Please enter your personal email address';
+      errorObj.userEmailMissing = userEmailMissing;
     } else if (!emailRegex.test(userEmail)) {
-      errorObj.userEmailInvalid = 'The personal email address you entered is not valid. Please enter a valid email address';
+      // errorObj.userEmailInvalid = 'The personal email address you entered is not valid. Please enter a valid email address';
+      errorObj.userEmailInvalid = userEmailInvalid;
     }
 
     if (!dob) {
-      errorObj.dobMissing = 'Please enter your date of birth';
+      // errorObj.dobMissing = 'Please enter your date of birth';
+      errorObj.dobMissing = dobMissing;
     } else if (!checkAge(dob)) {
-      errorObj.dobInvalid = `The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`;
+      // errorObj.dobInvalid = `The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`;
+      errorObj.dobInvalid = dobInvalid;
     }
 
     if (!secondEmail) {
-      errorObj.secondEmailMissing = `Please enter your ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address`;
+      // errorObj.secondEmailMissing = `Please enter your ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address`;
+      errorObj.secondEmailMissing = secondEmailMissing;
     } else if (!emailRegex.test(secondEmail)) {
-      errorObj.secondEmailInvalid = `The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`;
+      // errorObj.secondEmailInvalid = `The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`;
+      errorObj.secondEmailInvalid = secondEmailInvalid;
     }
 
     if (!password) {
-      errorObj.passwordMissing = 'Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
+      // errorObj.passwordMissing = 'Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
+      errorObj.passwordMissing = passwordMissing;
     } else if (!passwordRegex.test(password)) {
-      errorObj.passwordInvalid = 'Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
+      // errorObj.passwordInvalid = 'Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol';
+      errorObj.passwordInvalid = passwordInvalid;
     }
 
     if (!confPassword) {
-      errorObj.confPasswordMissing = 'Please re-enter the password for confirmation';
+      // errorObj.confPasswordMissing = 'Please re-enter the password for confirmation';
+      errorObj.confPasswordMissing = confPasswordMissing;
     } else if (confPassword !== password) {
-      errorObj.confPasswordInvalid = 'The confirmation password should be the same as the password';
+      // errorObj.confPasswordInvalid = 'The confirmation password should be the same as the password';
+      errorObj.confPasswordInvalid = confPasswordInvalid;
     }
 
     if (!tcBoxChecked) {
-      errorObj.tcBoxUnchecked = 'Please read and agree to the terms and conditions';
+      // errorObj.tcBoxUnchecked = 'Please read and agree to the terms and conditions';
+      errorObj.tcBoxUnchecked = tcBoxUnchecked;
     }
 
     setErrors(errorObj);
@@ -146,7 +180,6 @@ function Register() {
   };
 
   function submitRegistration() {
-    // console.log('Sending registration data');
     API().post('register', {
       userType: userType,
       first: forename,
@@ -156,7 +189,25 @@ function Register() {
       email2: secondEmail,
       password: password,
       confPassword: confPassword
-    }).then(response => console.log(response.data)).catch(error => console.log(error));
+    })
+    .then(response => {
+      if (response.data.outcome === 'success') {
+        // useDispatch(login(
+        //   {
+        //     loggedIn: true,
+        //     id: response.data.userId,
+        //     userType: userType,
+        //     forename: forename,
+        //     lastname: lastname,
+        //   }
+        // ))
+      } else if (Array.isArray(response.data.error)) {
+        console.log('Server validation errors');
+      } else {
+
+      }
+    })
+    .catch(error => console.log(error));
   };
 
 
@@ -164,6 +215,7 @@ function Register() {
     <div id='register'>
       <h1>Register for an account</h1>
       <form onSubmit={checkForm}>
+        {errors.badResponse && <p>{errors.badResponse}</p>}
         <label htmlFor='forename'>First name </label>
         <input id='forename' type='text' placeholder='First name' value={forename} onChange={(e) => setForename(e.target.value.trim())}></input>
         {errors.forenameMissing && <p>{errors.forenameMissing}</p>}
