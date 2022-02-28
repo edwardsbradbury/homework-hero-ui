@@ -15,7 +15,6 @@ function Nav() {
   function logout() {
     API().get('logout')
     .then(response => {
-      dispatch(changeMode({mode: 'splash'}));
       dispatch(logout({
         loggedIn: false,
         id: null,
@@ -23,6 +22,7 @@ function Nav() {
         forename: '',
         lastname: ''
       }));
+      dispatch(changeMode({mode: 'splash'}));
     })
     .catch(error => console.log(error));
   }
