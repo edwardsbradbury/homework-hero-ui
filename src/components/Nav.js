@@ -13,27 +13,27 @@ function Nav() {
   const dispatch = useDispatch();
 
   function logout() {
-    // API().get('logout')
-    // .then(response => {
-    //   dispatch(changeMode({mode: 'splash'}));
-    //   dispatch(logout({
-    //     loggedIn: false,
-    //     id: null,
-    //     type: 'client',
-    //     forename: '',
-    //     lastname: ''
-    //   }));
-    // })
-    // .catch(error => console.log(error));
-    dispatch(changeMode({mode: 'splash'}));
-    dispatch(logout({
-      loggedIn: false,
-      id: null,
-      type: 'client',
-      forename: '',
-      lastname: ''
-    }));
-    API().get('logout');
+    API().get('logout')
+    .then(response => {
+      dispatch(changeMode({mode: 'splash'}));
+      dispatch(logout({
+        loggedIn: false,
+        id: null,
+        type: 'client',
+        forename: '',
+        lastname: ''
+      }));
+    })
+    .catch(error => console.log(error));
+    // dispatch(changeMode({mode: 'splash'}));
+    // dispatch(logout({
+    //   loggedIn: false,
+    //   id: null,
+    //   type: 'client',
+    //   forename: '',
+    //   lastname: ''
+    // }));
+    // API().get('logout');
   }
 
   return (
