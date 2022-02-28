@@ -15,14 +15,16 @@ function Nav() {
   function logout() {
     API().get('logout')
     .then(response => {
-      dispatch(changeMode({mode: 'splash'}));
-      dispatch(logout({
+      if (response.data.outcome === 'success') {
+        dispatch(changeMode({mode: 'splash'}));
+        dispatch(logout({
         loggedIn: false,
         id: null,
         type: 'client',
         forename: '',
         lastname: ''
       }));
+      }
     })
     .catch(error => console.log(error));
     // dispatch(changeMode({mode: 'splash'}));
