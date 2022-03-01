@@ -200,7 +200,7 @@ function Register() {
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
         <label for='accountType'>Account type</label>
-        <select id='accountType' onChange={(e) => setUserType(e.target.value)}>
+        <select id='accountType' value={userType} onChange={(e) => setUserType(e.target.value)}>
           <option value='client'>Pupil</option>
           <option value='tutor'>Tutor</option>
         </select>
