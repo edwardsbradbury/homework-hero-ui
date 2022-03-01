@@ -199,6 +199,11 @@ function Register() {
       <h1>Register for an account</h1>
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
+        <label for='accountType'>Account type</label>
+        <select id='accountType' onChange={(e) => setUserType(e.target.value)}>
+          <option value='client'>Pupil</option>
+          <option value='tutor'>Tutor</option>
+        </select>
         <label htmlFor='forename'>First name </label>
         <input id='forename' type='text' placeholder='First name' value={forename} onChange={(e) => setForename(e.target.value.trim())}></input>
         {errors.forenameMissing && <p>{errors.forenameMissing}</p>}
