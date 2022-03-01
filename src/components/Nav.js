@@ -12,21 +12,21 @@ function Nav() {
   const search_prompt = user_type === 'client' ? 'Search for tutors' : 'Search for clients';
   const dispatch = useDispatch();
 
-  function logout() {
-    API().get('logout')
-    .then(response => {
-      if (response.data.outcome === 'success') {
-        dispatch(changeMode({mode: 'splash'}));
-        dispatch(logout({
-          loggedIn: false,
-          id: null,
-          type: 'client',
-          forename: '',
-          lastname: ''
-      }));
-      }
-    })
-    .catch(error => console.log(error));
+  // function logout() {
+  //   API().get('logout')
+  //   .then(response => {
+  //     if (response.data.outcome === 'success') {
+  //       dispatch(changeMode({mode: 'splash'}));
+  //       dispatch(logout({
+  //         loggedIn: false,
+  //         id: null,
+  //         type: 'client',
+  //         forename: '',
+  //         lastname: ''
+  //     }));
+  //     }
+  //   })
+  //   .catch(error => console.log(error));
     // dispatch(changeMode({mode: 'splash'}));
     // dispatch(logout({
     //   loggedIn: false,
@@ -36,7 +36,7 @@ function Nav() {
     //   lastname: ''
     // }));
     // API().get('logout');
-  }
+  // }
 
   return (
     <div id='nav'>
@@ -53,7 +53,8 @@ function Nav() {
         <button onClick={() => dispatch(changeMode({mode: 'search'}))}>{search_prompt}</button>
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</button>}
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</button>}
-        {loggedIn && <button onClick={() => logout()}>Logout</button>}
+        {/* {loggedIn && <button onClick={() => logout()}>Logout</button>} */}
+        {loggedIn && <button onClick={() => dispatch(logout())}>Logout</button>}
       </nav>
     </div>
   )

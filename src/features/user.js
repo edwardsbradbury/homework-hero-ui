@@ -9,9 +9,11 @@ const initialState = {value: {
   lastname: ''
 }}
 
-export const logout = createAsyncThunk('user/logout', async () => {
-  const response = await API().get('logout');
-  return response.data;
+export const logout = createAsyncThunk(
+  'user/logout',
+  async (thunkAPI) => {
+    const response = await API().get('logout');
+    return response.data;
 });
 
 export const userReducer = createSlice({
@@ -33,14 +35,11 @@ export const userReducer = createSlice({
     //   state.value = action.payload;
     // }
   },
-  // extraReducers(builder) {
-  //   builder.addCase(logout.fulfilled, (state, action) => {
-  //     state.value = initialState;
-  //   }),
-  //   // builder.addCase(logout.rejected, (state, action) => {
-
-  //   // })
-  // }
+  extraReducers: (builder) => {
+    builder.addCase(logout.fulfilled, (state, action) =>{
+      state.value = initialState;
+    })
+  }
 });
 
 // export const {login, logout} = userReducer.actions;
