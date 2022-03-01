@@ -12,10 +12,10 @@ function Nav() {
   const search_prompt = user_type === 'client' ? 'Search for tutors' : 'Search for clients';
   const dispatch = useDispatch();
 
-  function logout() {
-    dispatch(logout());
-    dispatch(changeMode({mode: 'splash'}));
-  }
+  // function logout() {
+  //   dispatch(logout());
+  //   dispatch(changeMode({mode: 'splash'}));
+  // }
 
   return (
     <div id='nav'>
@@ -32,7 +32,8 @@ function Nav() {
         <button onClick={() => dispatch(changeMode({mode: 'search'}))}>{search_prompt}</button>
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</button>}
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</button>}
-        {loggedIn && <button onClick={logout()}>Logout</button>}
+        {/* {loggedIn && <button onClick={logout()}>Logout</button>} */}
+        {loggedIn && <button onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}))}}>Logout</button>}
       </nav>
     </div>
   )
