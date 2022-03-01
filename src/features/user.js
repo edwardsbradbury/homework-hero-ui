@@ -18,26 +18,15 @@ export const logout = createAsyncThunk(
 
 export const userReducer = createSlice({
   name: 'user',
-  // initialState: {
-  //   value: {
-  //     loggedIn: false,
-  //     id: null,
-  //     type: 'client',
-  //     forename: '',
-  //     lastname: ''
-  //   }},
   initialState,
   reducers: {
     login: (state, action) => {
       state.value = action.payload;
     },
-    // logout: (state, action) => {
-    //   state.value = action.payload;
-    // }
   },
   extraReducers: (builder) => {
     builder.addCase(logout.fulfilled, (state, action) =>{
-      state.value = initialState;
+      state.value = initialState.value;
     })
   }
 });
