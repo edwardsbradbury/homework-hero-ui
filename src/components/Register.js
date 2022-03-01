@@ -89,28 +89,30 @@ function Register() {
   
   function checkAge(date) {
 
+    console.log(`Date input: ${date}`)
     const minus18Years = today.getFullYear() - 18;
     const under18Date = new Date();
     under18Date.setFullYear(minus18Years);
     under18Date.setHours(0,0,0,0);
-    const under11Years = today.getFullYear() - 11;
-    const under11Date = new Date();
-    under11Date.setFullYear(under11Years);
-    under11Date.setHours(0,0,0,0);
+    console.log(`Under 18 date : ${under18Date}`);
+    const over11Years = today.getFullYear() - 11;
+    const over11Date = new Date();
+    over11Date.setFullYear(over11Years);
+    over11Date.setHours(0,0,0,0);
+    console.log(`Under 11 date: ${over11Date}`);
 
     if (userType === 'client') {
-      if (date <= under18Date) {
-        return false;
-      } else if (date >= under11Date) {
-        return false;
-      } else {
+      if (date > under18Date && date <= over11Date) {
         return true;
+      } else {
+        return false;
       }
     } else {
-      if (!(date <= under18Date)) {
+      if (date <= under18Date) {
+        return true;
+      } else {
         return false;
       }
-      return true;
     }
 
   };
@@ -158,13 +160,13 @@ function Register() {
 
     if (!dob) {
       errorObj.dobMissing = dobMissing;
-    } else if (!checkAge(dob)) {
+    } else if (!dobValid) {
       errorObj.dobInvalid = dobInvalid;
     }
 
     if (!secondEmail) {
       errorObj.secondEmailMissing = secondEmailMissing;
-    } else if (!emailRegex.test(secondEmail)) {
+    } else if (!acEmailRegex.test(secondEmail)) {
       errorObj.secondEmailInvalid = secondEmailInvalid;
     }
 
@@ -176,7 +178,7 @@ function Register() {
 
     if (!confPassword) {
       errorObj.confPasswordMissing = confPasswordMissing;
-    } else if (!confPasswordValid) {
+    } else if (!passwordsMatch) {
       errorObj.confPasswordInvalid = confPasswordInvalid;
     }
 
