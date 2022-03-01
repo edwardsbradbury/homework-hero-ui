@@ -32,7 +32,7 @@ function Nav() {
         <button onClick={() => dispatch(changeMode({mode: 'search'}))}>{search_prompt}</button>
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</button>}
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</button>}
-        {loggedIn && <button onClick={() => logout()}>Logout</button>}
+        {loggedIn && <button onClick={logout()}>Logout</button>}
       </nav>
     </div>
   )
