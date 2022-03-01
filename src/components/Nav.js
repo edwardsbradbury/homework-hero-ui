@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeMode } from '../features/home';
-import API from '../features/API';
 import {logout} from '../features/user';
 
 function Nav() {

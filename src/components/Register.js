@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import API from '../features/API';
-import {setUserType, login} from '../features/user';
+import {login} from '../features/user';
 import {changeMode} from '../features/home';
 
 function Register() {
@@ -13,9 +13,13 @@ function Register() {
   const [emailRegex] = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   const [acEmailRegex] = useState(/^[\w!#$%&'*+\/=?^`{|}~-]+(?:\.[\w!#$%&'*+\/=?`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:ac\.uk)$/);
   const [passwordRegex] = useState(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
-  const [userType, setUserType] = useState(useSelector((state) => state.user.value.type));
-  const [emailLabel, setEmailLabel]  = useState(userType === 'client' ? `Designated teacher's email address` : `Personal tutor's email address`);
-  const [emailPlaceholder, setEmailPlaceholder] = useState(userType === 'client' ? 'teacher@school.ac.uk' : 'tutor@university.ac.uk');
+  const [userType, setUserType] = useState('client');
+  const [clientEmailLabel] = useState(`Designated teacher's email address`);
+  const [tutorEmailLabel] = useState(`University personal tutor's email address`);
+  const [clientEmailPlaceholder] = useState('teacher@school.ac.uk');
+  const [tutorEmailPlaceholder] = useState('tutor@university.ac.uk');
+  const [emailLabel, setEmailLabel]  = useState(userType === 'client' ? clientEmailLabel : tutorEmailLabel);
+  const [emailPlaceholder, setEmailPlaceholder] = useState(userType === 'client' ? clientEmailPlaceholder : tutorEmailPlaceholder);
   const [forename, setForename] = useState('');
   const [lastname, setLastname] = useState('');
   const [userEmail, setEmail] = useState('');
@@ -31,9 +35,15 @@ function Register() {
   const userEmailMissing = useState('Please enter your personal email address');
   const userEmailInvalid = useState('The personal email address you entered is not valid. Please enter a valid email address');
   const dobMissing = useState('Please enter your date of birth');
-  const dobInvalid = useState(`The date of birth you entered is not valid. ${userType === 'client' ? 'Pupils' : 'Tutors'} should be aged ${userType === 'client' ? '11-17' : '18 or over'}`);
-  const secondEmailMissing = useState(`Please enter your ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address`);
-  const secondEmailInvalid = useState(`The ${userType === 'client' ? 'designated teacher' : 'university personal tutor'}'s email address you entered is invalid. Please enter their school/university email address ending .ac.uk`);
+  const [clientDobInvalid] = useState('The date of birth you entered is not valid. Pupils should be aged 11-17');
+  const [tutorDobInvalid] = useState('The date of birth you entered is not valid. Tutors should be aged 18 or over');
+  const [dobInvalid, setDobInvalid] = useState(userType === 'client' ? clientDobInvalid : tutorDobInvalid);
+  const [desigTeacherEmailMissing] = useState(`Please enter your designated teacher's email address`);
+  const [personalTutorEmailMissing] = useState(`Please enter your university personal tutor's email address`);
+  const [secondEmailMissing, setSecondEmailMissing] = useState(userType === 'client' ? desigTeacherEmailMissing : personalTutorEmailMissing);
+  const [desigTeacherEmailInvalid] = useState(`The designated teacher's email address you entered is invalid. Please enter their school email address ending .ac.uk`);
+  const [personalTutorEmailInvalid] = useState(`The university personal tutor's email address you entered is invalid. Please enter their university email address ending .ac.uk`);
+  const [secondEmailInvalid, setSecondEmailInvalid] = useState(userType === 'client' ? desigTeacherEmailInvalid : personalTutorEmailInvalid);
   const passwordMissing = useState('Please enter a password: at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol');
   const passwordInvalid = useState('Password must be at least 8 characters long, containing at least 1 upper case letter, 1 lower case letter, 1 digit and 1 symbol');
   const confPasswordMissing = useState('Please re-enter the password for confirmation');
@@ -59,6 +69,23 @@ function Register() {
   }
   const [errors, setErrors] = useState(errorsObj);
   const allFieldsAreFilled = Boolean(forename) && Boolean(lastname) && Boolean(userEmail) && Boolean(dob) && Boolean(secondEmail) && Boolean(password) && Boolean(confPassword) && Boolean(tcBoxChecked);
+
+  function updateState(type) {
+    setUserType(type);
+    if (type === 'tutor') {
+      setEmailLabel(tutorEmailLabel);
+      setEmailPlaceholder(tutorEmailPlaceholder);
+      setDobInvalid(tutorDobInvalid);
+      setSecondEmailMissing(personalTutorEmailMissing);
+      setSecondEmailInvalid(personalTutorEmailInvalid);
+    } else {
+      setEmailLabel(clientEmailLabel);
+      setEmailPlaceholder(clientEmailPlaceholder);
+      setDobInvalid(clientDobInvalid);
+      setSecondEmailMissing(desigTeacherEmailMissing);
+      setSecondEmailInvalid(desigTeacherEmailInvalid);
+    }
+  }
   
   function checkAge(date) {
 
@@ -199,9 +226,8 @@ function Register() {
       <h1>Register for an account</h1>
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
-        <label for='accountType'>Account type</label>
-        {/* <select id='accountType' value={userType} onChange={(e) => setUserType(e.target.value)}> */}
-        <select id='accountType' value={userType} onChange={(e) => dispatch(setUserType({type: e.target.value}))}>
+        <label htmlFor='accountType'>Account type </label>
+        <select id='accountType' value={userType} onChange={(e) => {updateState(e.target.value)}}>
           <option value='client'>Pupil</option>
           <option value='tutor'>Tutor</option>
         </select>

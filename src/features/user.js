@@ -20,9 +20,6 @@ export const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserType: (state, action) => {
-      state.value.type = action.payload;
-    },
     login: (state, action) => {
       state.value = action.payload;
     },
