@@ -89,17 +89,14 @@ function Register() {
   
   function checkAge(date) {
 
-    console.log(`Date input: ${date}`)
     const minus18Years = today.getFullYear() - 18;
     const under18Date = new Date();
     under18Date.setFullYear(minus18Years);
     under18Date.setHours(0,0,0,0);
-    console.log(`Under 18 date : ${under18Date}`);
     const over11Years = today.getFullYear() - 11;
     const over11Date = new Date();
     over11Date.setFullYear(over11Years);
     over11Date.setHours(0,0,0,0);
-    console.log(`Under 11 date: ${over11Date}`);
 
     if (userType === 'client') {
       if (date > under18Date && date <= over11Date) {
@@ -119,7 +116,6 @@ function Register() {
   
   function checkForm(e) {
     e.preventDefault();
-    console.log('Checking form');
     const errorObj = {...errorsObj};
 
     const forenameValid = forename !== '' && nameRegex.test(forename);
