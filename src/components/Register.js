@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import API from '../features/API';
-import {login} from '../features/user';
+import {setUserType, login} from '../features/user';
 import {changeMode} from '../features/home';
 
 function Register() {
@@ -200,10 +200,12 @@ function Register() {
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
         <label for='accountType'>Account type</label>
-        <select id='accountType' value={userType} onChange={(e) => setUserType(e.target.value)}>
+        {/* <select id='accountType' value={userType} onChange={(e) => setUserType(e.target.value)}> */}
+        <select id='accountType' value={userType} onChange={(e) => dispatch(setUserType({type: e.target.value}))}>
           <option value='client'>Pupil</option>
           <option value='tutor'>Tutor</option>
         </select>
+        <br />
         <label htmlFor='forename'>First name </label>
         <input id='forename' type='text' placeholder='First name' value={forename} onChange={(e) => setForename(e.target.value.trim())}></input>
         {errors.forenameMissing && <p>{errors.forenameMissing}</p>}
