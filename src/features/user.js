@@ -1,25 +1,49 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import API from './API';
+
+const initialState = {value: {
+  loggedIn: false,
+  id: null,
+  type: 'client',
+  forename: '',
+  lastname: ''
+}}
+
+export const logout = createAsyncThunk('user/logout', async () => {
+  const response = await API().get('logout');
+  return response.data;
+});
 
 export const userReducer = createSlice({
   name: 'user',
-  initialState: {
-    value: {
-      loggedIn: false,
-      id: null,
-      type: 'client',
-      forename: '',
-      lastname: ''
-    }},
+  // initialState: {
+  //   value: {
+  //     loggedIn: false,
+  //     id: null,
+  //     type: 'client',
+  //     forename: '',
+  //     lastname: ''
+  //   }},
+  initialState,
   reducers: {
     login: (state, action) => {
       state.value = action.payload;
     },
-    logout: (state, action) => {
-      state.value = action.payload;
-    }
-  }
+    // logout: (state, action) => {
+    //   state.value = action.payload;
+    // }
+  },
+  // extraReducers(builder) {
+  //   builder.addCase(logout.fulfilled, (state, action) => {
+  //     state.value = initialState;
+  //   }),
+  //   // builder.addCase(logout.rejected, (state, action) => {
+
+  //   // })
+  // }
 });
 
-export const {login, logout} = userReducer.actions;
+// export const {login, logout} = userReducer.actions;
+export const {login} = userReducer.actions;
 
 export default userReducer.reducer;

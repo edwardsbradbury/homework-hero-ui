@@ -58,10 +58,7 @@ function Register() {
     badResponse: '',
   }
   const [errors, setErrors] = useState(errorsObj);
-  
-  function allFieldsAreFilled() {
-    return (forename && lastname && userEmail && dob && secondEmail && password && confPassword && tcBoxChecked) ? true : false;
-  };
+  const allFieldsAreFilled = Boolean(forename) && Boolean(lastname) && Boolean(userEmail) && Boolean(dob) && Boolean(secondEmail) && Boolean(password) && Boolean(confPassword) && Boolean(tcBoxChecked);
   
   function checkAge(date) {
 
@@ -108,7 +105,7 @@ function Register() {
     const passwordsMatch = password === confPassword;
     const allFieldsAreValid = (forenameValid && lastnameValid && userEmailValid && dobValid && secondEmailValid && passwordValid && confPasswordValid && passwordsMatch) ? true : false;
 
-    if (allFieldsAreFilled()) {
+    if (allFieldsAreFilled) {
       if (allFieldsAreValid) {
         submitRegistration();
       }
@@ -236,7 +233,7 @@ function Register() {
         <label htmlFor='tcCheckbox'>I have read and agree to Homework Hero's terms and conditions: </label>
         <input id='tcCheckbox' type='checkbox' value={tcBoxChecked} onChange={(e) => setTcBoxChecked(!tcBoxChecked)}></input>
         {errors.tcBoxUnchecked && <p>{errors.tcBoxUnchecked}</p>}
-        <input type='submit' value='Register'/>
+        <input type='submit' value='Register' disabled={!allFieldsAreFilled}/>
       </form>
     </div>
   );

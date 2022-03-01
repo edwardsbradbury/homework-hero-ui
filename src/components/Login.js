@@ -6,10 +6,10 @@ import {changeMode} from '../features/home';
 
 function Login() {
   const dispatch = useDispatch();
-  const userType = useState(useSelector((state) => state.user.value.type));
   const [emailRegex] = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const canLogin = Boolean(email) && Boolean(password);
   let errorsObj = {
     emailMissing: '',
     emailInvalid: '',
@@ -77,7 +77,7 @@ function Login() {
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}
         <br />
         <button>Forgotten password?</button>
-        <input type='submit' value='Login' />
+        <input type='submit' value='Login' disabled={!canLogin}/>
       </form>
     </div>
   );

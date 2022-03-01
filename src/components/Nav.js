@@ -18,11 +18,11 @@ function Nav() {
       if (response.data.outcome === 'success') {
         dispatch(changeMode({mode: 'splash'}));
         dispatch(logout({
-        loggedIn: false,
-        id: null,
-        type: 'client',
-        forename: '',
-        lastname: ''
+          loggedIn: false,
+          id: null,
+          type: 'client',
+          forename: '',
+          lastname: ''
       }));
       }
     })
