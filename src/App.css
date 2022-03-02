@@ -29,6 +29,7 @@
 }
 
 #nav {
+  background-color: #007AFF;
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
@@ -45,4 +46,10 @@
 
 #splashBg {
   max-height: 60vh;
+}
+
+button {
+  border-radius: 10px;
+  /* margin-left: 2%;
+  margin-right: 2%; */
 }
