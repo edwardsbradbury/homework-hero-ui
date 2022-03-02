@@ -42,3 +42,7 @@
 #logo:hover {
   cursor: pointer;
 }
+
+#splashBg {
+  max-height: 60vh;
+}
