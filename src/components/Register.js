@@ -264,7 +264,7 @@ function Register() {
         <label htmlFor='tcCheckbox'>I have read and agree to Homework Hero's terms and conditions: </label>
         <input id='tcCheckbox' type='checkbox' value={tcBoxChecked} onChange={(e) => setTcBoxChecked(!tcBoxChecked)}></input>
         {errors.tcBoxUnchecked && <p>{errors.tcBoxUnchecked}</p>}
-        <input type='submit' value='Register' disabled={!allFieldsAreFilled}/>
+        <input className='button' type='submit' value='Register' disabled={!allFieldsAreFilled}/>
       </form>
     </div>
   );

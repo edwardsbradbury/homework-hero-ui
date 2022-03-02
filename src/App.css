@@ -48,7 +48,7 @@
   max-height: 60vh;
 }
 
-button {
+button, .button {
   border-radius: 10px;
   /* margin-left: 2%;
   margin-right: 2%; */

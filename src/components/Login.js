@@ -77,7 +77,7 @@ function Login() {
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}
         <br />
         <button>Forgotten password?</button>
-        <input type='submit' value='Login' disabled={!canLogin}/>
+        <input className='button' type='submit' value='Login' disabled={!canLogin}/>
       </form>
     </div>
   );
