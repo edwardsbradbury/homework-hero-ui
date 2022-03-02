@@ -11,11 +11,6 @@ function Nav() {
   const search_prompt = user_type === 'client' ? 'Search for tutors' : 'Search for clients';
   const dispatch = useDispatch();
 
-  // function logout() {
-  //   dispatch(logout());
-  //   dispatch(changeMode({mode: 'splash'}));
-  // }
-
   return (
     <div id='nav'>
       <img
