@@ -33,7 +33,6 @@
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
-  /* justify-items: center; */
 }
 
 #logo {
@@ -42,7 +41,7 @@
   justify-self: center;
 }
 
-#logo:hover {
+#logo:hover, li:hover {
   cursor: pointer;
 }
 
@@ -50,7 +49,7 @@
   max-height: 60vh;
 }
 
-button, input {
+button, input, select {
   border-radius: 10px;
 }
 
@@ -75,9 +74,9 @@ nav li {
   color: #FFFFFF;
 }
 
-li:hover {
+/* li:hover {
   cursor: pointer;
-}
+} */
 
 nav li:hover {
   font-weight: bold;

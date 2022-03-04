@@ -21,12 +21,6 @@ function Nav() {
           mode: loggedIn ? 'dashboard' : 'splash'}))}>
       </img>
       <nav>
-        {/* <button onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</button>
-        <button onClick={() => dispatch(changeMode({mode: 'questions'}))}>{question_prompt}</button>
-        <button onClick={() => dispatch(changeMode({mode: 'search'}))}>{search_prompt}</button>
-        {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</button>}
-        {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</button>}
-        {loggedIn && <button onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</button>} */}
         <ul>
           <li onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</li>
           <li onClick={() => dispatch(changeMode({mode: 'questions'}))}>{questionPrompt}</li>
