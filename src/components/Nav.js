@@ -4,11 +4,11 @@ import { changeMode } from '../features/home';
 import {logout} from '../features/user';
 
 function Nav() {
-  const user_data = useSelector((state) => state.user.value);
-  const loggedIn = user_data.loggedIn;
-  const user_type = user_data.type;
-  const question_prompt = user_type === 'client' ? 'Ask a question' : 'Browse questions';
-  const search_prompt = user_type === 'client' ? 'Search for tutors' : 'Search for clients';
+  const userData = useSelector((state) => state.user.value);
+  const loggedIn = userData.loggedIn;
+  const userType = userData.type;
+  const questionPrompt = userType === 'client' ? 'Ask a question' : 'Browse questions';
+  const searchPrompt = userType === 'client' ? 'Search for tutors' : 'Search for clients';
   const dispatch = useDispatch();
 
   return (
@@ -21,12 +21,20 @@ function Nav() {
           mode: loggedIn ? 'dashboard' : 'splash'}))}>
       </img>
       <nav>
-        <button onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</button>
+        {/* <button onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</button>
         <button onClick={() => dispatch(changeMode({mode: 'questions'}))}>{question_prompt}</button>
         <button onClick={() => dispatch(changeMode({mode: 'search'}))}>{search_prompt}</button>
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</button>}
         {!loggedIn && <button onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</button>}
-        {loggedIn && <button onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</button>}
+        {loggedIn && <button onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</button>} */}
+        <ul>
+          <li onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</li>
+          <li onClick={() => dispatch(changeMode({mode: 'questions'}))}>{questionPrompt}</li>
+          <li onClick={() => dispatch(changeMode({mode: 'search'}))}>{searchPrompt}</li>
+          {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</li>}
+          {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</li>}
+          {loggedIn && <li onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</li>}
+        </ul>
       </nav>
     </div>
   )

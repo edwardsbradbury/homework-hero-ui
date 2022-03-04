@@ -33,11 +33,13 @@
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
-  justify-items: center;
+  /* justify-items: center; */
 }
 
 #logo {
+  display: inline-block;
   max-width: 25vw;
+  justify-self: center;
 }
 
 #logo:hover {
@@ -48,8 +50,35 @@
   max-height: 60vh;
 }
 
-button, .button {
+button, input {
   border-radius: 10px;
-  /* margin-left: 2%;
-  margin-right: 2%; */
+}
+
+nav {
+  display: inline-block;
+  justify-self: start;
+  /* min-width: 20vw;
+  max-width: 25vw; */
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: #FFFFFF;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+nav li:hover {
+  font-weight: bold;
 }
