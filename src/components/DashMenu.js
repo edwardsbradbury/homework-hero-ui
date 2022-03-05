@@ -7,7 +7,7 @@ import {changeDashMode} from '../features/dash';
 function DashMenu() {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.value.type);
-  const mode = useState(useSelector((state) => state.dashboard.value.mode));
+  const mode = useSelector((state) => state.dashboard.value.mode);
   const variableLabel = useState(userType === 'client' ? 'Questions' : 'Feedback');
   const targetMode = useState(userType === 'client' ? 'questions' : 'feedback');
 
