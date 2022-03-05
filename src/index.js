@@ -6,11 +6,13 @@ import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import userReducer from './features/user.js';
 import homeReducer from './features/home.js';
+import dashReducer from './features/dash.js';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    home: homeReducer
+    home: homeReducer,
+    dashboard: dashReducer
   }
 });
 
