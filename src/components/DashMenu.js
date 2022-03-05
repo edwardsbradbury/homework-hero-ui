@@ -14,12 +14,35 @@ function DashMenu() {
   return (
     <div id='dashMenu'>
       <ul>
-        <li onClick={() => dispatch(changeDashMode({mode: 'dash'}))}>Dashboard</li>
-        <li onClick={() => dispatch(changeDashMode({mode: 'messages'}))}>Messages</li>
-        <li onClick={() => dispatch(changeDashMode({mode: 'lessons'}))}>Lessons</li>
-        <li onClick={() => dispatch(changeDashMode({mode: targetMode}))}>{variableLabel}</li>
-        <li onClick={() => dispatch(changeDashMode({mode: 'profile'}))}>My profile</li>
-        <li onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</li>
+        <li
+          className={mode === 'dash' ? 'current' : null}
+          onClick={() => dispatch(changeDashMode({mode: 'dash'}))}>
+            Dashboard
+        </li>
+        <li
+          className={mode === 'messages' ? 'current' : null}
+          onClick={() => dispatch(changeDashMode({mode: 'messages'}))}>
+            Messages
+        </li>
+        <li
+          className={mode === 'lessons' ? 'current' : null}
+          onClick={() => dispatch(changeDashMode({mode: 'lessons'}))}>
+            Lessons
+          </li>
+        <li
+          className={mode === ('questions' || 'feedback') ? 'current' : null}
+          onClick={() => dispatch(changeDashMode({mode: targetMode}))}>{
+          variableLabel}
+        </li>
+        <li
+          className={mode === 'profile' ? 'current' : null}
+          onClick={() => dispatch(changeDashMode({mode: 'profile'}))}>
+            My profile
+          </li>
+        <li
+          onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>
+            Logout
+          </li>
       </ul>
     </div>
   )
