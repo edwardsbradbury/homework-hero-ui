@@ -5,6 +5,7 @@ import Splash from './Splash';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import Register from './Register';
+import Search from './Search';
 
 function Home() {
   const homeState = useSelector((state) => state);
@@ -17,6 +18,7 @@ function Home() {
       {mode === 'splash' && <Splash />}
       {mode === 'login' && <Login />}
       {mode === 'register' && <Register />}
+      {mode === 'search' && <Search />}
     </div>
   )
 }

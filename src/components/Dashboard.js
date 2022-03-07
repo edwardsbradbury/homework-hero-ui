@@ -4,10 +4,12 @@ import DashMenu from './DashMenu';
 
 function Dashboard() {
   const user = useSelector((state) => state.user.value);
+  const mode = useSelector((state) => state.dash.value.mode);
   return (
     <div id='dashboard'>
       <h1>Welcome to your dashboard, {user.forename}</h1>
       <DashMenu />
+      {}
     </div>
   )
 }

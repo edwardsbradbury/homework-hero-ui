@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import API from '../features/API';
 import {login} from '../features/user';
 import {changeMode} from '../features/home';
@@ -72,6 +72,7 @@ function Login() {
         <input id='email' type='text' placeholder='you@website.com' value={email} onChange={(e) => setEmail(e.target.value.trim())}></input>
         {errors.emailMissing && <p>{errors.emailMissing}</p>}
         {errors.emailInvalid && <p>{errors.emailInvalid}</p>}
+        <br />
         <label htmlFor='password'>Password </label>
         <input id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}

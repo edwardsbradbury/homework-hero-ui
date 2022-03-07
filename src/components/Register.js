@@ -225,7 +225,7 @@ function Register() {
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
         <label htmlFor='accountType'>Account type </label>
-        <select id='accountType' value={userType} onChange={(e) => {updateState(e.target.value)}}>
+        <select id='accountType' value={userType} onChange={(e) => updateState(e.target.value)}>
           <option value='client'>Pupil</option>
           <option value='tutor'>Tutor</option>
         </select>

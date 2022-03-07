@@ -28,21 +28,21 @@ function DashMenu() {
           className={mode === 'lessons' ? 'current' : null}
           onClick={() => dispatch(changeDashMode({mode: 'lessons'}))}>
             Lessons
-          </li>
+        </li>
         <li
           className={mode === ('questions' || 'feedback') ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: targetMode}))}>{
-          variableLabel}
+          onClick={() => dispatch(changeDashMode({mode: targetMode}))}>
+            {variableLabel}
         </li>
         <li
           className={mode === 'profile' ? 'current' : null}
           onClick={() => dispatch(changeDashMode({mode: 'profile'}))}>
             My profile
-          </li>
+        </li>
         <li
           onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>
             Logout
-          </li>
+        </li>
       </ul>
     </div>
   )

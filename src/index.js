@@ -7,12 +7,14 @@ import {Provider} from 'react-redux';
 import userReducer from './features/user.js';
 import homeReducer from './features/home.js';
 import dashReducer from './features/dash.js';
+import searchReducer from './features/search.js';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     home: homeReducer,
-    dashboard: dashReducer
+    dashboard: dashReducer,
+    search: searchReducer
   }
 });
 
