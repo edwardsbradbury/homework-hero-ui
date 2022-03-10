@@ -6,7 +6,8 @@ const initialState = {value: {
   id: null,
   type: 'client',
   forename: '',
-  lastname: ''
+  lastname: '',
+  newUser: false
 }}
 
 export const logout = createAsyncThunk(

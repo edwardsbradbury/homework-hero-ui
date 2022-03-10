@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import API from '../features/API';
-import {doSearch} from '../features/search';
 
-function SearchForm() {
+function Onboarding() {
   const dispatch = useDispatch();
-  const userType = useSelector((state) => state.user.value.type);
-  const messageIfClient = useState(`Choose the subject you need help with and the level you're studying at`);
-  const messageIfTutor = useState(`Choose the subject you want to teach\n
-    You can also specify the level you're confident teaching this subject at, or leave the level blank to see students of all levels who need help`);
+  const user = useSelector((state) => state.user.value);
+  const userType = user.type;
+
+  const messageIfClient = useState(`Add a subject that you need help with and the level you're studying this subject at.\nThis will help tutors who teach that subject to find you`);
+  const messageIfTutor = useState(`Choose a subject you want to teach and the level you're confident teaching this subject at`);
   const [message] = useState(userType === 'client' ? messageIfClient : messageIfTutor);
   const [subject, setSubject] = useState('');
   const [level, setLevel] = useState('');
@@ -19,41 +18,22 @@ function SearchForm() {
   const levels = ['GCSE', 'A-level', 'Year 7', 'Year 8', 'Year 9', 'Year 10', 'Year 11', 'Year 12', 'Year 13'];
   const levelOptions = levels.map((level, index) => <option key={index} value={level}>{level}</option>);
   const [error, setError] = useState('');
+  const errMessage = useState('Please add a subject and level');
 
-  function search(e) {
+  function addSubject(e) {
     e.preventDefault();
 
-    if (userType === 'client') {
-      if (subject && level) {
-        dispatch(doSearch(
-          {
-            userType: userType,
-            subject: subject,
-            level: level
-          }
-        ));
-      } else {
-        setError('You must enter the subject and level of study before you can search for tutors');
-      }
+    if (subject && level) {
+
     } else {
-      if (subject) {
-        dispatch(doSearch(
-          {
-            userType: userType,
-            subject: subject,
-            level: level
-          }
-        ));
-      } else {
-        setError('You must enter at least a subject before you can search for pupils');
-      }
+      setError(errMessage);
     }
   }
   
-  return (
-    <div id='searchForm'>
+  return(
+    <div id='onboarding'>
       <p>{message}</p>
-      <form onSubmit={search}>
+      <form onSubmit={addSubject}>
         <select defaultValue={subjectPrompt} onChange={(e) => setSubject(e.target.value)}>
           <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
           {subjectOptions}
@@ -64,10 +44,10 @@ function SearchForm() {
         </select>
         {error && <p>{error}</p>}
         <br />
-        <input type='submit' value='Search'></input>
+        <input type='submit' value='Add'></input>
       </form>
     </div>
   )
 }
 
-export default SearchForm;
+export default Onboarding;

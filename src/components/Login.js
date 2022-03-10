@@ -53,7 +53,8 @@ function Login() {
               id: response.data.userId,
               type: response.data.userType,
               forename: response.data.first,
-              lastname: response.data.last
+              lastname: response.data.last,
+              newUser: false
             }
           ));
         } else {

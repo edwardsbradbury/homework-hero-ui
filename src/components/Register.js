@@ -207,6 +207,7 @@ function Register() {
             userType: userType,
             forename: forename,
             lastname: lastname,
+            newUser: true
           }
         ))
       } else if (Array.isArray(response.data.error)) {
