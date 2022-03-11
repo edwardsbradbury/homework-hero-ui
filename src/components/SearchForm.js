@@ -16,7 +16,7 @@ function SearchForm() {
   const subjects = ['Maths', 'English', 'Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Design and Technology', 'ICT', 'Computer Science', 'Religious Education', 'Art', 'French', 'German', 'Spanish', 'Italian'];
   const subjectOptions = subjects.map((subject, index) => <option key={index} value={subject}>{subject}</option>);
   const levelPrompt = useState('Level');
-  const levels = ['GCSE', 'A-level', 'Year 7', 'Year 8', 'Year 9', 'Year 10', 'Year 11', 'Year 12', 'Year 13'];
+  const levels = ['GCSE', 'A level', 'Year 7', 'Year 8', 'Year 9', 'Year 10', 'Year 11', 'Year 12', 'Year 13'];
   const levelOptions = levels.map((level, index) => <option key={index} value={level}>{level}</option>);
   const [error, setError] = useState('');
 

@@ -54,7 +54,6 @@ function Login() {
               type: response.data.userType,
               forename: response.data.first,
               lastname: response.data.last,
-              newUser: false
             }
           ));
         } else {

@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import API from '../features/API';
 import {login} from '../features/user';
 import {changeMode} from '../features/home';
+import {changeDashMode} from '../features/dash';
 
 function Register() {
 
@@ -200,6 +201,7 @@ function Register() {
     .then(response => {
       if (response.data.outcome === 'success') {
         dispatch(changeMode({mode: 'dashboard'}));
+        dispatch(changeDashMode({mode: 'dash', newUser: true}));
         dispatch(login(
           {
             loggedIn: true,
@@ -207,7 +209,6 @@ function Register() {
             userType: userType,
             forename: forename,
             lastname: lastname,
-            newUser: true
           }
         ))
       } else if (Array.isArray(response.data.error)) {

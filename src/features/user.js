@@ -7,8 +7,15 @@ const initialState = {value: {
   type: 'client',
   forename: '',
   lastname: '',
-  newUser: false
 }}
+
+// const initialState = {value: {
+//   loggedIn: true,
+//   id: 1,
+//   type: 'client',
+//   forename: 'Ed',
+//   lastname: '',
+// }}
 
 export const logout = createAsyncThunk(
   'user/logout',

@@ -16,27 +16,27 @@ function DashMenu() {
       <ul>
         <li
           className={mode === 'dash' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'dash'}))}>
+          onClick={() => dispatch(changeDashMode({mode: 'dash', newUser: false}))}>
             Dashboard
         </li>
         <li
           className={mode === 'messages' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'messages'}))}>
+          onClick={() => dispatch(changeDashMode({mode: 'messages', newUser: false}))}>
             Messages
         </li>
         <li
           className={mode === 'lessons' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'lessons'}))}>
+          onClick={() => dispatch(changeDashMode({mode: 'lessons', newUser: false}))}>
             Lessons
         </li>
         <li
           className={mode === ('questions' || 'feedback') ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: targetMode}))}>
+          onClick={() => dispatch(changeDashMode({mode: targetMode, newUser: false}))}>
             {variableLabel}
         </li>
         <li
           className={mode === 'profile' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'profile'}))}>
+          onClick={() => dispatch(changeDashMode({mode: 'profile', newUser: false}))}>
             My profile
         </li>
         <li
