@@ -200,8 +200,8 @@ function Register() {
     })
     .then(response => {
       if (response.data.outcome === 'success') {
-        dispatch(changeMode({mode: 'dashboard'}));
         dispatch(changeDashMode({mode: 'dash', newUser: true}));
+        dispatch(changeMode({mode: 'dashboard'}));
         dispatch(login(
           {
             loggedIn: true,
