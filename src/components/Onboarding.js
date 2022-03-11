@@ -53,7 +53,7 @@ function Onboarding() {
         </select>
         {error && <p>{error}</p>}
         <br />
-        <input type='submit' value='Add'></input>
+        <input type='submit' value='Add' disabled={!(subject && level)}></input>
       </form>
     </div>
   )
