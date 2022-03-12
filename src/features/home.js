@@ -4,8 +4,8 @@ export const homeReducer = createSlice({
   name: 'home',
   initialState: {
     value: {
-      // mode: 'splash'
-      mode: 'dash'
+      mode: 'splash'
+      // mode: 'dash'
     }},
   reducers: {
     changeMode: (state, action) => {

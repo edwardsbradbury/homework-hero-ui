@@ -14,8 +14,8 @@ export const dashReducer = createSlice({
   initialState: {
     value: {
       mode: 'dash',
-      // newUser: false
-      newUser: true
+      newUser: false
+      // newUser: true
     }},
   reducers: {
     changeDashMode: (state, action) => {
