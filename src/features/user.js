@@ -1,21 +1,21 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import API from './API';
 
-const initialState = {value: {
-  loggedIn: false,
-  id: null,
-  type: 'client',
-  forename: '',
-  lastname: '',
-}}
-
 // const initialState = {value: {
-//   loggedIn: true,
-//   id: 1,
+//   loggedIn: false,
+//   id: null,
 //   type: 'client',
-//   forename: 'Ed',
+//   forename: '',
 //   lastname: '',
 // }}
+
+const initialState = {value: {
+  loggedIn: true,
+  id: 1,
+  type: 'client',
+  forename: 'Ed',
+  lastname: '',
+}}
 
 export const logout = createAsyncThunk(
   'user/logout',

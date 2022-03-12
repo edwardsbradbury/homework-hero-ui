@@ -21,8 +21,11 @@ function Onboarding() {
   const [error, setError] = useState('');
   const errMessage = useState('Please add a subject and level');
 
-  function addSubject(e) {
-    e.preventDefault();
+  // function addSubject(e) {
+    function addSubjct() {
+    // console.log(`e is this:`);
+    // console.log(e);
+    // e.preventDefault();
     setError('');
     if (subject && level) {
       dispatch(addSubject(
@@ -43,7 +46,7 @@ function Onboarding() {
     <div id='onboarding'>
       <p>{message}</p>
       {/* <form onSubmit={addSubject}> */}
-      <form onSubmit={(e) => addSubject(e)} >
+      {/* <form onSubmit={(e) => addSubject(e)} > */}
         <select defaultValue={subjectPrompt} onChange={(e) => setSubject(e.target.value)}>
           <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
           {subjectOptions}
@@ -54,8 +57,9 @@ function Onboarding() {
         </select>
         {error && <p>{error}</p>}
         <br />
-        <input type='submit' value='Add' disabled={!(subject && level)}></input>
-      </form>
+        {/* <input type='submit' value='Add' disabled={!(subject && level)}></input> */}
+        <button onClick={addSubject()} disabled={!(subject && level)}>Add</button>
+      {/* </form> */}
     </div>
   )
 }
