@@ -23,30 +23,30 @@ function Onboarding() {
   const errMessage = useState('Please add a subject and level');
 
   // function addSubject(e) {
-    function addSubjct() {
+    function addSubject() {
     // console.log(`e is this:`);
     // console.log(e);
     // e.preventDefault();
     setError('');
     if (subject && level) {
-      // dispatch(addSubject(
-      //   {
-          // id: user.id,
-          // first: user.forename,
-          // last: user.lastname,
-          // subject: subject,
-          // level: level
-      //   }
-      // ))
-      API().post('add_subject', {
-        id: user.id,
-        first: user.forename,
-        last: user.lastname,
-        subject: subject,
-        level: level
-      })
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+      dispatch(addSubject(
+        {
+          id: user.id,
+          first: user.forename,
+          last: user.lastname,
+          subject: subject,
+          level: level
+        }
+      ))
+      // API().post('add_subject', {
+      //   id: user.id,
+      //   first: user.forename,
+      //   last: user.lastname,
+      //   subject: subject,
+      //   level: level
+      // })
+      // .then(response => console.log(response))
+      // .catch(error => console.log(error));
     } else {
       setError(errMessage);
     }
@@ -68,7 +68,7 @@ function Onboarding() {
         {error && <p>{error}</p>}
         <br />
         {/* <input type='submit' value='Add' disabled={!(subject && level)}></input> */}
-        <button onClick={addSubject()} disabled={!(subject && level)}>Add</button>
+        <button onClick={addSubject} disabled={!(subject && level)}>Add</button>
       {/* </form> */}
     </div>
   )
