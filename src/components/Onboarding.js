@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeDashMode, addSubject} from '../features/dash';
-import API from '../features/dash'
+import API from '../features/API';
 
 function Onboarding() {
   const dispatch = useDispatch();
