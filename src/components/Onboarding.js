@@ -23,7 +23,7 @@ function Onboarding() {
   const errMessage = useState('Please add a subject and level');
 
   // function addSubject(e) {
-    function addSubject() {
+    function addSubjectToProfile() {
     // console.log(`e is this:`);
     // console.log(e);
     // e.preventDefault();
@@ -68,7 +68,7 @@ function Onboarding() {
         {error && <p>{error}</p>}
         <br />
         {/* <input type='submit' value='Add' disabled={!(subject && level)}></input> */}
-        <button onClick={addSubject} disabled={!(subject && level)}>Add</button>
+        <button onClick={addSubjectToProfile} disabled={!(subject && level)}>Add</button>
       {/* </form> */}
     </div>
   )
