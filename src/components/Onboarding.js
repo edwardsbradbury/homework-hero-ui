@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeDashMode, addSubject} from '../features/dash';
+import API from '../features/dash'
 
 function Onboarding() {
   const dispatch = useDispatch();
@@ -28,15 +29,24 @@ function Onboarding() {
     // e.preventDefault();
     setError('');
     if (subject && level) {
-      dispatch(addSubject(
-        {
-          id: user.id,
-          first: user.forename,
-          last: user.lastname,
-          subject: subject,
-          level: level
-        }
-      ))
+      // dispatch(addSubject(
+      //   {
+          // id: user.id,
+          // first: user.forename,
+          // last: user.lastname,
+          // subject: subject,
+          // level: level
+      //   }
+      // ))
+      API().post('add_subject', {
+        id: user.id,
+        first: user.forename,
+        last: user.lastname,
+        subject: subject,
+        level: level
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
     } else {
       setError(errMessage);
     }
