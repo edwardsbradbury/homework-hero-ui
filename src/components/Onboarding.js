@@ -22,31 +22,28 @@ function Onboarding() {
   const [error, setError] = useState('');
   const errMessage = useState('Please add a subject and level');
 
-  // function addSubject(e) {
-    function addSubjectToProfile() {
-    // console.log(`e is this:`);
-    // console.log(e);
-    // e.preventDefault();
+  function addSubjectToProfile() {
     setError('');
     if (subject && level) {
-      // dispatch(addSubject(
-      //   {
-      //     id: user.id,
-      //     first: user.forename,
-      //     last: user.lastname,
-      //     subject: subject,
-      //     level: level
-      //   }
-      // ))
-      API().post('add_subject', {
-        id: user.id,
-        first: user.forename,
-        last: user.lastname,
-        subject: subject,
-        level: level
-      })
-      .then(response => console.log(response.data))
-      .catch(error => console.log(error));
+      const result = dispatch(addSubject(
+        {
+          id: user.id,
+          first: user.forename,
+          last: user.lastname,
+          userType: user.type,
+          subject: subject,
+          level: level
+        }
+      ))
+      // API().post('add_subject', {
+      //   id: user.id,
+      //   first: user.forename,
+      //   last: user.lastname,
+      //   subject: subject,
+      //   level: level
+      // })
+      // .then(response => console.log(response.data))
+      // .catch(error => console.log(error));
     } else {
       setError(errMessage);
     }
