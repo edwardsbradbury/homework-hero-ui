@@ -35,6 +35,7 @@ function Onboarding() {
           level: level
         }
       ))
+      console.log(result);
       // API().post('add_subject', {
       //   id: user.id,
       //   first: user.forename,
@@ -52,21 +53,17 @@ function Onboarding() {
   return(
     <div id='onboarding'>
       <p>{message}</p>
-      {/* <form onSubmit={addSubject}> */}
-      {/* <form onSubmit={(e) => addSubject(e)} > */}
-        <select defaultValue={subjectPrompt} onChange={(e) => setSubject(e.target.value)}>
-          <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
-          {subjectOptions}
-        </select>
-        <select defaultValue={levelPrompt} onChange={(e) => setLevel(e.target.value)}>
-          <option key='levelPrompt' value={levelPrompt} disabled>{levelPrompt}</option>
-          {levelOptions}
-        </select>
-        {error && <p>{error}</p>}
-        <br />
-        {/* <input type='submit' value='Add' disabled={!(subject && level)}></input> */}
-        <button onClick={addSubjectToProfile} disabled={!(subject && level)}>Add</button>
-      {/* </form> */}
+      <select defaultValue={subjectPrompt} onChange={(e) => setSubject(e.target.value)}>
+        <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
+        {subjectOptions}
+      </select>
+      <select defaultValue={levelPrompt} onChange={(e) => setLevel(e.target.value)}>
+        <option key='levelPrompt' value={levelPrompt} disabled>{levelPrompt}</option>
+        {levelOptions}
+      </select>
+      {error && <p>{error}</p>}
+      <br />
+      <button onClick={addSubjectToProfile} disabled={!(subject && level)}>Add</button>
     </div>
   )
 }
