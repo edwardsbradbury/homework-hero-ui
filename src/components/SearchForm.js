@@ -22,6 +22,7 @@ function SearchForm() {
 
   function search(e) {
     e.preventDefault();
+    setError('');
 
     if (userType === 'client') {
       if (subject && level) {
