@@ -13,7 +13,7 @@ function Dashboard() {
       <h1>Welcome, {user.forename}</h1>
       {!newUser && <DashMenu />}
       {newUser && <Onboarding />}
-      {mode === 'messages' && <Messages />}
+      {mode === 'messages' && <Messaging />}
     </div>
   )
 }

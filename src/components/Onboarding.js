@@ -35,16 +35,6 @@ function Onboarding() {
           level: level
         }
       ))
-      // console.log(result);
-      // API().post('add_subject', {
-      //   id: user.id,
-      //   first: user.forename,
-      //   last: user.lastname,
-      //   subject: subject,
-      //   level: level
-      // })
-      // .then(response => console.log(response.data))
-      // .catch(error => console.log(error));
     } else {
       setError(errMessage);
     }

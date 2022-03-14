@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {getConversations, getMessages} from '../features/messaging';
 
 function Messaging() {
 
-  const mode = useSelector((state) => state.messaging.value.mode);
+  const state = useSelector((state) => state.messaging.value);
+  const conversations = state.conversations;
+  const messages = state.messaging;
 
   return (
     <div id='messaging'>
-
+      <h1>Messages</h1>
     </div>
   )
 }
