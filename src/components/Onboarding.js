@@ -30,12 +30,11 @@ function Onboarding() {
           id: user.id,
           first: user.forename,
           last: user.lastname,
-          userType: user.type,
+          userType,
           subject: subject,
           level: level
         }
       ))
-      console.log(result);
       // API().post('add_subject', {
       //   id: user.id,
       //   first: user.forename,
