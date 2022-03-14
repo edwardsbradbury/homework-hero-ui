@@ -6,7 +6,7 @@ import API from '../features/API';
 function Onboarding() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const userType = user.type;
+  const userType = useState(user.type);
 
   const messageIfClient = useState(`Add a subject that you need help with and the level you're studying this subject at. This will help tutors who teach that subject to find you`);
   const messageIfTutor = useState(`Choose a subject you want to teach and the level you're confident teaching this subject at`);

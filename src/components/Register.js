@@ -206,7 +206,7 @@ function Register() {
           {
             loggedIn: true,
             id: response.data.userId,
-            userType: userType,
+            type: userType,
             forename: forename,
             lastname: lastname,
           }
