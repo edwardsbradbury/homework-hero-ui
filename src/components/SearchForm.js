@@ -25,13 +25,14 @@ function SearchForm() {
 
     if (userType === 'client') {
       if (subject && level) {
-        dispatch(doSearch(
+        const searchResults = dispatch(doSearch(
           {
             userType: userType,
             subject: subject,
             level: level
           }
         ));
+        console.log(searchResults);
       } else {
         setError('You must enter the subject and level of study before you can search for tutors');
       }
