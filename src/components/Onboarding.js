@@ -35,7 +35,7 @@ function Onboarding() {
           level: level
         }
       ))
-      console.log(result);
+      // console.log(result);
       // API().post('add_subject', {
       //   id: user.id,
       //   first: user.forename,

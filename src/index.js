@@ -4,17 +4,19 @@ import './index.css';
 import App from './App';
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
-import userReducer from './features/user.js';
-import homeReducer from './features/home.js';
-import dashReducer from './features/dash.js';
-import searchReducer from './features/search.js';
+import userReducer from './features/user';
+import homeReducer from './features/home';
+import dashReducer from './features/dash';
+import searchReducer from './features/search';
+import messagingReducer from './features/messaging';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     home: homeReducer,
     dashboard: dashReducer,
-    search: searchReducer
+    search: searchReducer,
+    messaging: messagingReducer
   }
 });
 

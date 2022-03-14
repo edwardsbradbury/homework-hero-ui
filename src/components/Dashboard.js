@@ -2,6 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import DashMenu from './DashMenu';
 import Onboarding from './Onboarding';
+import Messaging from './Messaging';
 
 function Dashboard() {
   const user = useSelector((state) => state.user.value);
@@ -12,6 +13,7 @@ function Dashboard() {
       <h1>Welcome, {user.forename}</h1>
       {!newUser && <DashMenu />}
       {newUser && <Onboarding />}
+      {mode === 'messages' && <Messages />}
     </div>
   )
 }
