@@ -71,6 +71,10 @@ nav li {
   color: #FFFFFF;
 }
 
+#dashMenu {
+  max-width: 10vw;
+}
+
 nav li:hover, #dashMenu li:hover {
   font-weight: bold;
 }
