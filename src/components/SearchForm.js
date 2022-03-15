@@ -41,16 +41,13 @@ function SearchForm() {
             if (typeof result.result === 'string') {
               setError('No results matched your search criteria');
             } else {
-              // console.log(result);
-              console.log(typeof result.result);
-              console.log(Array.isArray(result.result));
-              console.log(result.result);
               dispatch(setResults(
                 {
                   mode: parentState.mode,
                   message: parentState.message,
                   results: result.result
-                }));
+                }
+              ));
             }
           }
         })
@@ -59,15 +56,29 @@ function SearchForm() {
       }
     } else {
       if (subject) {
-        const APIresponse = dispatch(doSearch(
+        dispatch(doSearch(
           {
             userType: userType,
             subject: subject,
             level: level
           }
-        )).unwrap();
-        // APIresponse.then()
-        console.log(APIresponse);
+        ))
+        .unwrap()
+        .then((result) => {
+          if (result.outcome === 'error') {
+            setError('Something went wrong! Please check your input and try again');
+          } else if (typeof result.result === 'string') {
+            setError('No results matched your search criteria');
+          } else {
+            dispatch(setResults(
+              {
+                mode: parentState.mode,
+                message: parentState.message,
+                results: result.result
+              }
+            ))
+          }
+        })
       } else {
         setError('You must enter at least a subject before you can search for pupils');
       }
