@@ -71,7 +71,7 @@ nav li {
   color: #FFFFFF;
 }
 
-nav li:hover {
+nav li:hover, #dashMenu li:hover {
   font-weight: bold;
 }
 
