@@ -4,6 +4,7 @@ import {doSearch, setResults} from '../features/search';
 
 function SearchForm() {
   const dispatch = useDispatch();
+  const parentState = useSelector((state) => state.search.value);
   const userType = useSelector((state) => state.user.value.type);
   const messageIfClient = useState(`Choose the subject you need help with and the level you're studying at`);
   const messageIfTutor = useState(`Choose the subject you want to teach\n
@@ -44,7 +45,12 @@ function SearchForm() {
               console.log(typeof result.result);
               console.log(Array.isArray(result.result));
               console.log(result.result);
-              dispatch(setResults({results: result.result}));
+              dispatch(setResults(
+                {
+                  mode: parentState.mode,
+                  message: parentState.message,
+                  results: result.result
+                }));
             }
           }
         })

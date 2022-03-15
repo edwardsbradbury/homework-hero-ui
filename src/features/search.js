@@ -19,10 +19,10 @@ export const searchReducer = createSlice({
     }},
   reducers: {
     changeSearchMode: (state, action) => {
-      state.value.mode = action.payload.mode;
+      state.value = action.payload;
     },
     setResults: (state, action) => {
-      state.value.results = action.payload.results;
+      state.value = action.payload;
     }
   },
   // extraReducers: (builder) => {
