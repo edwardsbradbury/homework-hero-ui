@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import SearchForm from './SearchForm';
-import SearchResult from './SearchResults';
+import SearchResult from './SearchResult';
 
 function Search() {
   const mode = useSelector((state) => state.search.value.mode);
