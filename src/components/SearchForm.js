@@ -23,6 +23,13 @@ function SearchForm() {
   function search(e) {
     e.preventDefault();
     setError('');
+    dispatch(setResults(
+      {
+        mode: parentState.mode,
+        message: parentState.message,
+        results: []
+      }
+    ));
 
     if (userType === 'client') {
       if (subject && level) {
@@ -99,7 +106,7 @@ function SearchForm() {
         </select>
         {error && <p>{error}</p>}
         <br />
-        <input type='submit' value='Search'></input>
+        <input className='button' type='submit' value='Search'></input>
       </form>
     </div>
   )
