@@ -18,7 +18,7 @@ function SearchResult(props) {
           </td>
         </tr>
         <tr>
-          <td>Some description about being a great {userType === 'tutor' ? 'tutor' : 'student'}.</td>
+          <td>Some description about being a great {userType === 'client' ? 'tutor' : 'student'}.</td>
           <td>
             {loggedIn && <button>Message</button>}
           </td>

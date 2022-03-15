@@ -13,7 +13,6 @@ function Search() {
       <h1>Search for {userType === 'client' ? 'tutors' : 'students'}</h1>
       <SearchForm />
       {(results.length > 0) && results.map((result) => <SearchResult key={result.id} resultData={result}/>)}
-      {/* {results.length > 0 && <SearchResults />} */}
     </div>
   )
 }
