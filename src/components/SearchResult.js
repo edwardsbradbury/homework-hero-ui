@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 
 function SearchResult(props) {
-  const mode = useSelector((state) => state.search.value.mode);
-  const user = useSelector((state) => state.user);
+  const userType = useSelector((state) => state.user.value.type);
+  const loggedIn = useSelector((state) => state.user.value.loggedIn);
   const data = props.resultData;
 
   return (
@@ -18,9 +18,9 @@ function SearchResult(props) {
           </td>
         </tr>
         <tr>
-          <td>Some description about being a great {user.type === 'tutor' ? 'tutor' : 'student'}.</td>
+          <td>Some description about being a great {userType === 'tutor' ? 'tutor' : 'student'}.</td>
           <td>
-            {user.loggedIn && <button>Message</button>}
+            {loggedIn && <button>Message</button>}
           </td>
         </tr>
       </table>

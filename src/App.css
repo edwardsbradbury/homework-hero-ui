@@ -72,3 +72,20 @@ nav li:hover {
 .current {
   color: #007AFF;
 }
+
+div.search-result {
+  /* background-color: #ffffff !important;
+  color: black !important;
+  opacity: 0.9; */
+  border: 1px solid black;
+  border-radius: 8px;
+  max-width: 50vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-left: 25vw;
+  margin-right: 25vw;
+}
+
+table {
+  width: 100%;
+}
