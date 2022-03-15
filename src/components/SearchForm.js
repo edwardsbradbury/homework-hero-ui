@@ -34,7 +34,13 @@ function SearchForm() {
         ))
         .unwrap()
         .then((result) => {
-          console.log(result);
+          if (result.outcome === 'failure') {
+            setError('Something went wrong! Please check your input and try again');
+          } else {
+            if (typeof result[result] === 'string') {
+              setError('No results matched your search criteria');
+            }
+          }
         })
       } else {
         setError('You must enter the subject and level of study before you can search for tutors');
