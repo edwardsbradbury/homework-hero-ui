@@ -11,6 +11,7 @@ function Search() {
     <div id='search'>
       <h1>Search for {userType === 'client' ? 'tutors' : 'students'}</h1>
       <SearchForm />
+      {results.length > 0 && <h2>Have a search result</h2>}
     </div>
   )
 }

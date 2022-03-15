@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {doSearch} from '../features/search';
+import {doSearch, setResults} from '../features/search';
 
 function SearchForm() {
   const dispatch = useDispatch();
@@ -39,6 +39,8 @@ function SearchForm() {
           } else {
             if (typeof result.result === 'string') {
               setError('No results matched your search criteria');
+            } else {
+              dispatch(setResults(result.result));
             }
           }
         })

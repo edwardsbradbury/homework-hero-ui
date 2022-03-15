@@ -19,8 +19,11 @@ export const searchReducer = createSlice({
     }},
   reducers: {
     changeSearchMode: (state, action) => {
-      state.value = action.payload;
+      state.value.mode = action.payload.mode;
     },
+    setResults: (state, action) => {
+      state.value.results = action.payload;
+    }
   },
   // extraReducers: (builder) => {
   //   builder.addCase(doSearch.fulfilled, (state, action) => {
@@ -29,6 +32,6 @@ export const searchReducer = createSlice({
   // }
 });
 
-export const {changeSearchMode} = searchReducer.actions;
+export const {changeSearchMode, setResults} = searchReducer.actions;
 
 export default searchReducer.reducer;
