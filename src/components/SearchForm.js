@@ -44,7 +44,7 @@ function SearchForm() {
               console.log(typeof result.result);
               console.log(Array.isArray(result.result));
               console.log(result.result);
-              dispatch(setResults({results: result.result.values()}));
+              dispatch(setResults({results: result.result}));
             }
           }
         })

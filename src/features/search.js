@@ -22,7 +22,7 @@ export const searchReducer = createSlice({
       state.value.mode = action.payload.mode;
     },
     setResults: (state, action) => {
-      state.value.results = action.payload;
+      state.value.results = action.payload.results;
     }
   },
   // extraReducers: (builder) => {
