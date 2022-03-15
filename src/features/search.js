@@ -14,6 +14,7 @@ export const searchReducer = createSlice({
   initialState: {
     value: {
       mode: 'query',
+      message: '',
       results: []
     }},
   reducers: {
@@ -23,7 +24,9 @@ export const searchReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(doSearch.fulfilled, (state, action) => {
-      state.value.results = action.payload;
+      // state.value.results = action.payload;
+      const result = action.payload.unwrap();
+      console.log(result);
     })
   }
 });

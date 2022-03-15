@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import API from '../features/API';
 import {doSearch} from '../features/search';
 
 function SearchForm() {
