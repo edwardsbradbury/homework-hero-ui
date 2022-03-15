@@ -38,13 +38,15 @@ function SearchForm() {
       }
     } else {
       if (subject) {
-        dispatch(doSearch(
+        const APIresponse = dispatch(doSearch(
           {
             userType: userType,
             subject: subject,
             level: level
           }
-        ));
+        )).unwrap();
+        // APIresponse.then()
+        console.log(APIresponse);
       } else {
         setError('You must enter at least a subject before you can search for pupils');
       }

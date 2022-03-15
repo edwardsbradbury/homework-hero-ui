@@ -22,13 +22,11 @@ export const searchReducer = createSlice({
       state.value = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(doSearch.fulfilled, (state, action) => {
-      // state.value.results = action.payload;
-      const result = action.payload.unwrap();
-      console.log(result);
-    })
-  }
+  // extraReducers: (builder) => {
+  //   builder.addCase(doSearch.fulfilled, (state, action) => {
+  //     state.value.results = action.payload;
+  //   })
+  // }
 });
 
 export const {changeSearchMode} = searchReducer.actions;
