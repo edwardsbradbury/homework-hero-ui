@@ -37,7 +37,7 @@ function SearchForm() {
           if (result.outcome === 'failure') {
             setError('Something went wrong! Please check your input and try again');
           } else {
-            if (typeof result[result] === 'string') {
+            if (typeof result['result'] === 'string') {
               setError('No results matched your search criteria');
             }
           }
