@@ -14,6 +14,7 @@ function SearchResult(props) {
           <td></td>
           <td>
             {data.subject}
+            <br />
             {data.level}
           </td>
         </tr>
