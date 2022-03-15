@@ -40,10 +40,10 @@ function SearchForm() {
             if (typeof result.result === 'string') {
               setError('No results matched your search criteria');
             } else {
-              // console.log('Setting search results');
-              // console.log(result.result);
-              // console.log(typeof result.result);
-              dispatch(setResults(result.result.values()));
+              // console.log(result);
+              console.log(typeof result.result);
+              console.log(result.result);
+              dispatch(setResults({results: result.result.values()}));
             }
           }
         })
