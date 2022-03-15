@@ -73,6 +73,8 @@ nav li {
 
 #dashMenu {
   max-width: 10vw;
+  border: 1px solid black;
+  border-radius: 15px;
 }
 
 nav li:hover, #dashMenu li:hover {
