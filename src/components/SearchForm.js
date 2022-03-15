@@ -42,6 +42,7 @@ function SearchForm() {
             } else {
               // console.log(result);
               console.log(typeof result.result);
+              console.log(Array.isArray(result.result));
               console.log(result.result);
               dispatch(setResults({results: result.result.values()}));
             }
