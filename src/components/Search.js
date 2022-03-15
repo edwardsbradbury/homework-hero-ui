@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import SearchForm from './SearchForm';
+import SearchResult from './SearchForm';
 
 function Search() {
   const mode = useSelector((state) => state.search.value.mode);
@@ -11,7 +12,7 @@ function Search() {
     <div id='search'>
       <h1>Search for {userType === 'client' ? 'tutors' : 'students'}</h1>
       <SearchForm />
-      {results.length > 0 && <h2>Have a search result</h2>}
+      {results.length > 0 && results.map((result) => <SearchResult resultData={result}/>)}
     </div>
   )
 }
