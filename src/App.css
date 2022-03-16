@@ -56,9 +56,7 @@ button:disabled, .button:disabled {
 
 nav {
   display: inline-block;
-  justify-self: start;
-  /* min-width: 20vw;
-  max-width: 25vw; */
+  /* justify-self: start; */
   width: 100%;
 }
 
@@ -66,6 +64,12 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+nav ul {
+  justify-self: start;
+  /* width: 100%; */
+  width: 25vw;
 }
 
 nav li {
@@ -76,7 +80,7 @@ nav li {
 }
 
 #dashMenu {
-  max-width: 10vw;
+  max-width: 8vw;
   border: 1px solid black;
   border-radius: 15px;
 }
