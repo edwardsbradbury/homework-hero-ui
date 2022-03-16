@@ -29,7 +29,7 @@
 #logo {
   display: inline-block;
   max-width: 25vw;
-  max-height: 7vh;
+  max-height: 10vh;
   justify-self: center;
 }
 
@@ -57,7 +57,6 @@ button:disabled, .button:disabled {
 
 nav {
   display: inline-block;
-  /* justify-self: start; */
   width: 100%;
 }
 
@@ -68,9 +67,10 @@ ul {
 }
 
 nav ul {
-  justify-self: start;
-  /* width: 100%; */
-  width: 30vw;
+  justify-self: center;
+  /* width: 30vw; */
+  max-width: 60%;
+  min-width: 50%;
 }
 
 nav li {
