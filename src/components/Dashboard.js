@@ -5,9 +5,9 @@ import Onboarding from './Onboarding';
 import Messaging from './Messaging';
 
 function Dashboard() {
-  const user = useSelector((state) => state.user.value);
-  const newUser = useSelector((state) => state.dashboard.value.newUser);
-  const mode = useSelector((state) => state.dashboard.value.mode);
+  const user = useSelector(state => state.user.value);
+  const newUser = useSelector(state => state.dashboard.value.newUser);
+  const mode = useSelector(state => state.dashboard.value.mode);
   return (
     <div id='dashboard'>
       <h1>Welcome, {user.forename}</h1>

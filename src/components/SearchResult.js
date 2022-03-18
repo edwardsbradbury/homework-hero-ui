@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 
 function SearchResult(props) {
-  const userType = useSelector((state) => state.user.value.type);
-  const loggedIn = useSelector((state) => state.user.value.loggedIn);
+  const userType = useSelector(state => state.user.value.type);
+  const loggedIn = useSelector(state => state.user.value.loggedIn);
   const data = props.resultData;
 
   return (

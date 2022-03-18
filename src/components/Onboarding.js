@@ -5,7 +5,7 @@ import API from '../features/API';
 
 function Onboarding() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector(state => state.user.value);
   const userType = user.type;
 
   const messageIfClient = useState(`Add a subject that you need help with and the level you're studying this subject at. This will help tutors who teach that subject to find you`);
@@ -43,11 +43,11 @@ function Onboarding() {
   return(
     <div id='onboarding'>
       <p>{message}</p>
-      <select defaultValue={subjectPrompt} onChange={(e) => setSubject(e.target.value)}>
+      <select defaultValue={subjectPrompt} onChange={e => setSubject(e.target.value)}>
         <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
         {subjectOptions}
       </select>
-      <select defaultValue={levelPrompt} onChange={(e) => setLevel(e.target.value)}>
+      <select defaultValue={levelPrompt} onChange={e => setLevel(e.target.value)}>
         <option key='levelPrompt' value={levelPrompt} disabled>{levelPrompt}</option>
         {levelOptions}
       </select>

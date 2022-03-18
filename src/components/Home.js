@@ -8,9 +8,9 @@ import Register from './Register';
 import Search from './Search';
 
 function Home() {
-  const homeState = useSelector((state) => state);
-  const loggedIn = homeState.user.value.loggedIn;
-  const mode = homeState.home.value.mode;
+  const state = useSelector(state => state);
+  const loggedIn = state.user.value.loggedIn;
+  const mode = state.home.value.mode;
   return (
     <div id='home'>
       <Nav />

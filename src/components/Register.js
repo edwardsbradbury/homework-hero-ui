@@ -227,44 +227,44 @@ function Register() {
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
         <label htmlFor='accountType'>Account type </label>
-        <select id='accountType' value={userType} onChange={(e) => updateState(e.target.value)}>
+        <select id='accountType' value={userType} onChange={e => updateState(e.target.value)}>
           <option value='client'>Pupil</option>
           <option value='tutor'>Tutor</option>
         </select>
         <br />
         <label htmlFor='forename'>First name </label>
-        <input id='forename' type='text' placeholder='First name' value={forename} onChange={(e) => setForename(e.target.value.trim())}></input>
+        <input id='forename' type='text' placeholder='First name' value={forename} onChange={e => setForename(e.target.value.trim())}></input>
         {errors.forenameMissing && <p>{errors.forenameMissing}</p>}
         {errors.forenameInvalid && <p>{errors.forenameInvalid}</p>}
         <label htmlFor='lastname'>Last name </label>
-        <input id='lastname' type='text' placeholder='Last name' value={lastname} onChange={(e) => setLastname(e.target.value.trim())}></input>
+        <input id='lastname' type='text' placeholder='Last name' value={lastname} onChange={e => setLastname(e.target.value.trim())}></input>
         {errors.lastnameMissing && <p>{errors.lastnameMissing}</p>}
         {errors.lastnameInvalid && <p>{errors.lastnameInvalid}</p>}
         <label htmlFor='userEmail'>Email address </label>
-        <input id='userEmail' type='text' placeholder='you@website.com' value={userEmail} onChange={(e) => setEmail(e.target.value.trim())}></input>
+        <input id='userEmail' type='text' placeholder='you@website.com' value={userEmail} onChange={e => setEmail(e.target.value.trim())}></input>
         {errors.userEmailMissing && <p>{errors.userEmailMissing}</p>}
         {errors.userEmailInvalid && <p>{errors.userEmailInvalid}</p>}
         <br />
         <label htmlFor='dob'>Date of birth </label>
-        <input id='dob' type='date' value={dob} onChange={(e) => setDob(e.target.value)}></input>
+        <input id='dob' type='date' value={dob} onChange={e => setDob(e.target.value)}></input>
         {errors.dobMissing && <p>{errors.dobMissing}</p>}
         {errors.dobInvalid && <p>{errors.dobInvalid}</p>}
         <label htmlFor='secondEmail'>{emailLabel} </label>
-        <input id='secondEmail' type='text' placeholder={emailPlaceholder} value={secondEmail} onChange={(e) => setSecondEmail(e.target.value.trim())}></input>
+        <input id='secondEmail' type='text' placeholder={emailPlaceholder} value={secondEmail} onChange={e => setSecondEmail(e.target.value.trim())}></input>
         {errors.secondEmailMissing && <p>{errors.secondEmailMissing}</p>}
         {errors.secondEmailInvalid && <p>{errors.secondEmailInvalid}</p>}
         <br />
         <label htmlFor='password'>Password </label>
-        <input id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
+        <input id='password' type='password' value={password} onChange={e => setPassword(e.target.value)}></input>
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}
         {errors.passwordInvalid && <p>{errors.passwordInvalid}</p>}
         <label htmlFor='confPass'>Confirm password </label>
-        <input id='confPass' type='password' value={confPassword} onChange={(e) => setConfPassword(e.target.value)}></input>
+        <input id='confPass' type='password' value={confPassword} onChange={e => setConfPassword(e.target.value)}></input>
         {errors.confPasswordMissing && <p>{errors.confPasswordMissing}</p>}
         {errors.confPasswordInvalid && <p>{errors.confPasswordInvalid}</p>}
         <br />
         <label htmlFor='tcCheckbox'>I have read and agree to Homework Hero's terms and conditions: </label>
-        <input id='tcCheckbox' type='checkbox' value={tcBoxChecked} onChange={(e) => setTcBoxChecked(!tcBoxChecked)}></input>
+        <input id='tcCheckbox' type='checkbox' value={tcBoxChecked} onChange={e => setTcBoxChecked(!tcBoxChecked)}></input>
         {errors.tcBoxUnchecked && <p>{errors.tcBoxUnchecked}</p>}
         <input className='button' type='submit' value='Register' disabled={!allFieldsAreFilled}/>
       </form>

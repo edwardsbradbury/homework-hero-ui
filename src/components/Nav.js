@@ -4,7 +4,7 @@ import { changeMode } from '../features/home';
 import {logout} from '../features/user';
 
 function Nav() {
-  const userData = useSelector((state) => state.user.value);
+  const userData = useSelector(state => state.user.value);
   const loggedIn = userData.loggedIn;
   const userType = userData.type;
   const questionPrompt = userType === 'client' ? 'Ask a question' : 'Browse questions';

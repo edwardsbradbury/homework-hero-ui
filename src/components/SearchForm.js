@@ -4,8 +4,8 @@ import {doSearch, setResults} from '../features/search';
 
 function SearchForm() {
   const dispatch = useDispatch();
-  const parentState = useSelector((state) => state.search.value);
-  const userType = useSelector((state) => state.user.value.type);
+  const parentState = useSelector(state => state.search.value);
+  const userType = useSelector(state => state.user.value.type);
   const messageIfClient = useState(`Choose the subject you need help with and the level you're studying at`);
   const messageIfTutor = useState(`Choose the subject you want to teach\n
     You can also specify the level you're confident teaching this subject at, or leave the level blank to see students of all levels who need help`);
@@ -41,7 +41,7 @@ function SearchForm() {
           }
         ))
         .unwrap()
-        .then((result) => {
+        .then(result => {
           if (result.outcome === 'failure') {
             setError('Something went wrong! Please check your input and try again');
           } else {
@@ -71,7 +71,7 @@ function SearchForm() {
           }
         ))
         .unwrap()
-        .then((result) => {
+        .then(result => {
           if (result.outcome === 'error') {
             setError('Something went wrong! Please check your input and try again');
           } else if (typeof result.result === 'string') {
@@ -96,11 +96,11 @@ function SearchForm() {
     <div id='searchForm'>
       <p>{message}</p>
       <form onSubmit={search}>
-        <select defaultValue={subjectPrompt} onChange={(e) => setSubject(e.target.value)}>
+        <select defaultValue={subjectPrompt} onChange={e => setSubject(e.target.value)}>
           <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
           {subjectOptions}
         </select>
-        <select defaultValue={levelPrompt} onChange={(e) => setLevel(e.target.value)}>
+        <select defaultValue={levelPrompt} onChange={e => setLevel(e.target.value)}>
           <option key='levelPrompt' value={levelPrompt} disabled>{levelPrompt}</option>
           {levelOptions}
         </select>

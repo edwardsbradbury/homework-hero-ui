@@ -44,7 +44,7 @@ function Login() {
       email: email,
       password: password
     }).then(
-      (response) => {
+      response => {
         if (response.data.outcome === 'success') {
           dispatch(changeMode({mode: 'dashboard'}));
           dispatch(login(
@@ -61,7 +61,7 @@ function Login() {
         }
       }
     ).catch(
-      (error) => console.log(error));
+      error => console.log(error));
   };
 
   return (
@@ -69,12 +69,12 @@ function Login() {
       <h1>Login</h1>
       <form onSubmit={checkCredentials}>
         <label htmlFor='email'>Email address </label>
-        <input id='email' type='text' placeholder='you@website.com' value={email} onChange={(e) => setEmail(e.target.value.trim())}></input>
+        <input id='email' type='text' placeholder='you@website.com' value={email} onChange={e => setEmail(e.target.value.trim())}></input>
         {errors.emailMissing && <p>{errors.emailMissing}</p>}
         {errors.emailInvalid && <p>{errors.emailInvalid}</p>}
         <br />
         <label htmlFor='password'>Password </label>
-        <input id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
+        <input id='password' type='password' value={password} onChange={e => setPassword(e.target.value)}></input>
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}
         <br />
         <button>Forgotten password?</button>
