@@ -10,6 +10,8 @@ import dashReducer from './features/dash';
 import searchReducer from './features/search';
 import messagingReducer from './features/messaging';
 
+
+// Configure a Redux global state store, import the following state slices and their methods from features
 const store = configureStore({
   reducer: {
     user: userReducer,
