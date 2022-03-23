@@ -29,12 +29,13 @@ function Nav() {
       </img>
       <nav>
         <ul>
-          {/* Changing the value of mode property in features/home switches out the component displayed */}
+          {/* Changing the value of mode property in ../features/home switches out the component displayed */}
           <li onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</li>
           <li onClick={() => dispatch(changeMode({mode: 'questions'}))}>{questionPrompt}</li>
           <li onClick={() => dispatch(changeMode({mode: 'search'}))}>{searchPrompt}</li>
           {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</li>}
           {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</li>}
+          {/* The logout action essentially resets things the app's initial state; see ../features/user for changeMode method definition */}
           {loggedIn && <li onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</li>}
         </ul>
       </nav>

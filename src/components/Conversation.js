@@ -6,6 +6,7 @@ import Message from './Message';
 
 function Conversation (props) {
 
+  const mode = useState('newMessage');
   const messages = props.messages.map(aMessage => <Message data={aMessage}/>);
   const generalError = useState('Failed to get messages');
   const confirmDeletion = useState('Are you sure you want to delete this message?');

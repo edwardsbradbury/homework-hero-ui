@@ -20,7 +20,10 @@ function Messaging() {
   return (
     <div id='messaging'>
       <h1>Messages</h1>
-      {error && <p className='error'>{error}</p>}
+      {errors &&
+        <ul style='{list-style-type: none; padding: 0; margin: 0}'>
+          {errors.map(error => <li>{error}</li>)}
+        </ul>}
       {conversations.length < 1 && <p>You don't have any conversations yet...</p>}
       {mode === 'conversations' && conversations.map(conversation => <Conversation messages={conversation}/>)}
     </div>
