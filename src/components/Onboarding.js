@@ -1,9 +1,13 @@
+/* Component to be displayed to newly registered users. Requires user to select a subject and level of study (either that they need
+    help with or are confident teaching). Posts this data to API to store in database. Search component uses this db table */
+
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeDashMode, addSubject} from '../features/dash';
-import API from '../features/API';
 
 function Onboarding() {
+
+  // Will need to dispatch some Redux state update actions
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.value);
   const userType = user.type;
@@ -22,6 +26,8 @@ function Onboarding() {
   const [error, setError] = useState('');
   const errMessage = useState('Please add a subject and level');
 
+  
+  // Method to submit the input data to API's /add_subject route. See features/dash for details of the addSubject action
   function addSubjectToProfile() {
     setError('');
     if (subject && level) {

@@ -1,3 +1,4 @@
+/* For the time being, all CSS for the entire app is in this file. May separate into components later */
 .App {
   text-align: center;
 }

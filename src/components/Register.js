@@ -1,3 +1,5 @@
+// This module is a React component consisting of a registration form with 
+
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import API from '../features/API';
@@ -7,12 +9,18 @@ import {changeDashMode} from '../features/dash';
 
 function Register() {
 
+  // Need to dispatch various actions updating Redux state variables depending on response from my API's /register route
   const dispatch = useDispatch();
+  // today state variable used in checkAge method defined below to check tutors are over 18 and clients aged between 11-17
   const [today] = useState(new Date());
   today.setHours(0,0,0,0);
+  // Name regex used to verify first and last names contain only letters and hyphens
   const [nameRegex] = useState(/^[a-zA-Z]+(-[a-zA-Z]+)*$/);
+  // emailRegex used to verify the email1 field input is a valid email address
   const [emailRegex] = useState(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  // acEmailRegex used to verify the email2 input is a valid email address ending ac.uk
   const [acEmailRegex] = useState(/^[\w!#$%&'*+\/=?^`{|}~-]+(?:\.[\w!#$%&'*+\/=?`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:ac\.uk)$/);
+  // Password regex tests for strong passwords - min 8 characters, at least 1 each of: capital & lower case letter, number and symbol
   const [passwordRegex] = useState(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
   const [userType, setUserType] = useState('client');
   const [clientEmailLabel] = useState(`Designated teacher's email address`);
@@ -69,9 +77,13 @@ function Register() {
     badResponse: '',
   }
   const [errors, setErrors] = useState(errorsObj);
+
+  // Boolean control value - Register button is disabled until all fields are filled and also no data submitted to API if any values are missing
   const allFieldsAreFilled = Boolean(forename) && Boolean(lastname) && Boolean(userEmail) && Boolean(dob) && Boolean(secondEmail) && Boolean(password) && Boolean(confPassword) && Boolean(tcBoxChecked);
 
+  // Various display text should change depend on whether the user is registering as a client or a tutor; this sets those wben the user type dropodown value changes
   function updateState(type) {
+
     setUserType(type);
     if (type === 'tutor') {
       setEmailLabel(tutorEmailLabel);
@@ -88,6 +100,7 @@ function Register() {
     }
   }
   
+  // Method to check that tutors are aged over 18, clients are aged 11 or over but under 18
   function checkAge(date) {
 
     const minus18Years = today.getFullYear() - 18;
@@ -115,20 +128,26 @@ function Register() {
 
   };
   
+  // Check validity of registration form input and submit to API if valid
   function checkForm(e) {
+
+    // Prevent the default HTML form behaviour of redirecting/refreshing on submission
     e.preventDefault();
     const errorObj = {...errorsObj};
 
+    // Names and email are valid if not empty strings and match the regex formats above
     const forenameValid = forename !== '' && nameRegex.test(forename);
     const lastnameValid = lastname !== '' && nameRegex.test(lastname);
     const userEmailValid = userEmail !== '' && emailRegex.test(userEmail);
     const tempDob = new Date(dob);
     tempDob.setHours(0,0,0,0);
+    // Use the checkDob method defined above to check the entered DOB is valid for the type of user
     const dobValid = checkAge(tempDob);
     const secondEmailValid = secondEmail !== '' && acEmailRegex.test(secondEmail);
     const passwordValid = password !== '' && passwordRegex.test(password);
     const confPasswordValid = confPassword !== '' && passwordRegex.test(confPassword);
     const passwordsMatch = password === confPassword;
+    // Made sense to check at this point whether all input is valid - can then submit to API if so, avoiding the error message setting code
     const allFieldsAreValid = (forenameValid && lastnameValid && userEmailValid && dobValid && secondEmailValid && passwordValid && confPasswordValid && passwordsMatch) ? true : false;
 
     if (allFieldsAreFilled) {
@@ -137,6 +156,7 @@ function Register() {
       }
     }
 
+    // Execution reaches here if some input is missing or invalid. So for each input field, check specifically what's wrong and add prompt message to user
     if (!forename) {
       errorObj.forenameMissing = forenameMissing;
     } else if (!nameRegex.test(forename)) {
@@ -183,10 +203,12 @@ function Register() {
       errorObj.tcBoxUnchecked = tcBoxUnchecked;
     }
 
+    // Set the error state object
     setErrors(errorObj);
 
   };
 
+  // Method to actually transmit the validated registration data to my API. This should really be in an asyncThunk in features/register.js
   function submitRegistration() {
     API().post('register', {
       userType: userType,
@@ -200,6 +222,8 @@ function Register() {
     })
     .then(response => {
       if (response.data.outcome === 'success') {
+        /* Update the necessary global state variables in Redux: mode and newUser properties in features/dash are updated, as are
+          the mode property in fatures/home and the user data is updated in features/user */
         dispatch(changeDashMode({mode: 'dash', newUser: true}));
         dispatch(changeMode({mode: 'dashboard'}));
         dispatch(login(
@@ -222,6 +246,7 @@ function Register() {
 
 
   return (
+    // JSX to render the form component and message prompts to users based on interaction
     <div id='register'>
       <h1>Register for an account</h1>
       <form onSubmit={checkForm}>

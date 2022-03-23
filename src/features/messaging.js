@@ -3,8 +3,7 @@ import API from './API';
 
 const initialState = {value: {
   mode: 'conversations',
-  conversations: [],
-  messages: []
+  conversations: []
 }}
 
 export const getConversations = createAsyncThunk(
@@ -19,6 +18,14 @@ export const getMessages = createAsyncThunk(
   'messaging/getMessages',
   async (convId, thunkAPI) => {
     const response = await API().get(`get_messages/${convId}`);
+    return response.data;
+  }
+);
+
+export const sendMessage = createAsyncThunk(
+  'messaging/sendMessage',
+  async (data, thunkAPI) => {
+    const response = await API().post('new_message', data);
     return response.data;
   }
 );

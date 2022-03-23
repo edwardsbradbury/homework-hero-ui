@@ -1,3 +1,5 @@
+// This component is a menu for use within the Dashboard component by users who're logged in
+
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
@@ -5,6 +7,8 @@ import {logout} from '../features/user';
 import {changeDashMode} from '../features/dash';
 
 function DashMenu() {
+
+  // Will need to dispatch some actions to update Redux global state properties
   const dispatch = useDispatch();
   const userType = useSelector(state => state.user.value.type);
   const mode = useSelector(state => state.dashboard.value.mode);
@@ -14,6 +18,7 @@ function DashMenu() {
   return (
     <div id='dashMenu'>
       <ul>
+        {/* See features/dash for details of the changeDashMode method - mode variable used to switch out components */}
         <li
           className={mode === 'dash' ? 'current' : null}
           onClick={() => dispatch(changeDashMode({mode: 'dash', newUser: false}))}>

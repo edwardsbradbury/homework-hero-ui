@@ -1,6 +1,7 @@
 import React from 'react';
 
-function Message () {
+function Message (props) {
+  
   return (
     <div className='message'>
 
