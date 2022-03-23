@@ -13,9 +13,9 @@ function Messaging() {
   const [currentConvMessages, setCurrConvMsgs] = useState([]);
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    dispatch(getConversations(userId));
-  })
+  // useEffect(() => {
+  //   dispatch(getConversations(userId));
+  // })
 
   return (
     <div id='messaging'>
