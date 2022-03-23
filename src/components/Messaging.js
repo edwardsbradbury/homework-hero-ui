@@ -21,7 +21,7 @@ function Messaging() {
     <div id='messaging'>
       <h1>Messages</h1>
       {errors &&
-        <ul style={{listStyleType: none, padding: 0, margin: 0}}>
+        <ul style={{listStyleType: 'none', padding: 0, margin: 0}}>
           {errors.map(error => <li>{error}</li>)}
         </ul>}
       {conversations.length < 1 && <p>You don't have any conversations yet...</p>}
