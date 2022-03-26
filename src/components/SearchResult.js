@@ -2,12 +2,25 @@
 passed in as a prop */
 
 import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {changeMode} from '../features/home';
+import {changeDashMode} from '../features/dash';
 
 function SearchResult(props) {
+  const dispatch = useDispatch();
   const userType = useSelector(state => state.user.value.type);
   const loggedIn = useSelector(state => state.user.value.loggedIn);
   const data = props.resultData;
+
+  function contactUser() {
+    dispatch(changeMode({
+       mode: 'dashboard'
+    }));
+    dispatch(changeDashMode({
+       mode: 'messages',
+       newUser: false
+    }));
+  }
 
   return (
     <div className='search-result'>
@@ -25,7 +38,7 @@ function SearchResult(props) {
           {/* Ultimately here should be a bio which should come from the database via the API */}
           <td>Some description about being a great {userType === 'client' ? 'tutor' : 'student'}.</td>
           <td>
-            {loggedIn && <button>Message</button>}
+            {loggedIn && <button onclick={contactUser}>Message</button>}
           </td>
         </tr>
       </table>

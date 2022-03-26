@@ -4,19 +4,35 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {sendMessage} from '../features/messaging';
 
-function MessageForm () {
+function MessageForm (props) {
   const dispatch = useDispatch();
+  const user = props.user;
   const [content, setContent] = useState('');
-  let charsRemaining = 500 - content.length;
+  let [characters, setCharacters] = useState(500);
 
+  function charsRemaining() {
+    return 500 - content.length;
+  }
+
+  function updateState(e) {
+    setContent(e.target.value);
+    setCharacters(charsRemaining());
+  }
+  
   function sendIt() {
-    
+    if (!(content.length > 500)) {
+      dispatch(sendMessage(
+        {
+
+        }
+      ));
+    }
   }
 
   return (
     <div id='messageForm'>
-      <textarea maxlength='500' placeholder='Write your message here...' onChange={e => setContent(e.target.value.trim())}></textarea>
-      <p>{charsRemaining}/500 characters remaining</p>
+      <textarea maxlength='500' placeholder='Write your message here...' onChange={updateState}></textarea>
+      <p>{characters}/500 characters remaining</p>
       <button onclick={sendIt}>Send</button>
     </div>
   )

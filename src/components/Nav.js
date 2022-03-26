@@ -1,8 +1,8 @@
 // This component is actually the whole topbar, not only the nav. Also the logo/branding/home button
 
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { changeMode } from '../features/home';
+import {useSelector, useDispatch} from 'react-redux';
+import {changeMode} from '../features/home';
 import {logout} from '../features/user';
 
 function Nav() {

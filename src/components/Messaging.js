@@ -1,3 +1,5 @@
+// Component into which subcomponents will be injected for facilitating messaging feature
+
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMessagingMode, getConversations} from '../features/messaging';
@@ -21,8 +23,8 @@ function Messaging() {
     <div id='messaging'>
       <h1>Messages</h1>
       {errors &&
-        <ul style={{listStyleType: 'none', padding: 0, margin: 0}}>
-          {errors.map(error => <li>{error}</li>)}
+        <ul>
+          {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
       {conversations.length < 1 && <p>You don't have any conversations yet...</p>}
       {mode === 'conversations' && conversations.map(conversation => <Conversation messages={conversation}/>)}

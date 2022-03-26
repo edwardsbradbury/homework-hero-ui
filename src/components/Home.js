@@ -21,11 +21,12 @@ function Home() {
   return (
     <div id='home'>
       <Nav />
-      {loggedIn && <Dashboard />}
+      {/* {loggedIn && <Dashboard />} */}
       {mode === 'splash' && <Splash />}
       {mode === 'login' && <Login />}
       {mode === 'register' && <Register />}
       {mode === 'search' && <Search />}
+      {mode === 'dashboard' && <Dashboard />}
     </div>
   )
 }

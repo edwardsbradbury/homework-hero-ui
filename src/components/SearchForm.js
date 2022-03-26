@@ -100,7 +100,8 @@ function SearchForm() {
             setError('No results matched your search criteria');
           } else {
             /* result.result should be an array; dispatch an action assigning this array to the results property in ../features/search
-                this part is what should really be moved into an extraReducer in aforementioned file */
+                this part is what should really be moved into an extraReducer in aforementioned file. Really everything from line 94
+                to at least 113 should probably be in that file */
             dispatch(setResults(
               {
                 mode: parentState.mode,
