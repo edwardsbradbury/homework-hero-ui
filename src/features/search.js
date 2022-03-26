@@ -13,14 +13,10 @@ export const searchReducer = createSlice({
   name: 'search',
   initialState: {
     value: {
-      mode: 'query',
       message: '',
       results: []
     }},
   reducers: {
-    changeSearchMode: (state, action) => {
-      state.value = action.payload;
-    },
     setResults: (state, action) => {
       state.value = action.payload;
     }
@@ -32,6 +28,6 @@ export const searchReducer = createSlice({
   // }
 });
 
-export const {changeSearchMode, setResults} = searchReducer.actions;
+export const {setResults} = searchReducer.actions;
 
 export default searchReducer.reducer;

@@ -11,7 +11,7 @@ function MessageForm (props) {
   let [characters, setCharacters] = useState(500);
 
   function charsRemaining() {
-    return 500 - content.length;
+    content ? (500 - content.length) : 500;
   }
 
   function updateState(e) {

@@ -6,7 +6,7 @@ import SearchForm from './SearchForm';
 import SearchResult from './SearchResult';
 
 function Search() {
-  const mode = useSelector(state => state.search.value.mode);
+
   const userType = useSelector(state => state.user.value.type);
   const results = useSelector(state => state.search.value.results);
 

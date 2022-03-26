@@ -3,6 +3,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
+import {changeMessagingMode} from '../features/messaging';
 import {logout} from '../features/user';
 
 function Nav() {
@@ -16,6 +17,16 @@ function Nav() {
   const searchPrompt = userType === 'client' ? 'Search for tutors' : 'Search for clients';
   // Need to dispatch actions to update Redux global state depending on what user clicks
   const dispatch = useDispatch();
+
+  function resetState() {
+    dispatch(logout());
+    dispatch(changeMode({mode: 'splash'}));
+    dispatch(changeMessagingMode({
+      mode: 'conversations',
+      conversations: [],
+      recipId: null
+    }))
+  }
 
   return (
     <div id='nav'>
@@ -36,7 +47,8 @@ function Nav() {
           {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</li>}
           {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</li>}
           {/* The logout action essentially resets things the app's initial state; see ../features/user for changeMode method definition */}
-          {loggedIn && <li onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</li>}
+          {/* {loggedIn && <li onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>Logout</li>} */}
+          {loggedIn && <li onClick={resetState}>Logout</li>}
         </ul>
       </nav>
     </div>
