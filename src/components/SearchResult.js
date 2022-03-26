@@ -38,7 +38,7 @@ function SearchResult(props) {
           {/* Ultimately here should be a bio which should come from the database via the API */}
           <td>Some description about being a great {userType === 'client' ? 'tutor' : 'student'}.</td>
           <td>
-            {loggedIn && <button onclick={contactUser}>Message</button>}
+            {loggedIn && <button onClick={contactUser}>Message</button>}
           </td>
         </tr>
       </table>
