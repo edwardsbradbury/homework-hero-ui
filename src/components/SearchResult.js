@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeMode} from '../features/home';
 import {changeDashMode} from '../features/dash';
+import {changeMessagingMode} from '../features/messaging';
 
 function SearchResult(props) {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ function SearchResult(props) {
   const loggedIn = useSelector(state => state.user.value.loggedIn);
   const data = props.resultData;
 
+  /* If user is logged in, a search result contains a Message button. This method is called on clicking that button. Method
+      unmounts the Search component from Home, switches to Dashboard. Dashboard is rendered in messages mode. Messaging is
+      rendered in 'from search' mode - MessageForm without any prior conversation data */
   function contactUser() {
     dispatch(changeMode({
        mode: 'dashboard'
@@ -20,6 +24,11 @@ function SearchResult(props) {
        mode: 'messages',
        newUser: false
     }));
+    dispatch(changeMessagingMode({
+      mode: 'from search',
+      conversations: [],
+      recipId: data.userId
+    }))
   }
 
   return (

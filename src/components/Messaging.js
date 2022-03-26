@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMessagingMode, getConversations} from '../features/messaging';
 import Conversation from './Conversation';
+import MessageForm from './MessageForm';
 
 function Messaging() {
 
@@ -26,7 +27,8 @@ function Messaging() {
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
-      {conversations.length < 1 && <p>You don't have any conversations yet...</p>}
+      {mode === 'from search' && <MessageForm />}
+      {mode === 'conversations' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
       {mode === 'conversations' && conversations.map(conversation => <Conversation messages={conversation}/>)}
     </div>
   )

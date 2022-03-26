@@ -3,7 +3,8 @@ import API from './API';
 
 const initialState = {value: {
   mode: 'conversations',
-  conversations: []
+  conversations: [],
+  recipId: null
 }}
 
 export const getConversations = createAsyncThunk(
