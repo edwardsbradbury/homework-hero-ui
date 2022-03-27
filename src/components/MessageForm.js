@@ -50,7 +50,7 @@ function MessageForm (props) {
     <div id='messageForm'>
       <textarea maxlength='500' placeholder='Write your message here...' onChange={updateState}></textarea>
       <p>{characters}/500 characters remaining</p>
-      <button onclick={sendIt}>Send</button>
+      <button onClick={sendIt}>Send</button>
     </div>
   )
 }
