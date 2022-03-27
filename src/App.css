@@ -109,9 +109,10 @@ table {
 }
 
 textarea {
-  border-radius: 15px;
-  max-width: 50vw;
+  border-radius: 10px;
+  width: 50vw;
   max-height: 15vh;
+  min-height: 10vh;
   margin-left: 25vw;
   margin-right: 25vw;
 }
