@@ -25,7 +25,7 @@ function MessageForm (props) {
   /* Send the message to the API /new_message endpoint to insert into database. On success response, update Redux state:
       re-fetch user's messages and ... TBC */
   function sendIt() {
-    if (!(content.length > 500)) {
+    if (content.length > 1 && !(content.length > 500)) {
       dispatch(sendMessage(
         {
           sender: user.id,
