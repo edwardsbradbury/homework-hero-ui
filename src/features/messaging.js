@@ -41,7 +41,7 @@ export const messagingReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getConversations.fulfilled, (state, action) => {
-      state.value.conversations = action.payload;
+      state.value.conversations = action.payload.messages;
     })
     .addCase(getMessages.fulfilled, (state, action) => {
       state.value.messages = action.payload;

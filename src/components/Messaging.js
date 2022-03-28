@@ -27,7 +27,7 @@ function Messaging() {
   return (
     <div id='messaging'>
       <h1>Messages</h1>
-      {errors &&
+      {errors.length &&
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}

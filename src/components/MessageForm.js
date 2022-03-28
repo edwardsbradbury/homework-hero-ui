@@ -2,7 +2,7 @@
 
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {sendMessage} from '../features/messaging';
+import {sendMessage, getConversations} from '../features/messaging';
 
 function MessageForm (props) {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function MessageForm (props) {
       .unwrap()
       .then(response => {
         if (response.outcome === 'success') {
-          console.log('success');
+          dispatch(getConversations(user.id));
         } else {
           props.setErrors(['Failed to send message, try again']);
         }
