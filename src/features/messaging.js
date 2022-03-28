@@ -10,7 +10,7 @@ const initialState = {value: {
 export const getConversations = createAsyncThunk(
   'messaging/getConversations',
   async (userId, thunkAPI) => {
-    const response = await API().get(`get_conversations/${userId}`);
+    const response = await API().get(`conversations/${userId}`);
     return response.data;
   }
 );

@@ -20,6 +20,10 @@ function Messaging() {
   //   dispatch(getConversations(userId));
   // })
 
+  function setErrsFromChild(errors) {
+    setErrors(errors);
+  }
+
   return (
     <div id='messaging'>
       <h1>Messages</h1>
@@ -27,7 +31,7 @@ function Messaging() {
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
-      {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId}/>}
+      {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>}
       {mode === 'conversations' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
       {mode === 'conversations' && conversations.map(conversation => <Conversation messages={conversation}/>)}
     </div>

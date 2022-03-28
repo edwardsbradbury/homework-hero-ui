@@ -39,7 +39,7 @@ function MessageForm (props) {
         if (response.outcome === 'success') {
           console.log('success');
         } else {
-          console.log(response.outcome);
+          props.setErrors(['Failed to send message, try again']);
         }
       })
       .catch()
