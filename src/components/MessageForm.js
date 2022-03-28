@@ -6,7 +6,7 @@ import {sendMessage} from '../features/messaging';
 
 function MessageForm (props) {
   const dispatch = useDispatch();
-  const user = props.user;
+  const user = useSelector(state => state.user.value);
   const [content, setContent] = useState('');
   let [characters, setCharacters] = useState(500);
 
