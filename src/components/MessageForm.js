@@ -30,7 +30,7 @@ function MessageForm (props) {
         {
           sender: user.id,
           recipient: props.recipient,
-          sent: new Date(),
+          sent: new Date().toISOString(),
           message: content
         }
       ))
