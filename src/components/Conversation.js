@@ -8,7 +8,7 @@ function Conversation (props) {
 
   const mode = useState('newMessage');
   const user = useSelector(state => state.user.value);
-  const firstMessage = props.messages[0];
+  const firstMessage = useState(props.messages[0]);
   const recipient = useState(firstMessage.senderId === user.id ? firstMessage.recipId : firstMessage.senderId);
   const messages = props.messages.map(aMessage => <Message data={aMessage}/>);
   const generalError = useState('Failed to get messages');
