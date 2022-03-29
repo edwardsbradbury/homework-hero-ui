@@ -39,14 +39,14 @@ export const messagingReducer = createSlice({
       state.value = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(getConversations.fulfilled, (state, action) => {
-      state.value.conversations = action.payload.messages;
-    })
-    .addCase(getMessages.fulfilled, (state, action) => {
-      state.value.messages = action.payload;
-    })
-  }
+  // extraReducers: (builder) => {
+  //   builder.addCase(getConversations.fulfilled, (state, action) => {
+  //     state.value.conversations = action.payload.messages;
+  //   })
+  //   .addCase(getMessages.fulfilled, (state, action) => {
+  //     state.value.messages = action.payload;
+  //   })
+  // }
 });
 
 export const {changeMessagingMode} = messagingReducer.actions;
