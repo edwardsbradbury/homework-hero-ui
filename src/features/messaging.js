@@ -4,7 +4,8 @@ import API from './API';
 const initialState = {value: {
   mode: 'conversations',
   conversations: [],
-  recipId: null
+  recipId: null,
+  error: null
 }}
 
 export const getConversations = createAsyncThunk(
@@ -39,14 +40,21 @@ export const messagingReducer = createSlice({
       state.value = action.payload;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(getConversations.fulfilled, (state, action) => {
-  //     state.value.conversations = action.payload.messages;
-  //   })
+  extraReducers: (builder) => {
+    builder.addCase(getConversations.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.outcome === 'failure') {
+        state.value.error = 'Something went wrong. Check your input and try again';
+      } else {
+        state.value.conversations = response.messages;
+        state.value.recipId = null,
+        state.value.mode = 'conversations';
+      }
+    })
   //   .addCase(getMessages.fulfilled, (state, action) => {
   //     state.value.messages = action.payload;
   //   })
-  // }
+  }
 });
 
 export const {changeMessagingMode} = messagingReducer.actions;

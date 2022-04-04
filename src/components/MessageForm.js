@@ -38,18 +38,18 @@ function MessageForm (props) {
       .then(response => {
         if (response.outcome === 'success') {
           dispatch(getConversations(user.id))
-          .unwrap()
-          .then(result => {
-            if (result.outcome === 'success') {
-              dispatch(changeMessagingMode(
-                {
-                  mode: 'conversations',
-                  conversations: result.messages,
-                  recipId: null
-                }
-              ))
-            }
-          })
+          // .unwrap()
+          // .then(result => {
+          //   if (result.outcome === 'success') {
+          //     dispatch(changeMessagingMode(
+          //       {
+          //         mode: 'conversations',
+          //         conversations: result.messages,
+          //         recipId: null
+          //       }
+          //     ))
+          //   }
+          // })
         } else {
           props.setErrors(['Failed to send message, try again']);
         }
