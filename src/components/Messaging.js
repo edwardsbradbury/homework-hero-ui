@@ -18,7 +18,7 @@ function Messaging() {
 
   useEffect(() => {
     dispatch(getConversations(userId));
-  })
+  }, [])
 
   function setErrsFromChild(errors) {
     setErrors(errors);
