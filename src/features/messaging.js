@@ -46,7 +46,7 @@ export const messagingReducer = createSlice({
       if (response.outcome === 'failure') {
         state.value.error = 'Something went wrong. Check your input and try again';
       } else {
-        state.value.conversations = response.messages;
+        state.value.conversations = response.conversations;
         state.value.recipId = null;
         state.value.mode = 'conversations';
       }
