@@ -48,7 +48,6 @@ export const messagingReducer = createSlice({
       } else {
         state.value.conversations = response.conversations;
         state.value.recipId = null;
-        state.value.mode = 'conversations';
       }
     })
   }
