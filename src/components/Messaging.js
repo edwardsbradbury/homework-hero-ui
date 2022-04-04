@@ -16,9 +16,9 @@ function Messaging() {
   const [currentConvMessages, setCurrConvMsgs] = useState([]);
   const [errors, setErrors] = useState([]);
 
-  // useEffect(() => {
-  //   dispatch(getConversations(userId));
-  // })
+  useEffect(() => {
+    dispatch(getConversations(userId));
+  })
 
   function setErrsFromChild(errors) {
     setErrors(errors);

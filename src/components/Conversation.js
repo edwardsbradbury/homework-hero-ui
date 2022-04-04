@@ -20,6 +20,7 @@ function Conversation () {
   return (
     <div className='conversation'>
       {mode === 'newMessage' && <MessageForm user={user} recipient={recipient}/>}
+      {convo.length > 0 && messages}
     </div>
   )
 }
