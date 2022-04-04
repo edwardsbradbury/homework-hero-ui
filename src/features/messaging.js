@@ -51,9 +51,6 @@ export const messagingReducer = createSlice({
         state.value.mode = 'conversations';
       }
     })
-  //   .addCase(getMessages.fulfilled, (state, action) => {
-  //     state.value.messages = action.payload;
-  //   })
   }
 });
 

@@ -37,19 +37,7 @@ function MessageForm (props) {
       .unwrap()
       .then(response => {
         if (response.outcome === 'success') {
-          dispatch(getConversations(user.id))
-          // .unwrap()
-          // .then(result => {
-          //   if (result.outcome === 'success') {
-          //     dispatch(changeMessagingMode(
-          //       {
-          //         mode: 'conversations',
-          //         conversations: result.messages,
-          //         recipId: null
-          //       }
-          //     ))
-          //   }
-          // })
+          dispatch(getConversations(user.id));
         } else {
           props.setErrors(['Failed to send message, try again']);
         }
