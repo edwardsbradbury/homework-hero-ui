@@ -47,7 +47,6 @@ export const messagingReducer = createSlice({
         state.value.error = 'Something went wrong. Check your input and try again';
       } else {
         state.value.conversations = response.conversations;
-        state.value.recipId = null;
       }
     })
   }
