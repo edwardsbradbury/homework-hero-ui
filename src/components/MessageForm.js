@@ -1,6 +1,6 @@
 // Component for writing new messages, with method to validate and send the message
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {sendMessage, getConversations, changeMessagingMode} from '../features/messaging';
 
@@ -17,11 +17,15 @@ function MessageForm (props) {
   }
 
   // Called by change event listener on the textarea - update the content state variabe and remaining characters
-  function updateState(e) {
-    setContent(e.target.value);
-    setCharacters(charsRemaining());
-  }
+  // function updateState(e) {
+  //   setContent(e.target.value);
+  //   setCharacters(charsRemaining());
+  // }
   
+  useEffect(() => {
+    setCharacters(charsRemaining());
+  }, [content])
+
   /* Send the message to the API /new_message endpoint to insert into database. On success response, update Redux state:
       re-fetch user's messages and ... TBC */
   function sendIt() {
@@ -37,18 +41,19 @@ function MessageForm (props) {
       .unwrap()
       .then(response => {
         if (response.outcome === 'success') {
+          setContent('');
           dispatch(getConversations(user.id));
         } else {
           props.setErrors(['Failed to send message, try again']);
         }
       })
-      .catch()
+      .catch(error => console.log(error))
     }
   }
 
   return (
     <div id='messageForm'>
-      <textarea maxlength='500' placeholder='Write your message here...' onChange={updateState}></textarea>
+      <textarea maxlength='500' placeholder='Write your message here...' onChange={e => setContent(e.target.value)}></textarea>
       <p>{characters}/500 characters remaining</p>
       <button onClick={sendIt}>Send</button>
     </div>
