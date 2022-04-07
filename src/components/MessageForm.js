@@ -61,9 +61,9 @@ function MessageForm (props) {
               }
             ))
             .unwrap()
-            console.log('Line 64:')
-            console.log(response)
             .then(response => {
+              console.log('Line 64:')
+              console.log(response)
               if (response.outcome === 'success') {
                 setContent('');
                 dispatch(getConversations(convId));
