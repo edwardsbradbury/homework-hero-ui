@@ -53,7 +53,7 @@ function MessageForm (props) {
             setConvId(result.data.convId);
             dispatch(sendMessage(
               {
-                convId,
+                convId: convId,
                 sender: user.id,
                 recipient: props.recipient,
                 sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
@@ -78,7 +78,7 @@ function MessageForm (props) {
       } else {
         dispatch(sendMessage(
           {
-            convId,
+            convId: convId,
             sender: user.id,
             recipient: props.recipient,
             sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
