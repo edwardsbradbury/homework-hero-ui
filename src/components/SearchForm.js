@@ -6,7 +6,6 @@ import {doSearch, setResults} from '../features/search';
 
 function SearchForm() {
   const dispatch = useDispatch();
-  const parentState = useSelector(state => state.search.value);
   const userType = useSelector(state => state.user.value.type);
   const messageIfClient = useState(`Choose the subject you need help with and the level you're studying at`);
   const messageIfTutor = useState(`Choose the subject you want to teach\n
@@ -33,13 +32,7 @@ function SearchForm() {
     setError('');
     /* See setResults method definition in ../features/search: essentially just clearing any previous search results here. Those are stored in the
         Redux store */
-    dispatch(setResults(
-      {
-        mode: parentState.mode,
-        message: parentState.message,
-        results: []
-      }
-    ));
+    dispatch(setResults([]));
 
     /* I can probably simplify this logic somewhat. The mandatory paramaters for the search depend on whether the user is a  client or a tutor:
       clients must choose both subject and level, tutors can choose both or omit level and find all students needing help with a subject at
@@ -66,13 +59,7 @@ function SearchForm() {
             } else {
               /* result.result should be an array; dispatch an action assigning this array to the results property in ../features/search
                 this part is what should really be moved into an extraReducer in aforementioned file */
-              dispatch(setResults(
-                {
-                  mode: parentState.mode,
-                  message: parentState.message,
-                  results: result.result
-                }
-              ));
+              dispatch(setResults(result.result));
             }
           }
         })
@@ -102,13 +89,7 @@ function SearchForm() {
             /* result.result should be an array; dispatch an action assigning this array to the results property in ../features/search
                 this part is what should really be moved into an extraReducer in aforementioned file. Really everything from line 94
                 to at least 113 should probably be in that file */
-            dispatch(setResults(
-              {
-                mode: parentState.mode,
-                message: parentState.message,
-                results: result.result
-              }
-            ))
+            dispatch(setResults(result.result))
           }
         })
       } else {

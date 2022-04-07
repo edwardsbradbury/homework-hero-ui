@@ -18,14 +18,9 @@ export const searchReducer = createSlice({
     }},
   reducers: {
     setResults: (state, action) => {
-      state.value = action.payload;
+      state.value.results = action.payload;
     }
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(doSearch.fulfilled, (state, action) => {
-  //     state.value.results = action.payload;
-  //   })
-  // }
 });
 
 export const {setResults} = searchReducer.actions;
