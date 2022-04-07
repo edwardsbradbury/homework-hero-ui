@@ -22,12 +22,7 @@ function Nav() {
     hits the /logout endpoint in my API which destroys the session */
   function resetState() {
     dispatch(logout());
-    dispatch(changeMode({mode: 'splash'}));
-    // dispatch(setMessagingMode({
-    //   mode: 'conversations',
-    //   conversations: [],
-    //   recipId: null
-    // }))
+    dispatch(changeMode('splash'));
     dispatch(setMessagingMode('conversations'));
     dispatch(setRecipId(null));
     dispatch(setConversations([]));
@@ -46,11 +41,11 @@ function Nav() {
       <nav>
         <ul>
           {/* Changing the value of mode property in ../features/home switches out the component displayed */}
-          <li onClick={() => dispatch(changeMode({mode: 'faq'}))}>F.A.Q</li>
-          <li onClick={() => dispatch(changeMode({mode: 'questions'}))}>{questionPrompt}</li>
-          <li onClick={() => dispatch(changeMode({mode: 'search'}))}>{searchPrompt}</li>
-          {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'login'}))}>Login</li>}
-          {!loggedIn && <li onClick={() => dispatch(changeMode({mode: 'register'}))}>Register</li>}
+          <li onClick={() => dispatch(changeMode('faq'))}>F.A.Q</li>
+          <li onClick={() => dispatch(changeMode('questions'))}>{questionPrompt}</li>
+          <li onClick={() => dispatch(changeMode('search'))}>{searchPrompt}</li>
+          {!loggedIn && <li onClick={() => dispatch(changeMode('login'))}>Login</li>}
+          {!loggedIn && <li onClick={() => dispatch(changeMode('register'))}>Register</li>}
           {loggedIn && <li onClick={resetState}>Logout</li>}
         </ul>
       </nav>

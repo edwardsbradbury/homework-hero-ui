@@ -225,7 +225,7 @@ function Register() {
         /* Update the necessary global state variables in Redux: mode and newUser properties in features/dash are updated, as are
           the mode property in fatures/home and the user data is updated in features/user */
         dispatch(changeDashMode({mode: 'dash', newUser: true}));
-        dispatch(changeMode({mode: 'dashboard'}));
+        dispatch(changeMode('dashboard'));
         dispatch(login(
           {
             loggedIn: true,

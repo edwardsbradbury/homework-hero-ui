@@ -61,7 +61,7 @@ function Login() {
       response => {
         if (response.data.outcome === 'success') {
           // Update the mode property of the Redux state slice features/home.js
-          dispatch(changeMode({mode: 'dashboard'}));
+          dispatch(changeMode('dashboard'));
           // Update the user data in the Redux state slice features/user.js
           dispatch(login(
             {

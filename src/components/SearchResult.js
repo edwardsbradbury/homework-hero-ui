@@ -17,9 +17,7 @@ function SearchResult(props) {
       unmounts the Search component from Home, switches to Dashboard. Dashboard is rendered in messages mode. Messaging is
       rendered in 'from search' mode - MessageForm without any prior conversation data */
   function contactUser() {
-    dispatch(changeMode({
-       mode: 'dashboard'
-    }));
+    dispatch(changeMode('dashboard'));
     dispatch(changeDashMode({
        mode: 'messages',
        newUser: false

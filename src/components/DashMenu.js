@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
 import {logout} from '../features/user';
 import {changeDashMode} from '../features/dash';
+import {setMessagingMode, setRecipId, setConversations} from '../features/messaging';
 
 function DashMenu() {
 
@@ -14,6 +15,15 @@ function DashMenu() {
   const mode = useSelector(state => state.dashboard.value.mode);
   const variableLabel = useState(userType === 'client' ? 'Questions' : 'Feedback');
   const targetMode = useState(userType === 'client' ? 'questions' : 'feedback');
+
+  function resetState() {
+    dispatch(logout());
+    dispatch(changeMode({mode: 'splash'}));
+    dispatch(setMessagingMode('conversations'));
+    dispatch(setRecipId(null));
+    dispatch(setConversations([]));
+    // dispatch(changeDashMode('dash'));
+  }
 
   return (
     <div id='dashMenu'>
@@ -44,8 +54,10 @@ function DashMenu() {
           onClick={() => dispatch(changeDashMode({mode: 'profile', newUser: false}))}>
             My profile
         </li>
+        {/* <li
+          onClick={() => {dispatch(logout()); dispatch(changeMode('splash'));}}> */}
         <li
-          onClick={() => {dispatch(logout()); dispatch(changeMode({mode: 'splash'}));}}>
+          onClick={resetState}>
             Logout
         </li>
       </ul>

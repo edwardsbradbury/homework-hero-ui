@@ -21,7 +21,7 @@ function Splash() {
       lessons.</p>
       <img id='splashBg' src={require('../assets/splash_bg.jpeg')} alt='Girl at desk with textbooks and notepad, looking frustrated'></img>
       <h2>Don't despair, we can help!</h2>
-      <button onClick={() => {dispatch(changeMode({mode: 'register'}))}}>Get help</button>
+      <button onClick={() => {dispatch(changeMode('register'))}}>Get help</button>
     </div>
   )
 }
