@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {changeMessagingMode, getConversations, getMessages} from '../features/messaging';
+import {setMessagingMode, getConversations, getMessages} from '../features/messaging';
 import MessageForm from './MessageForm';
 import Message from './Message';
 

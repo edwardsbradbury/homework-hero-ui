@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {sendMessage, getConvId, getConversations, changeMessagingMode} from '../features/messaging';
+import {sendMessage, getConvId, getConversations, setMessagingMode} from '../features/messaging';
 
 function MessageForm (props) {
   const dispatch = useDispatch();
@@ -37,9 +37,10 @@ function MessageForm (props) {
   /* Send the message to the API /new_message endpoint to insert into database. On success response, update Redux state:
       re-fetch user's messages and ... TBC */
   function sendIt() {
-    if (content.length > 1 && !(content.length > 500)) {
-      ///////////////////////////// take out lines 29-66 if i never figure it out
+    if (canSend) {
+      // If convId state variable has falsy value
       if (!convId) {
+        // Query API to get a convId, since it must be included with requests to new_message route at API
         dispatch(getConvId(
           {
             userId: user.id,
@@ -47,10 +48,10 @@ function MessageForm (props) {
           }))
         .unwrap()
         .then(result => {
-          console.log('Line 51:')
-          console.log(result);
           if (result.data.outcome === 'success') {
+            // API returned a convId; set the component's convId state property to this value
             setConvId(result.data.convId);
+            // Send the message data to API's new_message route
             dispatch(sendMessage(
               {
                 convId: result.data.convId,
@@ -62,20 +63,24 @@ function MessageForm (props) {
             ))
             .unwrap()
             .then(response => {
-              console.log('Line 64:')
-              console.log(response)
               if (response.outcome === 'success') {
+                // Message sent successfully; clear the content state variable
                 setContent('');
+                // Retrieve user's conversations again, so the new message is included in their conversations
                 dispatch(getConversations(user.id));
+                /* Update mode property of messaging object in Redux global state (should trigger Messaging component to unmount MessageForm
+                  and render a Conversation component, in which a new MessageForm is embedded but also messages are displayed) */
+                dispatch(setMessagingMode('conversations'));
               }
             })
-            .catch()
+            .catch(err => console.log(err));
           } else {
             props.setErrors(['Failed to send message, try again']);
           }
         })
         .catch(error => console.log(error))
       } else {
+        // convId local state variable isn't falsy, so is an int representing a convId; send the message data to API
         dispatch(sendMessage(
           {
             convId: convId,
@@ -88,7 +93,9 @@ function MessageForm (props) {
         .unwrap()
         .then(response => {
           if (response.outcome === 'success') {
+            // Message sent successfully; clear the content state variable
             setContent('');
+            // Retrieve user's conversations again, so the new message is included in their conversations
             dispatch(getConversations(user.id));
           } else {
             props.setErrors(['Failed to send message, try again']);
@@ -96,30 +103,11 @@ function MessageForm (props) {
         })
         .catch(error => console.log(error))
       }
-      
-      
-      
-      // dispatch(sendMessage(
-      //   {
-      //     sender: user.id,
-      //     recipient: props.recipient,
-      //     sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      //     message: content
-      //   }
-      // ))
-      // .unwrap()
-      // .then(response => {
-      //   if (response.outcome === 'success') {
-      //     setContent('');
-      //     dispatch(getConversations(user.id));
-      //   } else {
-      //     props.setErrors(['Failed to send message, try again']);
-      //   }
-      // })
-      // .catch(error => console.log(error))
+    
     } else {
       props.setErrors(['Messages must be 2-500 characters long']);
     }
+
   }
 
   return (

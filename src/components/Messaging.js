@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {changeMessagingMode, getConversations} from '../features/messaging';
+import {setMessagingMode, getConversations} from '../features/messaging';
 import Conversation from './Conversation';
 import MessageForm from './MessageForm';
 

@@ -44,8 +44,14 @@ export const messagingReducer = createSlice({
   name: 'messaging',
   initialState,
   reducers: {
-    changeMessagingMode: (state, action) => {
-      state.value = action.payload;
+    setMessagingMode: (state, action) => {
+      state.value.mode = action.payload;
+    },
+    setRecipId: (state, action) => {
+      state.value.recipId = action.payload;
+    },
+    setConversations: (state, action) => {
+      state.value.recipId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -60,6 +66,6 @@ export const messagingReducer = createSlice({
   }
 });
 
-export const {changeMessagingMode} = messagingReducer.actions;
+export const {setMessagingMode, setRecipId, setConversations} = messagingReducer.actions;
 
 export default messagingReducer.reducer;

@@ -3,7 +3,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
-import {changeMessagingMode} from '../features/messaging';
+import {setMessagingMode, setRecipId, setConversations} from '../features/messaging';
 import {logout} from '../features/user';
 
 function Nav() {
@@ -23,11 +23,14 @@ function Nav() {
   function resetState() {
     dispatch(logout());
     dispatch(changeMode({mode: 'splash'}));
-    dispatch(changeMessagingMode({
-      mode: 'conversations',
-      conversations: [],
-      recipId: null
-    }))
+    // dispatch(setMessagingMode({
+    //   mode: 'conversations',
+    //   conversations: [],
+    //   recipId: null
+    // }))
+    dispatch(setMessagingMode('conversations'));
+    dispatch(setRecipId(null));
+    dispatch(setConversations([]));
   }
 
   return (
