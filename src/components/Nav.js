@@ -35,8 +35,7 @@ function Nav() {
         id='logo'
         alt='Homework Hero logo'
         src={require('../assets/logo.png')}
-        onClick={() => dispatch(changeMode({
-          mode: loggedIn ? 'dashboard' : 'splash'}))}>
+        onClick={() => dispatch(changeMode(loggedIn ? 'dashboard' : 'splash'))}>
       </img>
       <nav>
         <ul>
