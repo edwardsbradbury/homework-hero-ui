@@ -50,10 +50,10 @@ function MessageForm (props) {
           console.log('Line 51:')
           console.log(result);
           if (result.data.outcome === 'success') {
-            setConvId(result.convId);
+            setConvId(result.data.convId);
             dispatch(sendMessage(
               {
-                convId: result.convId,
+                convId,
                 sender: user.id,
                 recipient: props.recipient,
                 sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
@@ -66,7 +66,7 @@ function MessageForm (props) {
               console.log(response)
               if (response.outcome === 'success') {
                 setContent('');
-                dispatch(getConversations(convId));
+                dispatch(getConversations(user.id));
               }
             })
             .catch()
