@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeMode} from '../features/home';
 import {changeDashMode} from '../features/dash';
-import {setMessagingMode} from '../features/messaging';
+import {setMessagingMode, setRecipId} from '../features/messaging';
 
 function SearchResult(props) {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ function SearchResult(props) {
        mode: 'messages',
        newUser: false
     }));
+    dispatch(setRecipId(data.userId));
     dispatch(setMessagingMode('from search'));
   }
 
