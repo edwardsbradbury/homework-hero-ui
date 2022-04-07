@@ -3,6 +3,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
+import {resetDashState} from '../features/dash';
 import {setMessagingMode, setRecipId, setConversations} from '../features/messaging';
 import {logout} from '../features/user';
 
@@ -23,6 +24,7 @@ function Nav() {
   function resetState() {
     dispatch(logout());
     dispatch(changeMode('splash'));
+    dispatch(resetDashState());
     dispatch(setMessagingMode('conversations'));
     dispatch(setRecipId(null));
     dispatch(setConversations([]));
