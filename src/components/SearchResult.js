@@ -4,7 +4,7 @@ passed in as a prop */
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeMode} from '../features/home';
-import {changeDashMode} from '../features/dash';
+import {setDashMode} from '../features/dash';
 import {setMessagingMode, setRecipId} from '../features/messaging';
 
 function SearchResult(props) {
@@ -18,10 +18,7 @@ function SearchResult(props) {
       rendered in 'from search' mode - MessageForm without any prior conversation data */
   function contactUser() {
     dispatch(changeMode('dashboard'));
-    dispatch(changeDashMode({
-       mode: 'messages',
-       newUser: false
-    }));
+    dispatch(setDashMode('messages'));
     dispatch(setRecipId(data.userId));
     dispatch(setMessagingMode('from search'));
   }

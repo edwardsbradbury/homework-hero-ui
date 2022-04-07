@@ -5,7 +5,6 @@ const initialState = {
   value: {
     mode: 'dash',
     newUser: false
-    // newUser: true
 }};
 
 export const addSubject = createAsyncThunk(
@@ -20,17 +19,23 @@ export const dashReducer = createSlice({
   name: 'dashboard',
   initialState,
   reducers: {
-    changeDashMode: (state, action) => {
-      state.value = action.payload;
+    setDashMode: (state, action) => {
+      state.value.mode = action.payload;
     },
+    setNewUser: (state, action) => {
+      state.value.newUser = action.payload;
+    },
+    resetDashState: (state) => {
+      state.value = initialState.value;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(addSubject.fulfilled, (state, action) => {
-      state.value = initialState.value;
+      state.value.newUser = initialState.value;
     })
   }
 });
 
-export const {changeDashMode} = dashReducer.actions;
+export const {setDashMode, setNewUser, resetDashState} = dashReducer.actions;
 
 export default dashReducer.reducer;

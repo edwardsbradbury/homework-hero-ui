@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
 import {logout} from '../features/user';
-import {changeDashMode} from '../features/dash';
+import {setDashMode} from '../features/dash';
 import {setMessagingMode, setRecipId, setConversations} from '../features/messaging';
 
 function DashMenu() {
@@ -18,40 +18,40 @@ function DashMenu() {
 
   function resetState() {
     dispatch(logout());
-    dispatch(changeMode({mode: 'splash'}));
+    dispatch(changeMode('splash'));
     dispatch(setMessagingMode('conversations'));
     dispatch(setRecipId(null));
     dispatch(setConversations([]));
-    // dispatch(changeDashMode('dash'));
+    dispatch(setDashMode('dash'));
   }
 
   return (
     <div id='dashMenu'>
       <ul>
-        {/* See features/dash for details of the changeDashMode method - mode variable used to switch out components */}
+        {/* See features/dash for details of the setDashMode method - mode variable used to switch out components */}
         <li
           className={mode === 'dash' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'dash', newUser: false}))}>
+          onClick={() => dispatch(setDashMode('dash'))}>
             Dashboard
         </li>
         <li
           className={mode === 'messages' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'messages', newUser: false}))}>
+          onClick={() => dispatch(setDashMode('messages'))}>
             Messages
         </li>
         <li
           className={mode === 'lessons' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'lessons', newUser: false}))}>
+          onClick={() => dispatch(setDashMode('lessons'))}>
             Lessons
         </li>
         <li
           className={mode === ('questions' || 'feedback') ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: targetMode, newUser: false}))}>
+          onClick={() => dispatch(setDashMode(targetMode))}>
             {variableLabel}
         </li>
         <li
           className={mode === 'profile' ? 'current' : null}
-          onClick={() => dispatch(changeDashMode({mode: 'profile', newUser: false}))}>
+          onClick={() => dispatch(setDashMode('profile'))}>
             My profile
         </li>
         {/* <li

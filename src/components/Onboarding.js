@@ -3,7 +3,7 @@
 
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {changeDashMode, addSubject} from '../features/dash';
+import {setDashMode, addSubject} from '../features/dash';
 
 function Onboarding() {
 
@@ -31,7 +31,7 @@ function Onboarding() {
   function addSubjectToProfile() {
     setError('');
     if (subject && level) {
-      const result = dispatch(addSubject(
+      dispatch(addSubject(
         {
           id: user.id,
           first: user.forename,

@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import API from '../features/API';
 import {login} from '../features/user';
 import {changeMode} from '../features/home';
-import {changeDashMode} from '../features/dash';
+import {setDashMode, setNewUser} from '../features/dash';
 
 function Register() {
 
@@ -224,7 +224,8 @@ function Register() {
       if (response.data.outcome === 'success') {
         /* Update the necessary global state variables in Redux: mode and newUser properties in features/dash are updated, as are
           the mode property in fatures/home and the user data is updated in features/user */
-        dispatch(changeDashMode({mode: 'dash', newUser: true}));
+        dispatch(setDashMode('dash'));
+        dispatch(setNewUser(true));
         dispatch(changeMode('dashboard'));
         dispatch(login(
           {
