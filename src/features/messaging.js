@@ -8,6 +8,14 @@ const initialState = {value: {
   error: null
 }}
 
+export const getConvId = createAsyncThunk(
+  'messaging/getConvId',
+  async (data, thunkAPI) => {
+    const response = await API().get(`get_conv_id?userId=${data.userId}&recipId=${data.recipId}`);
+    return response;
+  }
+);
+
 export const getConversations = createAsyncThunk(
   'messaging/getConversations',
   async (userId, thunkAPI) => {
