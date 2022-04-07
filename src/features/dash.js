@@ -31,7 +31,7 @@ export const dashReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(addSubject.fulfilled, (state, action) => {
-      state.value.newUser = initialState.value;
+      state.value = initialState.value;
     })
   }
 });

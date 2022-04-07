@@ -54,8 +54,6 @@ function DashMenu() {
           onClick={() => dispatch(setDashMode('profile'))}>
             My profile
         </li>
-        {/* <li
-          onClick={() => {dispatch(logout()); dispatch(changeMode('splash'));}}> */}
         <li
           onClick={resetState}>
             Logout

@@ -3,7 +3,7 @@
 
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setDashMode, addSubject} from '../features/dash';
+import {addSubject} from '../features/dash';
 
 function Onboarding() {
 
