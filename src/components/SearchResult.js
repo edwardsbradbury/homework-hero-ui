@@ -24,11 +24,7 @@ function SearchResult(props) {
        mode: 'messages',
        newUser: false
     }));
-    dispatch(setMessagingMode({
-      mode: 'from search',
-      conversations: [],
-      recipId: data.userId
-    }))
+    dispatch(setMessagingMode('from search'));
   }
 
   return (
