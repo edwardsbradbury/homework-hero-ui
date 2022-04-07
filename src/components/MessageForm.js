@@ -47,6 +47,7 @@ function MessageForm (props) {
           }))
         .unwrap()
         .then(result => {
+          console.log(result);
           if (result.outcome === 'success') {
             setConvId(result.convId);
             dispatch(sendMessage(
