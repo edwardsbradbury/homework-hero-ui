@@ -47,8 +47,9 @@ function MessageForm (props) {
           }))
         .unwrap()
         .then(result => {
+          console.log('Line 51:')
           console.log(result);
-          if (result.outcome === 'success') {
+          if (result.data.outcome === 'success') {
             setConvId(result.convId);
             dispatch(sendMessage(
               {
@@ -60,6 +61,8 @@ function MessageForm (props) {
               }
             ))
             .unwrap()
+            console.log('Line 64:')
+            console.log(response)
             .then(response => {
               if (response.outcome === 'success') {
                 setContent('');
