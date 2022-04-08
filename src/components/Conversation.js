@@ -41,7 +41,7 @@ function Conversation (props) {
   }
 
   return (
-    <div className='conversation' onClick={setMode('messages')}>
+    <div className='conversation'>
       {displayContents()}
     </div>
   )
