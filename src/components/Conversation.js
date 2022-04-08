@@ -13,7 +13,6 @@ function Conversation (props) {
   const mode = useState('inbox');
   const userId = useSelector(state => state.user.value.id);
   const recipient = useState(props.messages[0].senderId === userId ? props.messages[0].recipId : props.messages[0].senderId);
-  console.log(`type of userId: ${typeof userId}`);
   const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={userId}/>);
   const generalError = useState('Failed to get messages');
   const confirmDeletion = useState('Are you sure you want to delete this message?');

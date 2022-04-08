@@ -12,7 +12,7 @@ function Message (props) {
     <div className='message'>
       <table>
         <tr>
-          <td>{`Sent: ${props.message.sent}`}</td>
+          <td>{`Sent: ${messageData.sent}`}</td>
         </tr>
         <tr>
           {mode === 'messages' && <td>{messageData.message}</td>}
