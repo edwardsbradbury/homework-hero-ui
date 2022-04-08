@@ -10,9 +10,9 @@ function Messaging() {
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  const [userId] = useState(state.user.value.id);
-  const [mode] = useState(state.messaging.value.mode);
-  const [conversations] = useState(state.messaging.value.conversations);
+  const userId = state.user.value.id;
+  const mode = state.messaging.value.mode;
+  const conversations = state.messaging.value.conversations;
   const [currConvId, setCurrConvId] = useState(null);
   const [errors, setErrors] = useState([]);
 
