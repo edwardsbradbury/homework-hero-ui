@@ -11,15 +11,8 @@ import Message from './Message';
 function Conversation (props) {
 
   const mode = useState('inbox');
-  // const user = useSelector(state => state.user.value);
-  // const userId = useState(user.id);
-  // const userId = useState(useSelector(state => state.user.value.id));
   const userId = useSelector(state => state.user.value.id);
-  const firstMessage = useState(props.messages[0]);
-  // const recipient = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
-  console.log(`type of senderId: ${typeof firstMessage.senderId}`);
   const recipient = useState(props.messages[0].senderId === userId ? props.messages[0].recipId : props.messages[0].senderId);
-  // console.log(`type of senderId: ${typeof props.messages[0].senderId}`);
   console.log(`type of userId: ${typeof userId}`);
   const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={userId}/>);
   const generalError = useState('Failed to get messages');
@@ -29,14 +22,14 @@ function Conversation (props) {
     <div>
       <h3>{`Chat with user: ${recipient}`}</h3>
       <br />
-      <Message parentMode={mode} data={firstMessage} userId={userId}/>
+      <Message parentMode={mode} data={props.messages[0]} userId={userId}/>
     </div>
   );
   const renderIfMessages = (
     <div>
       <h3>{`Chat with user: ${recipient}`}</h3>
       <br />
-      <MessageForm convId={firstMessage.convId} recipient={recipient} setErrors={props.setErrors} />
+      <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} />
       {messages}
     </div>
   );
