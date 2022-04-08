@@ -11,21 +11,23 @@ import Message from './Message';
 function Conversation (props) {
 
   const [mode] = useState('inbox');
-  const userId = useSelector(state => state.user.value.id);
-  const recipient = useState(props.messages[0].senderId === userId ? props.messages[0].recipId : props.messages[0].senderId);
+  const [userId] = useState(useSelector(state => state.user.value.id));
+  const [firstMessage] = props.messages[0];
+  // const recipient = useState(props.messages[0].senderId === userId ? props.messages[0].recipId : props.messages[0].senderId);
+  const recipient = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
   const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={userId}/>);
   const generalError = useState('Failed to get messages');
   const confirmDeletion = useState('Are you sure you want to delete this message?');
   const deletionFailed = useState('Failed to delete your message');
 
   function displayContents() {
-    console.log(typeof mode)
     if (mode === 'inbox') {
       return (
         <>
           <h3>{`Chat with user: ${recipient}`}</h3>
           <br />
-          <Message parentMode={mode} data={props.messages[0]} userId={userId}/>
+          {/* <Message parentMode={mode} data={props.messages[0]} userId={userId}/> */}
+          <Message parentMode={mode} data={firstMessage} userId={userId}/>
         </>
       )
     } else {
@@ -33,7 +35,8 @@ function Conversation (props) {
       <>
         <h3>{`Chat with user: ${recipient}`}</h3>
         <br />
-        <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} />
+        {/* <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} /> */}
+        <MessageForm convId={firstMessage.convId} recipient={recipient} setErrors={props.setErrors} />
         {messages}
       </>
       )
