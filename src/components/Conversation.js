@@ -22,26 +22,28 @@ function Conversation (props) {
     console.log(typeof mode)
     if (mode === 'inbox') {
       return (
-        <div className='conversation'>
+        <>
           <h3>{`Chat with user: ${recipient}`}</h3>
           <br />
           <Message parentMode={mode} data={props.messages[0]} userId={userId}/>
-        </div>
+        </>
       )
     } else {
       return (
-      <div className='conversation'>
+      <>
         <h3>{`Chat with user: ${recipient}`}</h3>
         <br />
         <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} />
         {messages}
-      </div>
+      </>
       )
     }
   }
 
   return (
-    {displayContents}
+    <div className='conversation'>
+      {displayContents}
+    </div>
   )
 }
 
