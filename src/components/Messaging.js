@@ -25,6 +25,31 @@ function Messaging() {
     setErrors(errors);
   }
 
+  // Method to conditionally return elements/components depending on state
+  function displayContent() {
+    if (mode === 'from search') {
+      return (
+        <>
+          <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>
+        </>
+      )
+    } else if (mode === 'inbox' && conversations.length < 1) {
+      return (
+        <>
+          <p>You don't have any conversations yet...</p>
+        </>
+      )
+    } else if (mode === 'inbox' && conversations.length > 0) {
+      return (
+        <>
+          {conversations.map(conversation => 
+            <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>
+          )}
+        </>
+      )
+    }
+  }
+
   return (
     <div id='messaging'>
       <h1>Messages</h1>
@@ -32,9 +57,10 @@ function Messaging() {
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
-      {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>}
+      {/* {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>}
       {mode === 'inbox' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
-      {mode === 'inbox' && conversations.map(conversation => <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>)}
+      {mode === 'inbox' && conversations.map(conversation => <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>)} */}
+      {displayContent()}
     </div>
   )
 }

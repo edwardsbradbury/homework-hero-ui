@@ -10,7 +10,7 @@ import Message from './Message';
 
 function Conversation (props) {
 
-  const [mode, setMode] = useState('inbox');
+  // const [mode, setMode] = useState('inbox');
   const [userId] = useState(useSelector(state => state.user.value.id));
   const [firstMessage] = useState(props.messages[0]);
   const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
@@ -19,30 +19,33 @@ function Conversation (props) {
   const [confirmDeletion] = useState('Are you sure you want to delete this message?');
   const [deletionFailed] = useState('Failed to delete your message');
 
-  function displayContents() {
-    if (mode === 'inbox') {
-      return (
-        <>
-          <h3>{`Chat with user: ${recipient}`}</h3>
-          <br />
-          <Message parentMode={mode} data={firstMessage} userId={userId}/>
-        </>
-      )
-    } else if (mode === 'messages') {
-      return (
-      <>
-        <h3>{`Chat with user: ${recipient}`}</h3>
-        <br />
-        <MessageForm convId={firstMessage.convId} recipient={recipient} setErrors={props.setErrors} />
-        {messages}
-      </>
-      )
-    }
-  }
+  // function displayContents() {
+  //   if (mode === 'inbox') {
+  //     return (
+  //       <>
+  //         <h3>{`Chat with user: ${recipient}`}</h3>
+  //         <br />
+  //         <Message parentMode={mode} data={firstMessage} userId={userId}/>
+  //       </>
+  //     )
+  //   } else if (mode === 'messages') {
+  //     return (
+  //     <>
+  //       <h3>{`Chat with user: ${recipient}`}</h3>
+  //       <br />
+  //       <MessageForm convId={firstMessage.convId} recipient={recipient} setErrors={props.setErrors} />
+  //       {messages}
+  //     </>
+  //     )
+  //   }
+  // }
 
   return (
     <div className='conversation'>
-      {displayContents()}
+      {/* {displayContents()} */}
+      <h3>{`Chat with user: ${recipient}`}</h3>
+      <br />
+      <Message parentMode={mode} data={firstMessage} userId={userId}/>
     </div>
   )
 }
