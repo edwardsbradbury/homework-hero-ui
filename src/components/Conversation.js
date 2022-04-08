@@ -16,7 +16,7 @@ function Conversation (props) {
   const firstMessage = useState(props.messages[0]);
   // const recipient = useState(firstMessage.senderId === user.id ? firstMessage.recipId : firstMessage.senderId);
   const recipient = useState(props.messages[0].senderId === userId ? props.messages[0].recipId : props.messages[0].senderId);
-  const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={user.id}/>);
+  const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={userId}/>);
   const generalError = useState('Failed to get messages');
   const confirmDeletion = useState('Are you sure you want to delete this message?');
   const deletionFailed = useState('Failed to delete your message');
@@ -24,7 +24,7 @@ function Conversation (props) {
     <div>
       <h3>{`Chat with user: ${recipient}`}</h3>
       <br />
-      <Message parentMode={mode} data={firstMessage} userId={user.id}/>
+      <Message parentMode={mode} data={firstMessage} userId={userId}/>
     </div>
   );
   const renderIfMessages = (
