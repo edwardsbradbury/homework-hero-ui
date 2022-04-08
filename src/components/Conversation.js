@@ -28,7 +28,7 @@ function Conversation (props) {
           <Message parentMode={mode} data={firstMessage} userId={userId}/>
         </>
       )
-    } else {
+    } else if (mode === 'messages') {
       return (
       <>
         <h3>{`Chat with user: ${recipient}`}</h3>
@@ -41,7 +41,7 @@ function Conversation (props) {
   }
 
   return (
-    <div className='conversation'>
+    <div className='conversation' onClick={setMode('messages')}>
       {displayContents()}
     </div>
   )
