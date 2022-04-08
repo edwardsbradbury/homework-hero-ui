@@ -11,7 +11,8 @@ import Message from './Message';
 function Conversation (props) {
 
   const mode = useState('inbox');
-  const user = useState(useSelector(state => state.user.value));
+  // const user = useState(useSelector(state => state.user.value));
+  const userId = useState(useSelector(state => state.user.value.id));
   const firstMessage = useState(props.messages[0]);
   // const recipient = useState(firstMessage.senderId === user.id ? firstMessage.recipId : firstMessage.senderId);
   const recipient = useState(props.messages[0].senderId === user.id ? props.messages[0].recipId : props.messages[0].senderId);
