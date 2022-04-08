@@ -10,9 +10,10 @@ function Messaging() {
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  const userId = state.user.value.id;
-  const mode = state.messaging.value.mode;
-  const conversations = state.messaging.value.conversations;
+  const [userId] = useState(state.user.value.id);
+  const [mode] = useState(state.messaging.value.mode);
+  const [conversations] = useState(state.messaging.value.conversations);
+  const [currConvId, setCurrConvId] = useState(null);
   const [errors, setErrors] = useState([]);
 
   // After component is mounted, fetch their conversations
@@ -57,9 +58,6 @@ function Messaging() {
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
-      {/* {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>}
-      {mode === 'inbox' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
-      {mode === 'inbox' && conversations.map(conversation => <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>)} */}
       {displayContent()}
     </div>
   )
