@@ -7,11 +7,6 @@ function Message (props) {
 
   const mode = props.parentMode;
   const messageData = props.data;
-  // const [sentDateTime, setSentDateTime] = useState('');
-
-  // useEffect(() => {
-  //   formatSentDate();
-  // }, [])
 
   // Method to format the sent date of message to be more readable to human eyes
   function formatSentDate() {
@@ -23,7 +18,6 @@ function Message (props) {
     dateTimeString += (month < 10 ? `0${month}/` : `${month}/`);
     dateTimeString += timeStamp.getFullYear();
     dateTimeString += ` ${timeStamp.getHours()}:${timeStamp.getMinutes()}`;
-    // setSentDateTime(dateTimeString);
     return dateTimeString;
   }
 
@@ -31,9 +25,7 @@ function Message (props) {
     <div className='message'>
       <table>
         <tr>
-          {/* <td>{`Sent: ${messageData.sent}`}</td> */}
-          {/* <td>{`Sent: ${sentDateTime}`}</td> */}
-          <td>{`Sent: ${formatSentDate()}`}</td>
+          <td>{formatSentDate()}</td>
         </tr>
         <tr>
           {mode === 'messages' && <td>{messageData.message}</td>}

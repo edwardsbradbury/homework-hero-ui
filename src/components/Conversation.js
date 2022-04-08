@@ -10,7 +10,7 @@ import Message from './Message';
 
 function Conversation (props) {
 
-  const [mode] = useState('inbox');
+  const [mode, setMode] = useState('inbox');
   const [userId] = useState(useSelector(state => state.user.value.id));
   const [firstMessage] = useState(props.messages[0]);
   const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
@@ -41,7 +41,7 @@ function Conversation (props) {
   }
 
   return (
-    <div className='conversation'>
+    <div className='conversation' onClick={setMode('messages')}>
       {displayContents()}
     </div>
   )
