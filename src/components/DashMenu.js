@@ -16,6 +16,7 @@ function DashMenu() {
   const variableLabel = useState(userType === 'client' ? 'Questions' : 'Feedback');
   const targetMode = useState(userType === 'client' ? 'questions' : 'feedback');
 
+  // Basically when user logs out, reset as much of the global state in Redux store as possible to its initial state
   function resetState() {
     dispatch(logout());
     dispatch(changeMode('splash'));

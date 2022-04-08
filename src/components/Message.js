@@ -1,12 +1,21 @@
 /* Component to display message data formatted into a table within a div with a class of message,
    rendered by the Conversation component */
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function Message (props) {
 
   const mode = props.parentMode;
   const messageData = props.data;
+
+  // Method to format the sent date of message to be more readable to human eyes
+  function formatSentDate() {
+    return;
+  }
+
+  useEffect(() => {
+    console.log(typeof messageData.sent);
+  }, [])
 
   return (
     <div className='message'>

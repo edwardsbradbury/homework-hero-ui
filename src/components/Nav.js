@@ -19,8 +19,7 @@ function Nav() {
   // Need to dispatch actions to update Redux global state depending on what user clicks
   const dispatch = useDispatch();
 
-  /* Method called on clicking the logout option - updates global state variables in Redux store. The logout action dispatched
-    hits the /logout endpoint in my API which destroys the session */
+  // Basically when user logs out, reset as much of the global state in Redux store as possible to its initial state
   function resetState() {
     dispatch(logout());
     dispatch(changeMode('splash'));
