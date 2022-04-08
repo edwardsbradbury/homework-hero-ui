@@ -42,7 +42,7 @@ function Conversation (props) {
 
   return (
     <div className='conversation'>
-      {displayContents}
+      {displayContents()}
     </div>
   )
 }
