@@ -12,13 +12,13 @@ function Conversation (props) {
 
   const [mode] = useState('inbox');
   const [userId] = useState(useSelector(state => state.user.value.id));
-  const [firstMessage] = props.messages[0];
+  const [firstMessage] = useState(props.messages[0]);
   // const recipient = useState(props.messages[0].senderId === userId ? props.messages[0].recipId : props.messages[0].senderId);
-  const recipient = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
+  const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
   const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={userId}/>);
-  const generalError = useState('Failed to get messages');
-  const confirmDeletion = useState('Are you sure you want to delete this message?');
-  const deletionFailed = useState('Failed to delete your message');
+  const [generalError] = useState('Failed to get messages');
+  const [confirmDeletion] = useState('Are you sure you want to delete this message?');
+  const [deletionFailed] = useState('Failed to delete your message');
 
   function displayContents() {
     if (mode === 'inbox') {
