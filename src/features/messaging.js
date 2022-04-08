@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import API from './API';
 
 const initialState = {value: {
-  mode: 'conversations',
+  mode: 'inbox',
   conversations: [],
   recipId: null,
   error: null

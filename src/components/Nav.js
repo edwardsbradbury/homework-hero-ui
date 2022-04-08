@@ -25,7 +25,7 @@ function Nav() {
     dispatch(logout());
     dispatch(changeMode('splash'));
     dispatch(resetDashState());
-    dispatch(setMessagingMode('conversations'));
+    dispatch(setMessagingMode('inbox'));
     dispatch(setRecipId(null));
     dispatch(setConversations([]));
   }

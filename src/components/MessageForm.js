@@ -39,7 +39,7 @@ function MessageForm (props) {
   // Method to return to search results if messaging component is in 'from search' mode
   function goBack() {
     dispatch(changeMode('search'));
-    dispatch(setMessagingMode('conversations'));
+    dispatch(setMessagingMode('inbox'));
     dispatch(setRecipId(null));
     dispatch(setMessagingError(null));
   }
@@ -80,7 +80,7 @@ function MessageForm (props) {
                 dispatch(getConversations(user.id));
                 /* Update mode property of messaging object in Redux global state (should trigger Messaging component to unmount MessageForm
                   and render a Conversation component, in which a new MessageForm is embedded but also messages are displayed) */
-                dispatch(setMessagingMode('conversations'));
+                dispatch(setMessagingMode('inbox'));
               }
             })
             .catch(err => console.log(err));

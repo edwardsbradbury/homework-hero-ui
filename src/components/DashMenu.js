@@ -19,7 +19,7 @@ function DashMenu() {
   function resetState() {
     dispatch(logout());
     dispatch(changeMode('splash'));
-    dispatch(setMessagingMode('conversations'));
+    dispatch(setMessagingMode('inbox'));
     dispatch(setRecipId(null));
     dispatch(setConversations([]));
     dispatch(resetDashState());
