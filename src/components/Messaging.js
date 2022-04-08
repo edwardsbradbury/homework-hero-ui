@@ -34,8 +34,8 @@ function Messaging() {
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
       {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>}
-      {mode === 'conversations' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
-      {mode === 'conversations' && conversations.map(conversation => <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>)}
+      {mode === 'inbox' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
+      {mode === 'inbox' && conversations.map(conversation => <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>)}
     </div>
   )
 }
