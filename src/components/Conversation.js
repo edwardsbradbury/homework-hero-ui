@@ -18,28 +18,48 @@ function Conversation (props) {
   const generalError = useState('Failed to get messages');
   const confirmDeletion = useState('Are you sure you want to delete this message?');
   const deletionFailed = useState('Failed to delete your message');
-  const renderIfInbox = (
-    <div>
-      <h3>{`Chat with user: ${recipient}`}</h3>
-      <br />
-      <Message parentMode={mode} data={props.messages[0]} userId={userId}/>
-    </div>
-  );
-  const renderIfMessages = (
-    <div>
-      <h3>{`Chat with user: ${recipient}`}</h3>
-      <br />
-      <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} />
-      {messages}
-    </div>
-  );
+  // const renderIfInbox = (
+    // <div>
+    //   <h3>{`Chat with user: ${recipient}`}</h3>
+    //   <br />
+    //   <Message parentMode={mode} data={props.messages[0]} userId={userId}/>
+    // </div>
+  // );
+  // const renderIfMessages = (
+  //   <div>
+  //     <h3>{`Chat with user: ${recipient}`}</h3>
+  //     <br />
+  //     <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} />
+  //     {messages}
+  //   </div>
+  // );
+
+  function displayContents() {
+    if (mode === 'inbox') {
+      return (
+        <div>
+          <h3>{`Chat with user: ${recipient}`}</h3>
+          <br />
+          <Message parentMode={mode} data={props.messages[0]} userId={userId}/>
+        </div>
+      )
+    } else {
+      return (
+      <div>
+        <h3>{`Chat with user: ${recipient}`}</h3>
+        <br />
+        <MessageForm convId={props.messages[0].convId} recipient={recipient} setErrors={props.setErrors} />
+        {messages}
+      </div>
+      )
+    }
+  }
 
   return (
     <div className='conversation'>
       {/* {mode === 'inbox' && <Message parentMode={mode} data={firstMessage} userId={user.id}/>}
       {mode === 'messages' && <MessageForm convId={firstMessage.convId} recipient={recipient} setErrors={props.setErrors} /> && messages} */}
-      {mode === 'inbox' && renderIfInbox}
-      {mode === 'messages' && renderIfMessages}
+      {displayContents()}
     </div>
   )
 }
