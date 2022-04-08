@@ -116,3 +116,7 @@ textarea {
   margin-left: 25vw;
   margin-right: 25vw;
 }
+
+.conversation:hover {
+  box-shadow: 1px 1px 5px black;
+}
