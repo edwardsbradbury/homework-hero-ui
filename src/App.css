@@ -34,7 +34,7 @@
   justify-self: center;
 }
 
-#logo:hover, li:hover {
+#logo:hover, nav li:hover, #dashMenu {
   cursor: pointer;
 }
 
@@ -94,7 +94,7 @@ nav li:hover, #dashMenu li:hover {
   color: #007AFF;
 }
 
-div.search-result {
+div.search-result, div.conversation {
   border: 1px solid black;
   border-radius: 15px;
   max-width: 50vw;
