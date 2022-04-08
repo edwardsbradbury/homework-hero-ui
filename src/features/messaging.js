@@ -27,7 +27,7 @@ export const getConversations = createAsyncThunk(
 export const getMessages = createAsyncThunk(
   'messaging/getMessages',
   async (convId, thunkAPI) => {
-    const response = await API().get(`get_messages/${convId}`);
+    const response = await API().get(`messages/?convId=${convId}`);
     return response.data;
   }
 );
@@ -51,7 +51,10 @@ export const messagingReducer = createSlice({
       state.value.recipId = action.payload;
     },
     setConversations: (state, action) => {
-      state.value.recipId = action.payload;
+      state.value.conversations = action.payload;
+    },
+    setMessagingError: (state, action) => {
+      state.value.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -66,6 +69,6 @@ export const messagingReducer = createSlice({
   }
 });
 
-export const {setMessagingMode, setRecipId, setConversations} = messagingReducer.actions;
+export const {setMessagingMode, setRecipId, setConversations, setMessagingError} = messagingReducer.actions;
 
 export default messagingReducer.reducer;

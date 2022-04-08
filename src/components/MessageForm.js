@@ -2,11 +2,13 @@
 
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {sendMessage, getConvId, getConversations, setMessagingMode} from '../features/messaging';
+import {sendMessage, getConvId, getConversations, setMessagingMode, setRecipId, setMessagingError} from '../features/messaging';
+import {changeMode} from '../features/home';
 
 function MessageForm (props) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.value);
+  const parentMode = useSelector(state => state.messaging.value.mode);
   const [content, setContent] = useState('');
   const [characters, setCharacters] = useState(500);
   const [convId, setConvId] = useState(null);
@@ -32,6 +34,14 @@ function MessageForm (props) {
     called by useEffect whenever content changes */
   function charsRemaining() {
     return content ? (500 - content.length) : 500;
+  }
+
+  // Method to return to search results if messaging component is in 'from search' mode
+  function goBack() {
+    dispatch(changeMode('search'));
+    dispatch(setMessagingMode('conversations'));
+    dispatch(setRecipId(null));
+    dispatch(setMessagingError(null));
   }
 
   /* Send the message to the API /new_message endpoint to insert into database. On success response, update Redux state:
@@ -115,6 +125,7 @@ function MessageForm (props) {
       <textarea maxlength='500' placeholder='Write your message here...' onChange={e => setContent(e.target.value)}></textarea>
       <p>{characters}/500 characters remaining</p>
       <button onClick={sendIt} disabled={!canSend}>Send</button>
+      {parentMode === 'from search' && <button onClick={goBack}>Back</button>}
     </div>
   )
 }

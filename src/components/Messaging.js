@@ -16,10 +16,12 @@ function Messaging() {
   const [currentConvMessages, setCurrConvMsgs] = useState([]);
   const [errors, setErrors] = useState([]);
 
+  // After component is mounted, fetch their conversations
   useEffect(() => {
     dispatch(getConversations(userId));
   }, [])
 
+  // Method to pass to child components to set errors state in this component
   function setErrsFromChild(errors) {
     setErrors(errors);
   }
@@ -33,7 +35,7 @@ function Messaging() {
         </ul>}
       {mode === 'from search' && <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>}
       {mode === 'conversations' && conversations.length < 1 && <p>You don't have any conversations yet...</p>}
-      {mode === 'conversations' && conversations.map(conversation => <Conversation messages={conversation}/>)}
+      {mode === 'conversations' && conversations.map(conversation => <Conversation key={conversation.convId} messages={conversation} setErrors={setErrsFromChild}/>)}
     </div>
   )
 }
