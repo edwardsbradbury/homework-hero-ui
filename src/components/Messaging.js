@@ -13,7 +13,6 @@ function Messaging() {
   const userId = state.user.value.id;
   const mode = state.messaging.value.mode;
   const conversations = state.messaging.value.conversations;
-  const [currentConvMessages, setCurrConvMsgs] = useState([]);
   const [errors, setErrors] = useState([]);
 
   // After component is mounted, fetch their conversations
