@@ -124,8 +124,8 @@ function MessageForm (props) {
     <div id='messageForm'>
       <textarea maxlength='500' placeholder='Write your message here...' onChange={e => setContent(e.target.value)}></textarea>
       <p>{characters}/500 characters remaining</p>
-      <button onClick={sendIt} disabled={!canSend}>Send</button>
       {parentMode === 'from search' && <button onClick={goBack}>Back</button>}
+      <button onClick={sendIt} disabled={!canSend}>Send</button>
     </div>
   )
 }
