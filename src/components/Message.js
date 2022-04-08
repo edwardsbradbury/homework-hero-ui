@@ -25,7 +25,7 @@ function Message (props) {
     <div className='message'>
       <table>
         <tr>
-          <td>{formatSentDate()}</td>
+          <td>{formatSentDate}</td>
         </tr>
         <tr>
           {mode === 'messages' && <td>{messageData.message}</td>}
