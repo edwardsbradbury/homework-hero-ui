@@ -70,15 +70,15 @@ function Messaging() {
       return (
         <>
           {conversations.map(conversation => 
-            <Conversation key={conversation.convId} messages={conversation} onClick={showConversation(conversation[0])}/>
+            <Conversation key={conversation.convId} messages={conversation} handleClick={showConversation}/>
           )}
         </>
       )
     } else if (mode === 'messages') {
       return (
         <>
-          <h3 className='link' onClick={backToInbox}></h3>
-          <h3>{`< Chat with user: ${state.messaging.value.recipId}`}</h3>
+          <h3 className='link' onClick={backToInbox}>&lt;</h3>
+          <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
           {conversations[currConvId].map(messageData => {
