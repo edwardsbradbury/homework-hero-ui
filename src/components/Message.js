@@ -25,14 +25,17 @@ function Message (props) {
   // How much of the message data is displayed depends on the Messaging component's mode & length of message
   function showMessage() {
     if (messagingMode === 'messaging') {
+      console.log('messaging mode, full message')
       return (
         <td>{messageData.message}</td>
       )
     } else if (messagingMode === 'inbox' && messageData.message.length > 100) {
+      console.log('inbox mode, shortened message')
       return (
         <td>{`${messageData.message.slice(0,97)}...`}</td>
       )
     } else if (messagingMode === 'inbox' && messageData.message.length < 100) {
+      console.log('inbox mode, full message')
       return (
         <td>{messageData.message}</td>
       )
