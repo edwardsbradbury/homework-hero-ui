@@ -49,7 +49,7 @@ function Messaging() {
     setConvId(null);
     dispatch(setRecipId(null));
     dispatch(setMessagingMode('inbox'));
-  }
+  } 
 
   // Method to conditionally return elements/components depending on state
   function displayContent() {
@@ -83,6 +83,7 @@ function Messaging() {
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
+          {console.log(currConvId)};
           {conversations[currConvId].map(messageData => {
             <Message key={messageData.id} data={messageData.message} />
           })}
