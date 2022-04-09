@@ -24,9 +24,11 @@ function Messaging() {
 
   // Watch currConvId for changes and update recipient
   useEffect(() => {
-    dispatch(setRecipId(
-      conversations[currConvId][0].senderId === userId ? conversations[currConvId][0].recipId : conversations[currConvId][0].senderId
-    ));
+    if (currConvId){
+      dispatch(setRecipId(
+        conversations[currConvId][0].senderId === userId ? conversations[currConvId][0].recipId : conversations[currConvId][0].senderId
+      ));
+    }
   }, [currConvId])
 
   // Method to pass to child components to set errors state in this component
