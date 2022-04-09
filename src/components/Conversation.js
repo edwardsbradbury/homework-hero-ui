@@ -14,7 +14,6 @@ function Conversation (props) {
   /* Calls the showConversation method defined in Messaging component, passing it the first message in the conversation
     so it can search the conversations to check which set of messages to display */
   function showMessages() {
-    // props.show(firstMessage);
     props.show(props.messages);
   }
 

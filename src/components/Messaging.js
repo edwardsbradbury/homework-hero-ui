@@ -39,15 +39,7 @@ function Messaging() {
 
   // Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
   function showConversation(conversation) {
-  // function showConversation(message) {
-  //   for (let i = 0; i < conversations.length; i++) {
-  //     if (conversations[i].includes(message)) {
-  //       setConvIndex(i);
-  //       break;
-  //     }
-  //   }
     setConvIndex(conversations.indexOf(conversation));
-    // dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
     dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
     dispatch(setMessagingMode('messages'));
   }
