@@ -59,12 +59,14 @@ function Messaging() {
         </>
       )
     } else if (mode === 'inbox' && conversations.length < 1) {
+      console.log('Mode is inbox and conversations.length < 0');
       return (
         <>
           <p>You don't have any conversations yet...</p>
         </>
       )
     } else if (mode === 'inbox' && conversations.length > 0) {
+      console.log('Mode is inbox and conversations.length > 0');
       return (
         <>
           {conversations.map(conversation => 
