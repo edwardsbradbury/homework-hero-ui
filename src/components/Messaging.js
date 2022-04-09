@@ -96,7 +96,7 @@ function Messaging() {
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>}
-      {displayContent}
+      {displayContent()}
     </div>
   )
 }
