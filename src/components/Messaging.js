@@ -71,7 +71,7 @@ function Messaging() {
       return (
         <>
           {conversations.map(conversation => 
-            <Conversation key={conversation.convId} messages={conversation} handleClick={showConversation}/>
+            <Conversation key={conversation.convId} messages={conversation} show={showConversation}/>
           )}
         </>
       )
