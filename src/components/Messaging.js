@@ -38,8 +38,12 @@ function Messaging() {
 
   // Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
   function showConversation(message) {
-    console.log('showConversation is being called')
-    setConvId(message.convId);
+    for (let i = 0; i < conversations.length; i++) {
+      if (conversations[i].includes(message)) {
+        setConvId(i);
+        break;
+      }
+    }
     dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
     dispatch(setMessagingMode('messages'));
   }
@@ -60,14 +64,12 @@ function Messaging() {
         </>
       )
     } else if (mode === 'inbox' && conversations.length < 1) {
-      console.log('Mode is inbox and conversations.length < 0');
       return (
         <>
           <p>You don't have any conversations yet...</p>
         </>
       )
     } else if (mode === 'inbox' && conversations.length > 0) {
-      console.log('Mode is inbox and conversations.length > 0');
       return (
         <>
           {conversations.map(conversation => 
@@ -76,14 +78,12 @@ function Messaging() {
         </>
       )
     } else if (mode === 'messages') {
-      console.log('mode is messages');
       return (
         <>
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
-          {console.log(currConvId)};
           {conversations[currConvId].map(messageData => {
             <Message key={messageData.id} data={messageData.message} />
           })}

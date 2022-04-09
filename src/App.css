@@ -117,14 +117,6 @@ textarea {
   margin-right: 25vw;
 }
 
-.conversation {
-  height: 15vh;
-}
-
 .conversation:hover {
   box-shadow: 1px 1px 5px black;
 }
-
-/* .message {
-  height: 75%;
-} */
