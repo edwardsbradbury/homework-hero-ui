@@ -29,9 +29,9 @@ function Messaging() {
       dispatch(setRecipId(
         conversations[currConvId][0].senderId === userId ? conversations[currConvId][0].recipId : conversations[currConvId][0].senderId
       ));
-      setCurrConvMsgs(conversations[currConvId].map(messageData => {
-        <Message key={messageData.id} data={messageData} />
-      }));
+      // setCurrConvMsgs(conversations[currConvId].map(messageData => {
+      //   <Message key={messageData.id} data={messageData} />
+      // }));
     }
   }, [currConvId])
 
@@ -92,7 +92,7 @@ function Messaging() {
           {conversations[currConvId].map(messageData => 
             <Message key={messageData.id} data={messageData} />
           )}
-          {currConvMsgs}
+          {/* {currConvMsgs} */}
         </>
       )
     }
