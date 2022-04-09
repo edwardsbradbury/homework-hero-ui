@@ -1,12 +1,13 @@
 /* Component to display message data formatted into a table within a div with a class of message,
    rendered by the Conversation component */
 
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {useSelector} from 'react-redux';
 
 function Message (props) {
 
-  const mode = props.parentMode;
   const messageData = props.data;
+  const messagingMode = useSelector((state) => state.messaging.value.mode);
 
   // Method to format the sent date of message to be more readable to human eyes
   function formatSentDate() {
@@ -21,16 +22,35 @@ function Message (props) {
     return dateTimeString;
   }
 
+  // How much of the message data is displayed depends on the Messaging component's mode & length of message
+  function showMessage() {
+    if (messagingMode === 'messaging') {
+      return (
+        <td>{messageData.message}</td>
+      )
+    } else if (messagingMode === 'inbox' && messageData.message.length > 100) {
+      return (
+        <td>{`${messageData.message.slice(0,97)}...`}</td>
+      )
+    } else if (messagingMode === 'inbox' && messageData.message.length < 100) {
+      return (
+        <td>{messageData.message}</td>
+      )
+    }
+  }
+
   return (
     <div className='message'>
       <table>
         <tr>
-          <td>{formatSentDate()}</td>
+          <td>{formatSentDate}</td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
-          {mode === 'messages' && <td>{messageData.message}</td>}
-          {(mode === 'inbox' && messageData.message.length > 100) && <td>{`${messageData.message.slice(0,97)}...`}</td>}
-          {(mode === 'inbox' && messageData.message.length < 100) && <td>{messageData.message}</td>}
+          <td></td>
+          <td>{showMessage}</td>
+          <td></td>
         </tr>
       </table>
     </div>

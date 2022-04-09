@@ -34,7 +34,7 @@
   justify-self: center;
 }
 
-#logo:hover, nav li:hover, #dashMenu {
+#logo:hover, nav li:hover, #dashMenu, h3.link {
   cursor: pointer;
 }
 

@@ -23,11 +23,28 @@ function MessageForm (props) {
 
   /* Because the MessageForm component might be rendered either by Messaging component directly (e.g. when replying to a user from search results)
     or else by a Conversation component nested within Messaging, it may or may not have been passed a convId prop. This effect checks, after the
-    MessageForm is rendered, whether convId prop was passed and if so, assigns it to the local state variable convId */
+    MessageForm is rendered, whether convId prop was passed and if so, assigns it to the local state variable convId. If not, queries the API to
+    retrieve a convId */
   useEffect(() => {
     if (props.hasOwnProperty('convId')) {
       setConvId(props.convId);
-    }
+    } /*else {*/
+    //   dispatch(getConvId(
+    //     {
+    //       userId: user.id,
+    //       recipId: props.recipient
+    //     }
+    //   ))
+    //   .unwrap()
+    //   .then(result => {
+    //     if (result.data.outcome === 'success') {
+    //       // API returned a convId; set the component's convId state property to this value
+    //       setConvId(result.data.convId);
+    //     } else {
+    //       props.setErrors(['Failed to get convId']);
+    //     }
+    //   })
+    // }
   }, [])
   
   /* Method to recalculate how many of max 500 characters have been enterd in the textarea,

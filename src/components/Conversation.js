@@ -1,51 +1,21 @@
-/* Component to hold all messages relating to one conversation the given user has ongoing. If the mode state is inbox, Conversation displays
-  the name of the other participant, time the most recent message was sent and first 97 characters of the message. If mode is messages, it
-  displays a MessageForm component and a Message component for each message in the conversation */
+/* Component to display an overview of a conversation when Messaging component is in inbox mode. Should display
+  ID of the other participant, time of most recent message, first 97 characters and whether there are unread messages */
 
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {setMessagingMode, getMessages} from '../features/messaging';
-import MessageForm from './MessageForm';
+import {useSelector} from 'react-redux';
 import Message from './Message';
 
 function Conversation (props) {
 
-  const [mode, setMode] = useState('inbox');
   const [userId] = useState(useSelector(state => state.user.value.id));
   const [firstMessage] = useState(props.messages[0]);
   const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
-  const messages = props.messages.map(aMessage => <Message key={aMessage.id} parentMode={mode} data={aMessage} userId={userId}/>);
-  const [generalError] = useState('Failed to get messages');
-  const [confirmDeletion] = useState('Are you sure you want to delete this message?');
-  const [deletionFailed] = useState('Failed to delete your message');
-
-  function displayContents() {
-    if (mode === 'inbox') {
-      return (
-        <>
-          <h3>{`Chat with user: ${recipient}`}</h3>
-          <br />
-          <Message parentMode={mode} data={firstMessage} userId={userId}/>
-        </>
-      )
-    } else if (mode === 'messages') {
-      return (
-      <>
-        <h3>{`Chat with user: ${recipient}`}</h3>
-        <br />
-        <MessageForm convId={firstMessage.convId} recipient={recipient} setErrors={props.setErrors} />
-        {messages}
-      </>
-      )
-    }
-  }
 
   return (
     <div className='conversation'>
-      {displayContents()}
-      {/* <h3>{`Chat with user: ${recipient}`}</h3>
+      <h3>{`Chat with user: ${recipient}`}</h3>
       <br />
-      <Message parentMode={mode} data={firstMessage} userId={userId}/> */}
+      <Message data={firstMessage}/>
     </div>
   )
 }
