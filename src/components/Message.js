@@ -43,13 +43,13 @@ function Message (props) {
     <div className='message'>
       <table>
         <tr>
-          <td>{formatSentDate}</td>
+          <td>{formatSentDate()}</td>
           <td></td>
           <td></td>
         </tr>
         <tr>
           <td></td>
-          <td>{showMessage}</td>
+          <td>{showMessage()}</td>
           <td></td>
         </tr>
       </table>
