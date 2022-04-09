@@ -117,6 +117,10 @@ textarea {
   margin-right: 25vw;
 }
 
+.conversation {
+  max-height: 10vh;
+}
+
 .conversation:hover {
   box-shadow: 1px 1px 5px black;
 }
