@@ -44,7 +44,7 @@ function Messaging() {
         break;
       }
     }
-    dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
+    // dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
     dispatch(setMessagingMode('messages'));
   }
 
