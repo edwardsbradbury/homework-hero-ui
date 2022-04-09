@@ -14,7 +14,7 @@ function Messaging() {
   const userId = state.user.value.id;
   const mode = state.messaging.value.mode;
   const conversations = state.messaging.value.conversations;
-  const [currConvId, setConvId] = useState(null);
+  const [convIndex, setConvIndex] = useState(null);
   const [currConvMsgs, setCurrConvMsgs] = useState([]);
   const [errors, setErrors] = useState([]);
 
@@ -23,14 +23,14 @@ function Messaging() {
     dispatch(getConversations(userId));
   }, [])
 
-  // Watch currConvId for changes and update recipient
+  // Watch convIndex for changes and update recipient
   useEffect(() => {
-    if (currConvId){
+    if (convIndex){
       dispatch(setRecipId(
-        conversations[currConvId][0].senderId === userId ? conversations[currConvId][0].recipId : conversations[currConvId][0].senderId
+        conversations[convIndex][0].senderId === userId ? conversations[convIndex][0].recipId : conversations[convIndex][0].senderId
       ));
     }
-  }, [currConvId])
+  }, [convIndex])
 
   // Method to pass to child components to set errors state in this component, e.g. if a message fails to send
   function setErrsFromChild(errors) {
@@ -38,20 +38,23 @@ function Messaging() {
   }
 
   // Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
-  function showConversation(message) {
-    for (let i = 0; i < conversations.length; i++) {
-      if (conversations[i].includes(message)) {
-        setConvId(i);
-        break;
-      }
-    }
-    dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
+  function showConversation(conversation) {
+  // function showConversation(message) {
+  //   for (let i = 0; i < conversations.length; i++) {
+  //     if (conversations[i].includes(message)) {
+  //       setConvIndex(i);
+  //       break;
+  //     }
+  //   }
+    setConvIndex(conversations.indexOf(conversation));
+    // dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
+    dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
     dispatch(setMessagingMode('messages'));
   }
 
   // Method to switch from a conversation view  back to inbox view
   function backToInbox() {
-    setConvId(null);
+    setConvIndex(null);
     dispatch(setRecipId(null));
     dispatch(setMessagingMode('inbox'));
   } 
@@ -84,8 +87,8 @@ function Messaging() {
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
-          <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
-          {conversations[currConvId].map(messageData => 
+          <MessageForm convId={convIndex} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
+          {conversations[convIndex].map(messageData => 
             <Message key={messageData.id} data={messageData} />
           )}
         </>

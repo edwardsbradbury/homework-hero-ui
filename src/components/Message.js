@@ -23,25 +23,6 @@ function Message (props) {
   }
 
   // How much of the message data is displayed depends on the Messaging component's mode & length of message
-  // function showMessage() {
-  //   if (messagingMode === 'messages') {
-  //     // console.log('messaging mode, full message')
-  //     return (
-  //       <td>{messageData.message}</td>
-  //     )
-  //   } else if (messagingMode === 'inbox' && messageData.message.length > 100) {
-  //     // console.log('inbox mode, shortened message')
-  //     return (
-  //       <td>{`${messageData.message.slice(0,97)}...`}</td>
-  //     )
-  //   } else if (messagingMode === 'inbox' && messageData.message.length < 100) {
-  //     // console.log('inbox mode, full message')
-  //     return (
-  //       <td>{messageData.message}</td>
-  //     )
-  //   }
-  // }
-
   function showMessage() {
     if (messagingMode === 'messages') {
       // console.log('messaging mode, full message')
@@ -57,18 +38,7 @@ function Message (props) {
 
   return (
     <div className='message'>
-      {/* <table>
-        <tr>
-          <td>{formatSentDate()}</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>{showMessage()}</td>
-          <td></td>
-        </tr>
-      </table> */}
+      {/* {messageData.senderId !== userId && <p>{`User ${messageData.senderId}`}</p>} */}
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
     </div>

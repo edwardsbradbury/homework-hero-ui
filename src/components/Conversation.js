@@ -11,15 +11,17 @@ function Conversation (props) {
   const [firstMessage] = useState(props.messages[0]);
   const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
 
+  /* Calls the showConversation method defined in Messaging component, passing it the first message in the conversation
+    so it can search the conversations to check which set of messages to display */
   function showMessages() {
-    props.show(firstMessage);
+    // props.show(firstMessage);
+    props.show(props.messages);
   }
 
   return (
-    // <div className='conversation' onClick={props.show(firstMessage)}>
     <div className='conversation' onClick={showMessages}>
       <h3>{`Chat with user: ${recipient}`}</h3>
-      <br />
+      {/* Display basic information about latest message in the conversation */}
       <Message data={firstMessage}/>
     </div>
   )
