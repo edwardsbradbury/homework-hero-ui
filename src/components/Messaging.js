@@ -89,9 +89,9 @@ function Messaging() {
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
           {/* {console.log(conversations[currConvId])} */}
-          {/* {conversations[currConvId].map(messageData => {
+          {conversations[currConvId].map(messageData => 
             <Message key={messageData.id} data={messageData} />
-          })} */}
+          )}
           {currConvMsgs}
         </>
       )
