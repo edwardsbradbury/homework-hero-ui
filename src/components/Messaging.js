@@ -84,7 +84,7 @@ function Messaging() {
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
-          {console.log(conversations[currConvId])};
+          {/* {console.log(conversations[currConvId])} */}
           {conversations[currConvId].map(messageData => {
             <Message key={messageData.id} data={messageData} />
           })}
