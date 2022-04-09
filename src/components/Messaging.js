@@ -38,6 +38,7 @@ function Messaging() {
 
   // Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
   function showConversation(message) {
+    console.log('showConversation is being called')
     setConvId(message.convId);
     dispatch(setRecipId(message.senderId === userId ? message.recipId : message.senderId));
     dispatch(setMessagingMode('messages'));
@@ -75,6 +76,7 @@ function Messaging() {
         </>
       )
     } else if (mode === 'messages') {
+      console.log('mode is messages');
       return (
         <>
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
