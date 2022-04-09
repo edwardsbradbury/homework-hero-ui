@@ -29,13 +29,10 @@ function Messaging() {
       dispatch(setRecipId(
         conversations[currConvId][0].senderId === userId ? conversations[currConvId][0].recipId : conversations[currConvId][0].senderId
       ));
-      // setCurrConvMsgs(conversations[currConvId].map(messageData => {
-      //   <Message key={messageData.id} data={messageData} />
-      // }));
     }
   }, [currConvId])
 
-  // Method to pass to child components to set errors state in this component
+  // Method to pass to child components to set errors state in this component, e.g. if a message fails to send
   function setErrsFromChild(errors) {
     setErrors(errors);
   }
@@ -88,11 +85,9 @@ function Messaging() {
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
-          {/* {console.log(conversations[currConvId])} */}
           {conversations[currConvId].map(messageData => 
             <Message key={messageData.id} data={messageData} />
           )}
-          {/* {currConvMsgs} */}
         </>
       )
     }

@@ -23,28 +23,41 @@ function Message (props) {
   }
 
   // How much of the message data is displayed depends on the Messaging component's mode & length of message
+  // function showMessage() {
+  //   if (messagingMode === 'messages') {
+  //     // console.log('messaging mode, full message')
+  //     return (
+  //       <td>{messageData.message}</td>
+  //     )
+  //   } else if (messagingMode === 'inbox' && messageData.message.length > 100) {
+  //     // console.log('inbox mode, shortened message')
+  //     return (
+  //       <td>{`${messageData.message.slice(0,97)}...`}</td>
+  //     )
+  //   } else if (messagingMode === 'inbox' && messageData.message.length < 100) {
+  //     // console.log('inbox mode, full message')
+  //     return (
+  //       <td>{messageData.message}</td>
+  //     )
+  //   }
+  // }
+
   function showMessage() {
     if (messagingMode === 'messages') {
-      console.log('messaging mode, full message')
-      return (
-        <td>{messageData.message}</td>
-      )
+      // console.log('messaging mode, full message')
+      return messageData.message;
     } else if (messagingMode === 'inbox' && messageData.message.length > 100) {
-      console.log('inbox mode, shortened message')
-      return (
-        <td>{`${messageData.message.slice(0,97)}...`}</td>
-      )
+      // console.log('inbox mode, shortened message')
+      return `${messageData.message.slice(0,97)}...`;
     } else if (messagingMode === 'inbox' && messageData.message.length < 100) {
-      console.log('inbox mode, full message')
-      return (
-        <td>{messageData.message}</td>
-      )
+      // console.log('inbox mode, full message')
+      return messageData.message;
     }
   }
 
   return (
     <div className='message'>
-      <table>
+      {/* <table>
         <tr>
           <td>{formatSentDate()}</td>
           <td></td>
@@ -55,7 +68,9 @@ function Message (props) {
           <td>{showMessage()}</td>
           <td></td>
         </tr>
-      </table>
+      </table> */}
+      <p>{formatSentDate()}</p>
+      <p>{showMessage()}</p>
     </div>
   )
 }
