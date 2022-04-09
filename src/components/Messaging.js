@@ -15,6 +15,7 @@ function Messaging() {
   const mode = state.messaging.value.mode;
   const conversations = state.messaging.value.conversations;
   const [currConvId, setConvId] = useState(null);
+  const [currConvMsgs, setCurrConvMsgs] = useState([]);
   const [errors, setErrors] = useState([]);
 
   // After component is mounted, fetch their conversations
@@ -28,6 +29,9 @@ function Messaging() {
       dispatch(setRecipId(
         conversations[currConvId][0].senderId === userId ? conversations[currConvId][0].recipId : conversations[currConvId][0].senderId
       ));
+      setCurrConvMsgs(conversations[currConvId].map(messageData => {
+        <Message key={messageData.id} data={messageData} />
+      }));
     }
   }, [currConvId])
 
@@ -85,9 +89,10 @@ function Messaging() {
           <br />
           <MessageForm convId={currConvId} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
           {/* {console.log(conversations[currConvId])} */}
-          {conversations[currConvId].map(messageData => {
+          {/* {conversations[currConvId].map(messageData => {
             <Message key={messageData.id} data={messageData} />
-          })}
+          })} */}
+          {currConvMsgs}
         </>
       )
     }
