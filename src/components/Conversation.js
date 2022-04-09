@@ -12,7 +12,7 @@ function Conversation (props) {
   const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
 
   return (
-    <div className='conversation' onClick={props.show(firstMessage)}>
+    <div className='conversation'>
       <h3>{`Chat with user: ${recipient}`}</h3>
       <br />
       <Message data={firstMessage}/>
