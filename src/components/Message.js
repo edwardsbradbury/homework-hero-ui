@@ -7,7 +7,10 @@ import {useSelector} from 'react-redux';
 function Message (props) {
 
   const messageData = props.data;
-  const messagingMode = useSelector((state) => state.messaging.value.mode);
+  const globalState = useSelector((state) => state);
+  // const messagingMode = useSelector((state) => state.messaging.value.mode);
+  const messagingMode = globalState.messaging.value.mode;
+  const userId = globalState.user.value.id;
 
   // Method to format the sent date of message to be more readable to human eyes
   function formatSentDate() {
@@ -38,7 +41,7 @@ function Message (props) {
 
   return (
     <div className='message'>
-      {/* {messageData.senderId !== userId && <p>{`User ${messageData.senderId}`}</p>} */}
+      <p>{messageData.senderId === userId ? 'You' : `User ${messageData.senderId}`}</p>
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
     </div>
