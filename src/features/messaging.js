@@ -61,7 +61,7 @@ export const messagingReducer = createSlice({
     builder.addCase(getConversations.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.outcome === 'failure') {
-        state.value.error = 'Something went wrong. Check your input and try again';
+        state.value.error = 'Something went wrong fetching your conversations';
       } else {
         state.value.conversations = response.conversations;
       }

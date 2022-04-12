@@ -94,10 +94,16 @@ function MessageForm (props) {
                 // Message sent successfully; clear the content state variable
                 setContent('');
                 // Retrieve user's conversations again, so the new message is included in their conversations
-                dispatch(getConversations(user.id));
+                dispatch(getConversations(user.id))
+                .unwrap()
+                .then(reply => {
+                  if (reply.outcome === 'success') {
+                    dispatch(setMessagingMode('messages'));
+                  }
+                })
                 /* Update mode property of messaging object in Redux global state (should trigger Messaging component to unmount MessageForm
                   and render a Conversation component, in which a new MessageForm is embedded but also messages are displayed) */
-                dispatch(setMessagingMode('inbox'));
+                // dispatch(setMessagingMode('inbox'));
               }
             })
             .catch(err => console.log(err));
@@ -123,7 +129,13 @@ function MessageForm (props) {
             // Message sent successfully; clear the content state variable
             setContent('');
             // Retrieve user's conversations again, so the new message is included in their conversations
-            dispatch(getConversations(user.id));
+            dispatch(getConversations(user.id))
+            .unwrap()
+            .then(reply => {
+              if (reply.outcome === 'success') {
+                dispatch(setMessagingMode('messages'))
+              }
+            })
           } else {
             props.setErrors(['Failed to send message, try again']);
           }
