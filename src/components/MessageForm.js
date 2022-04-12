@@ -9,6 +9,7 @@ function MessageForm (props) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.value);
   const parentMode = useSelector(state => state.messaging.value.mode);
+  const recipient = useSelector(state => state.messaging.value.recipId);
   const [content, setContent] = useState('');
   const [characters, setCharacters] = useState(500);
   const [convId, setConvId] = useState(null);
@@ -32,7 +33,7 @@ function MessageForm (props) {
     //   dispatch(getConvId(
     //     {
     //       userId: user.id,
-    //       recipId: props.recipient
+    //       recipId: recipient
     //     }
     //   ))
     //   .unwrap()
@@ -76,7 +77,7 @@ function MessageForm (props) {
         dispatch(getConvId(
           {
             userId: user.id,
-            recipId: props.recipient
+            recipId: recipient
           }))
         .unwrap()
         .then(result => {
@@ -88,7 +89,7 @@ function MessageForm (props) {
               {
                 convId: result.data.convId,
                 sender: user.id,
-                recipient: props.recipient,
+                recipient: recipient,
                 sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 message: content
               }
@@ -124,7 +125,7 @@ function MessageForm (props) {
           {
             convId: convId,
             sender: user.id,
-            recipient: props.recipient,
+            recipient: recipient,
             sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
             message: content
           }

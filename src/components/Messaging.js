@@ -70,7 +70,7 @@ function Messaging() {
     if (mode === 'from search') {
       return (
         <>
-          <MessageForm recipient={state.messaging.value.recipId} setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild}/>
+          <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild}/>
         </>
       )
     } else if (mode === 'inbox' && conversations.length < 1) {
@@ -93,7 +93,7 @@ function Messaging() {
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
-          <MessageForm convId={convIndex} recipient={state.messaging.value.recipId} setErrors={setErrsFromChild} />
+          <MessageForm convId={convIndex} setErrors={setErrsFromChild} />
           {conversations[convIndex].map(messageData => 
             <Message key={messageData.id} data={messageData} />
           )}
