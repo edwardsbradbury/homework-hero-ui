@@ -38,6 +38,8 @@ function Messaging() {
     for (let i = 0; i < conversations.length; i++) {
       if (conversations[i][0].convId === convId) {
         setConvIndex(i);
+        console.log('Setting index from child');
+        console.log(`Index: ${convIndex}`);
         return;
       }
     }
