@@ -32,6 +32,17 @@ function Messaging() {
     }
   }, [convIndex])
 
+  /* Method passed to MessageForm component instance when Messaging component is in 'from search' mode so that - after writing to a user
+    from a search result, Messaging component can switch to 'messages' view, displaying the message the user just sent */
+  function setConvIndexFrmChld(convId) {
+    for (let i = 0; i < conversations.length; i++) {
+      if (conversations[i][0].convId === convId) {
+        setConvIndex(i);
+        return;
+      }
+    }
+  }
+  
   // Method to pass to child components to set errors state in this component, e.g. if a message fails to send
   function setErrsFromChild(errors) {
     setErrors(errors);
@@ -57,7 +68,7 @@ function Messaging() {
     if (mode === 'from search') {
       return (
         <>
-          <MessageForm recipient={state.messaging.value.recipId} setErrors={setErrsFromChild}/>
+          <MessageForm recipient={state.messaging.value.recipId} setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild}/>
         </>
       )
     } else if (mode === 'inbox' && conversations.length < 1) {

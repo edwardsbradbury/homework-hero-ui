@@ -133,6 +133,7 @@ function MessageForm (props) {
             .unwrap()
             .then(reply => {
               if (reply.outcome === 'success') {
+                props.setConvIndexFrmChld(convId);
                 dispatch(setMessagingMode('messages'))
               }
             })
