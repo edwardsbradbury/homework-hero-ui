@@ -61,6 +61,11 @@ function MessageForm (props) {
     dispatch(setMessagingError(null));
   }
 
+  // Method to set the convIndex state property in Messaging component
+  function setIndex(convId) {
+    props.setIndex(convId);
+  }
+
   /* Send the message to the API /new_message endpoint to insert into database. On success response, update Redux state:
       re-fetch user's messages and ... TBC */
   function sendIt() {
@@ -98,6 +103,7 @@ function MessageForm (props) {
                 .unwrap()
                 .then(reply => {
                   if (reply.outcome === 'success') {
+                    setIndex(convId);
                     dispatch(setMessagingMode('messages'));
                   }
                 })
@@ -133,7 +139,8 @@ function MessageForm (props) {
             .unwrap()
             .then(reply => {
               if (reply.outcome === 'success') {
-                props.setIndex(convId);
+                setIndex(convId);
+                // props.setIndex(convId);
                 dispatch(setMessagingMode('messages'))
               }
             })
@@ -152,7 +159,7 @@ function MessageForm (props) {
 
   return (
     <div id='messageForm'>
-      <textarea maxlength='500' placeholder='Write your message here...' onChange={e => setContent(e.target.value)}></textarea>
+      <textarea maxlength='500' placeholder='Write your message here...' value={content} onChange={e => setContent(e.target.value)}></textarea>
       <p>{characters}/500 characters remaining</p>
       {parentMode === 'from search' && <button onClick={goBack}>Back</button>}
       <button onClick={sendIt} disabled={!canSend}>Send</button>
