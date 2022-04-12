@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setMessagingMode, getConversations, setRecipId} from '../features/messaging';
+import {setMessagingMode, getConversations, setRecipId, setConvIndex, setMessagingErrors, clearMessagingErrors} from '../features/messaging';
 import Conversation from './Conversation';
 import MessageForm from './MessageForm';
 import Message from './Message';
@@ -14,9 +14,8 @@ function Messaging() {
   const userId = state.user.value.id;
   const mode = state.messaging.value.mode;
   const conversations = state.messaging.value.conversations;
-  const [convIndex, setConvIndex] = useState(null);
-  const [currConvMsgs, setCurrConvMsgs] = useState([]);
-  const [errors, setErrors] = useState([]);
+  const convIndex = state.messaging.value.convIndex;
+  const errors = state.messaging.value.errors;
 
   // After component is mounted, fetch their conversations
   useEffect(() => {
@@ -37,7 +36,7 @@ function Messaging() {
   function setConvIndexFrmChld(convId) {
     for (let i = 0; i < conversations.length; i++) {
       if (conversations[i][0].convId === convId) {
-        setConvIndex(i);
+        dispatch(setConvIndex(i));
         console.log('Setting index from child');
         console.log(`Index: ${convIndex}`);
         return;
@@ -47,7 +46,7 @@ function Messaging() {
   
   // Method to pass to child components to set errors state in this component, e.g. if a message fails to send
   function setErrsFromChild(errors) {
-    setErrors(errors);
+    dispatch(setMessagingErrors(errors));
   }
 
   /* Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
@@ -93,7 +92,7 @@ function Messaging() {
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
-          <MessageForm convId={convIndex} setErrors={setErrsFromChild} />
+          <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} />
           {conversations[convIndex].map(messageData => 
             <Message key={messageData.id} data={messageData} />
           )}

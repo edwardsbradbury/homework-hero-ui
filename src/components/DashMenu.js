@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
 import {logout} from '../features/user';
 import {setDashMode, resetDashState} from '../features/dash';
-import {setMessagingMode, setRecipId, setConversations} from '../features/messaging';
+import {resetMessagingState} from '../features/messaging';
 
 function DashMenu() {
 
@@ -20,9 +20,7 @@ function DashMenu() {
   function resetState() {
     dispatch(logout());
     dispatch(changeMode('splash'));
-    dispatch(setMessagingMode('inbox'));
-    dispatch(setRecipId(null));
-    dispatch(setConversations([]));
+    dispatch(resetMessagingState());
     dispatch(resetDashState());
   }
 

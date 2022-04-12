@@ -4,8 +4,11 @@ import API from './API';
 const initialState = {value: {
   mode: 'inbox',
   conversations: [],
+  convId: null,
+  convIndex: null,
   recipId: null,
-  error: null
+  errors: new Set()
+  // errors: []
 }}
 
 export const getConvId = createAsyncThunk(
@@ -53,22 +56,51 @@ export const messagingReducer = createSlice({
     setConversations: (state, action) => {
       state.value.conversations = action.payload;
     },
-    setMessagingError: (state, action) => {
-      state.value.error = action.payload;
+    setConvIndex: (state, action) => {
+      state.value.convIndex = action.payload;
     },
+    setMessagingErrors: (state, action) => {
+      if (Array.isArray(action.payload)) {
+        state.value.errors.push(...action.payload);
+      } else {
+        state.value.errors.push(action.payload);
+      }
+    },
+    clearMessagingErrors: state => {
+      // state.value.errors = [];
+      state.value.errors.clear();
+    },
+    resetMessagingState: state => {
+      state.value = initialState;
+    }
   },
   extraReducers: (builder) => {
-    builder.addCase(getConversations.fulfilled, (state, action) => {
+    builder.addCase(sendMessage.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.outcome === 'failure') {
-        state.value.error = 'Something went wrong fetching your conversations';
+        // state.value.errors.push('Something went wrong sending your message');
+        state.value.errors.add('Something went wrong sending your message');
+      }
+    }).addCase(getConversations.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.outcome === 'failure') {
+        // state.value.errors.push('Something went wrong fetching your conversations');
+        state.value.errors.add('Something went wrong fetching your conversations');
       } else {
         state.value.conversations = response.conversations;
+      }
+    }).addCase(getConvId.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.outcome === 'failure') {
+        // state.value.errors.push('Failed to get conversation ID');
+        state.value.errors.add('Failed to get conversation ID');
+      } else {
+        state.value.convId = response.convId;
       }
     })
   }
 });
 
-export const {setMessagingMode, setRecipId, setConversations, setMessagingError} = messagingReducer.actions;
+export const {setMessagingMode, setRecipId, setConversations, setConvIndex, setMessagingErrors, clearMessagingErrors, resetMessagingState} = messagingReducer.actions;
 
 export default messagingReducer.reducer;

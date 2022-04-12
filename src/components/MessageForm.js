@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {sendMessage, getConvId, getConversations, setMessagingMode, setRecipId, setMessagingError} from '../features/messaging';
+import {sendMessage, getConvId, getConversations, setMessagingMode, setRecipId, clearMessagingErrors, resetMessagingState} from '../features/messaging';
 import {changeMode} from '../features/home';
 
 function MessageForm (props) {
@@ -10,10 +10,11 @@ function MessageForm (props) {
   const user = useSelector(state => state.user.value);
   const parentMode = useSelector(state => state.messaging.value.mode);
   const recipient = useSelector(state => state.messaging.value.recipId);
+  const convId = useSelector(state => state.messaging.value.convId);
   const [content, setContent] = useState('');
   const [characters, setCharacters] = useState(500);
-  const [convId, setConvId] = useState(null);
   const [canSend, setCanSend] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
   /* Watch the 'content' local state property for changes. When it changes, recalculate remaining characters and set characters state property
     also setCanSend controls whether the send button is clickable */
@@ -22,31 +23,33 @@ function MessageForm (props) {
     setCanSend(content.length > 1 && content.length <= 500);
   }, [content])
 
-  /* Because the MessageForm component might be rendered either by Messaging component directly (e.g. when replying to a user from search results)
-    or else by a Conversation component nested within Messaging, it may or may not have been passed a convId prop. This effect checks, after the
-    MessageForm is rendered, whether convId prop was passed and if so, assigns it to the local state variable convId. If not, queries the API to
-    retrieve a convId */
+  /* If the convId state property is null, call the API to get a convId. Needs to be included with requests to API's /new_message route and is
+      used by the /conversations route to sort all of a user's messages into distinct conversations */
   useEffect(() => {
-    if (props.hasOwnProperty('convId')) {
-      setConvId(props.convId);
-    } /*else {*/
-    //   dispatch(getConvId(
-    //     {
-    //       userId: user.id,
-    //       recipId: recipient
-    //     }
-    //   ))
-    //   .unwrap()
-    //   .then(result => {
-    //     if (result.data.outcome === 'success') {
-    //       // API returned a convId; set the component's convId state property to this value
-    //       setConvId(result.data.convId);
-    //     } else {
-    //       props.setErrors(['Failed to get convId']);
-    //     }
-    //   })
-    // }
+    if (!convId) {
+      dispatch(getConvId(
+        {
+          userId: user.id,
+          recipId: recipient
+        }
+      ))
+      .unwrap()
+      .then(result => {
+        if (result.data.outcome === 'success') {
+          setIndex(result.data.convId);
+        }
+      })
+    }
   }, [])
+
+  /* Watch the isSent state variable; when it's true, fetch the user's conversations again, so that if MessageForm is
+    rendered alongside messages in an ongoing conversation, the new message should be present and displayed */
+  useEffect(() => {
+    if (isSent) {
+      dispatch(getConversations(user.id));
+      setIsSent(false);
+    }
+  }, [isSent])
   
   /* Method to recalculate how many of max 500 characters have been enterd in the textarea,
     called by useEffect whenever content changes */
@@ -57,9 +60,7 @@ function MessageForm (props) {
   // Method to return to search results if messaging component is in 'from search' mode
   function goBack() {
     dispatch(changeMode('search'));
-    dispatch(setMessagingMode('inbox'));
-    dispatch(setRecipId(null));
-    dispatch(setMessagingError(null));
+    dispatch(resetMessagingState());
   }
 
   // Method to set the convIndex state property in Messaging component
@@ -71,89 +72,24 @@ function MessageForm (props) {
       re-fetch user's messages and ... TBC */
   function sendIt() {
     if (canSend) {
-      // If convId state variable has falsy value
-      if (!convId) {
-        // Query API to get a convId, since it must be included with requests to new_message route at API
-        dispatch(getConvId(
-          {
-            userId: user.id,
-            recipId: recipient
-          }))
-        .unwrap()
-        .then(result => {
-          if (result.data.outcome === 'success') {
-            // API returned a convId; set the component's convId state property to this value
-            setConvId(result.data.convId);
-            // Send the message data to API's new_message route
-            dispatch(sendMessage(
-              {
-                convId: result.data.convId,
-                sender: user.id,
-                recipient: recipient,
-                sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
-                message: content
-              }
-            ))
-            .unwrap()
-            .then(response => {
-              if (response.outcome === 'success') {
-                // Message sent successfully; clear the content state variable
-                setContent('');
-                // Retrieve user's conversations again, so the new message is included in their conversations
-                dispatch(getConversations(user.id))
-                .unwrap()
-                .then(reply => {
-                  if (reply.outcome === 'success') {
-                    setIndex(convId);
-                    dispatch(setMessagingMode('messages'));
-                  }
-                })
-                /* Update mode property of messaging object in Redux global state (should trigger Messaging component to unmount MessageForm
-                  and render a Conversation component, in which a new MessageForm is embedded but also messages are displayed) */
-                // dispatch(setMessagingMode('inbox'));
-              }
-            })
-            .catch(err => console.log(err));
-          } else {
-            props.setErrors(['Failed to send message, try again']);
-          }
-        })
-        .catch(error => console.log(error))
-      } else {
-        // convId local state variable isn't falsy, so is an int representing a convId; send the message data to API
-        dispatch(sendMessage(
-          {
-            convId: convId,
-            sender: user.id,
-            recipient: recipient,
-            sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
-            message: content
-          }
-        ))
-        .unwrap()
-        .then(response => {
-          if (response.outcome === 'success') {
-            // Message sent successfully; clear the content state variable
-            setContent('');
-            // Retrieve user's conversations again, so the new message is included in their conversations
-            dispatch(getConversations(user.id))
-            .unwrap()
-            .then(reply => {
-              if (reply.outcome === 'success') {
-                setIndex(convId);
-                // props.setIndex(convId);
-                dispatch(setMessagingMode('messages'))
-              }
-            })
-          } else {
-            props.setErrors(['Failed to send message, try again']);
-          }
-        })
-        .catch(error => console.log(error))
-      }
+      dispatch(sendMessage(
+        {
+          convId: convId,
+          sender: user.id,
+          recipient: recipient,
+          sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
+          message: content
+        }
+      )).unwrap()
+      .then(result => {
+        if (result.data.outcome === 'success') {
+          setContent('');
+          setIsSent(true);
+        }
+      }).catch(error => console.log(error))
     
     } else {
-      props.setErrors(['Messages must be 2-500 characters long']);
+      props.setErrors('Messages must be 2-500 characters long');
     }
 
   }
