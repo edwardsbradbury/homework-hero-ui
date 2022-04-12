@@ -106,7 +106,7 @@ function Messaging() {
       <h1>Messages</h1>
       {errors.length > 0 &&
         <ul>
-          {errors.map(error => <li className='error'>{error}</li>)}
+          {errors.forEach(error => <li className='error'>{error}</li>)}
         </ul>}
       {displayContent()}
     </div>
