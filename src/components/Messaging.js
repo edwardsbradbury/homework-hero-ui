@@ -52,7 +52,7 @@ function Messaging() {
   /* Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
     passed as prop to - and called by showMessages method of - Conversation component */
   function showConversation(conversation) {
-    console.log(conversation);
+    console.log(conversations.indexOf(conversation));
     setConvIndex(conversations.indexOf(conversation));
     console.log(`convIndex: ${convIndex}`);
     dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
