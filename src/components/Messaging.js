@@ -11,10 +11,14 @@ function Messaging() {
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  const userId = state.user.value.id;
-  const mode = state.messaging.value.mode;
-  const conversations = state.messaging.value.conversations;
-  const convIndex = state.messaging.value.convIndex;
+  // const userId = state.user.value.id;
+  const userId = useSelector(state => state.user.value.id);
+  // const mode = state.messaging.value.mode;
+  const mode = useSelector(state => state.messaging.value.mode);
+  // const conversations = state.messaging.value.conversations;
+  const conversations = useSelector(state => state.messaging.value.conversations);
+  // const convIndex = state.messaging.value.convIndex;
+  const convIndex = useSelector(state => state.messaging.value.convIndex);
   const errors = state.messaging.value.errors;
 
   // After component is mounted, fetch their conversations
