@@ -55,7 +55,7 @@ function Messaging() {
     setConvIndex(conversations.indexOf(conversation));
     console.log(`convIndex: ${convIndex}`);
     dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
-    console.log(`recipId: ${recipient}`);
+    console.log(`recipId: ${state.messaging.value.recipId}`);
     dispatch(setMessagingMode('messages'));
   }
 
