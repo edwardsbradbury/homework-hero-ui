@@ -16,7 +16,7 @@ export const doSearch = createAsyncThunk(
 
 export const searchReducer = createSlice({
   name: 'search',
-  initialState,
+  initialState: JSON.parse(JSON.stringify(initialState)),
   reducers: {
     setResults: (state, action) => {
       state.value.results = action.payload;
