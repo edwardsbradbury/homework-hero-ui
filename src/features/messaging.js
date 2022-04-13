@@ -71,7 +71,7 @@ export const messagingReducer = createSlice({
       state.value.errors.clear();
     },
     resetMessagingState: state => {
-      state.value = initialState;
+      state = initialState;
     }
   },
   extraReducers: (builder) => {

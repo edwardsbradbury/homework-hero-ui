@@ -32,6 +32,7 @@ function Nav() {
   function goHome() {
     dispatch(resetDashState());
     dispatch(resetMessagingState());
+    dispatch(resetSearchState());
     dispatch(changeMode(loggedIn ? 'dashboard' : 'splash'));
   }
 
