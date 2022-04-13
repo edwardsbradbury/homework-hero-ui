@@ -16,10 +16,7 @@ export const doSearch = createAsyncThunk(
 
 export const searchReducer = createSlice({
   name: 'search',
-  initialState: {
-    value: {
-      results: []
-    }},
+  initialState,
   reducers: {
     setResults: (state, action) => {
       state.value.results = action.payload;
