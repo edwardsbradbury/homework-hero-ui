@@ -25,7 +25,7 @@ export const searchReducer = createSlice({
       state.value.results = action.payload;
     },
     resetSearchState: (state) => {
-      state.value = initialState;
+      state = initialState;
     }
   },
 });
