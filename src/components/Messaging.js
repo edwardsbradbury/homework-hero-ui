@@ -53,9 +53,10 @@ function Messaging() {
     passed as prop to - and called by showMessages method of - Conversation component */
   function showConversation(conversation) {
     console.log(conversations.indexOf(conversation));
-    setConvIndex(conversations.indexOf(conversation));
+    dispatch(setConvIndex(conversations.indexOf(conversation)));
     console.log(`convIndex: ${convIndex}`);
     dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
+    console.log(`Sender is current user? ${conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId}`);
     console.log(`recipId: ${state.messaging.value.recipId}`);
     dispatch(setMessagingMode('messages'));
   }
