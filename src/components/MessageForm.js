@@ -64,11 +64,6 @@ function MessageForm (props) {
     dispatch(resetMessagingState());
   }
 
-  // Method to set the convIndex state property in Messaging component
-  function setIndex(convId) {
-    props.setIndex(convId);
-  }
-
   /* Send the message to the API /new_message endpoint to insert into database. On success response, update Redux state:
       re-fetch user's messages and ... TBC */
   function sendIt() {

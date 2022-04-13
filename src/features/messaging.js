@@ -91,7 +91,7 @@ export const messagingReducer = createSlice({
       if (response.outcome === 'failure') {
         state.value.errors.push('Failed to get conversation ID');
       } else {
-        state.value.convId = response.convId;
+        state.value.convId = response.data.convId;
       }
     })
   }
