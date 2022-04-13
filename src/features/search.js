@@ -1,10 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import API from './API';
 
-const initialState = {
-  value: {
-    results: []
-  }};
+// const initialState = {
+//   value: {
+//     results: []
+//   }};
 
 export const doSearch = createAsyncThunk(
   'search/doSearch',
@@ -16,7 +16,9 @@ export const doSearch = createAsyncThunk(
 
 export const searchReducer = createSlice({
   name: 'search',
-  initialState,
+  initialState: {value: {
+    results: []
+  }},
   reducers: {
     setResults: (state, action) => {
       state.value.results = action.payload;
