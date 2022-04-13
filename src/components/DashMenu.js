@@ -6,6 +6,7 @@ import {changeMode} from '../features/home';
 import {logout} from '../features/user';
 import {setDashMode, resetDashState} from '../features/dash';
 import {resetMessagingState} from '../features/messaging';
+import {resetSearchState} from '../features/search';
 
 function DashMenu() {
 
@@ -22,6 +23,7 @@ function DashMenu() {
     dispatch(changeMode('splash'));
     dispatch(resetMessagingState());
     dispatch(resetDashState());
+    dispatch(resetSearchState());
   }
 
   return (

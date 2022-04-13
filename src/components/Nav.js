@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {changeMode} from '../features/home';
 import {resetDashState} from '../features/dash';
 import {resetMessagingState} from '../features/messaging';
+import {resetSearchState} from '../features/search';
 import {logout} from '../features/user';
 
 function Nav() {
@@ -25,6 +26,13 @@ function Nav() {
     dispatch(changeMode('splash'));
     dispatch(resetDashState());
     dispatch(resetMessagingState());
+    dispatch(resetSearchState());
+  }
+
+  function goHome() {
+    dispatch(resetDashState());
+    dispatch(resetMessagingState());
+    dispatch(changeMode(loggedIn ? 'dashboard' : 'splash'));
   }
 
   return (
@@ -34,7 +42,7 @@ function Nav() {
         id='logo'
         alt='Homework Hero logo'
         src={require('../assets/logo.png')}
-        onClick={() => dispatch(changeMode(loggedIn ? 'dashboard' : 'splash'))}>
+        onClick={goHome}>
       </img>
       <nav>
         <ul>
