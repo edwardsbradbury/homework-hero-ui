@@ -82,7 +82,7 @@ function MessageForm (props) {
         }
       )).unwrap()
       .then(result => {
-        if (result.data.outcome === 'success') {
+        if (result.outcome === 'success') {
           setContent('');
           setIsSent(true);
         }
