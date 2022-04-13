@@ -71,6 +71,7 @@ export const messagingReducer = createSlice({
       state.value.errors.clear();
     },
     resetMessagingState: state => {
+      initialState.value.conversations = [];
       state = initialState;
     }
   },
