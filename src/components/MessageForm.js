@@ -36,7 +36,8 @@ function MessageForm (props) {
       .unwrap()
       .then(result => {
         if (result.data.outcome === 'success') {
-          setIndex(result.data.convId);
+          console.log('setting index from messageform line 40');
+          props.setIndex(result.data.convId);
         }
       })
     }

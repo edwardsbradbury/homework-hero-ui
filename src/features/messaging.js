@@ -7,7 +7,6 @@ const initialState = {value: {
   convId: null,
   convIndex: null,
   recipId: null,
-  // errors: new Set()
   errors: []
 }}
 
@@ -68,7 +67,6 @@ export const messagingReducer = createSlice({
     },
     clearMessagingErrors: state => {
       state.value.errors = [];
-      // state.value.errors.clear();
     },
     resetMessagingState: state => {
       initialState.value.conversations = [];
@@ -80,13 +78,11 @@ export const messagingReducer = createSlice({
       const response = action.payload;
       if (response.outcome === 'failure') {
         state.value.errors.push('Something went wrong sending your message');
-        // state.value.errors.add('Something went wrong sending your message');
       }
     }).addCase(getConversations.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.outcome === 'failure') {
         state.value.errors.push('Something went wrong fetching your conversations');
-        // state.value.errors.add('Something went wrong fetching your conversations');
       } else {
         state.value.conversations = response.conversations;
       }
@@ -94,7 +90,6 @@ export const messagingReducer = createSlice({
       const response = action.payload;
       if (response.outcome === 'failure') {
         state.value.errors.push('Failed to get conversation ID');
-        // state.value.errors.add('Failed to get conversation ID');
       } else {
         state.value.convId = response.convId;
       }
