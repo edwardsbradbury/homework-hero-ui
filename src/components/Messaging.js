@@ -23,8 +23,10 @@ function Messaging() {
 
   // After component is mounted, fetch their conversations
   useEffect(() => {
-    dispatch(getConversations(userId));
-  }, [])
+    if (mode !== 'from search') {
+      dispatch(getConversations(userId));
+    }
+  }, [mode])
 
   // Watch convIndex for changes and update recipient
   useEffect(() => {
