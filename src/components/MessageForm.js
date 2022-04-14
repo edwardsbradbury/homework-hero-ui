@@ -73,7 +73,7 @@ function MessageForm (props) {
           convId: convId,
           senderId: user.id,
           recipId: recipient,
-          userName: user.forename,
+          senderName: user.forename,
           sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
           message: content
         }
