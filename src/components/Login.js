@@ -20,7 +20,10 @@ function Login() {
   let errorsObj = {
     emailMissing: '',
     emailInvalid: '',
-    passwordMissing: ''
+    passwordMissing: '',
+    userNotFound: '',
+    passwordIncorrect: '',
+    general: ''
   }
   const [errors, setErrors] = useState(errorsObj);
 
@@ -54,6 +57,7 @@ function Login() {
   
   // Method to actually transmit the validated login data to my API. This should really be in an asyncThunk in features/login.js
   function submitLogin() {
+    setErrors(errorsObj);
     API().post('login', {
       email: email,
       password: password
@@ -73,7 +77,18 @@ function Login() {
             }
           ));
         } else {
-
+          const errorObj = {...errorsObj};
+          switch (response.data.error) {
+            case 'user not found':
+              errorObj.userNotFound = `No user account found for ${email}`;
+              break;
+            case 'incorrect password':
+              errorObj.passwordIncorrect = `Incorrect password for ${email}`;
+              break;
+            default:
+              errorObj.general = 'Something went wrong, check your input and try again';
+          }
+          setErrors(errorObj);
         }
       }
     ).catch(
