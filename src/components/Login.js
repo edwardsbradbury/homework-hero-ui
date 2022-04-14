@@ -42,13 +42,13 @@ function Login() {
 
     // Execution reaches here if some validation failed. Figure out which correction prompts to show the user
     if (email === '') {
-      errorObj.emailMissing = 'To login, you need to enter your email address';
+      errorObj.emailMissing = 'To login, you must enter your email address';
     } else if (!emailRegex.test(email)) {
       errorObj.emailInvalid = 'The email address you entered is not a valid email address';
     }
 
     if (password === '') {
-      errorObj.passwordMissing = 'To login, you need to enter your password';
+      errorObj.passwordMissing = 'To login, you must enter your password';
     }
 
     // Show the prompt messages

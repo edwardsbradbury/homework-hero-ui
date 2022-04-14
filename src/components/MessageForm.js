@@ -71,8 +71,9 @@ function MessageForm (props) {
       dispatch(sendMessage(
         {
           convId: convId,
-          sender: user.id,
-          recipient: recipient,
+          senderId: user.id,
+          recipId: recipient,
+          userName: user.forename,
           sent: new Date().toISOString().slice(0, 19).replace('T', ' '),
           message: content
         }

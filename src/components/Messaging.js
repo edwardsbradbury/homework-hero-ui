@@ -11,7 +11,7 @@ function Messaging() {
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  // const userId = state.user.value.id;
+  // const [userId] = useState(state.user.value.id);
   const userId = useSelector(state => state.user.value.id);
   // const mode = state.messaging.value.mode;
   const mode = useSelector(state => state.messaging.value.mode);
