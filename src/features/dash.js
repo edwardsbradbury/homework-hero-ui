@@ -25,12 +25,15 @@ export const dashReducer = createSlice({
     setNewUser: (state, action) => {
       state.value.newUser = action.payload;
     },
-    resetDashState: (state) => {
-      state.value = initialState.value;
+    resetDashState: state => {
+      state.value = {
+        mode: 'dash',
+        newUser: false
+      };
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(addSubject.fulfilled, (state, action) => {
+    builder.addCase(addSubject.fulfilled, (state) => {
       state.value = initialState.value;
     })
   }

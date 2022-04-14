@@ -25,8 +25,14 @@ export const userReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(logout.fulfilled, (state, action) => {
-      state.value = initialState.value;
+    builder.addCase(logout.fulfilled, state => {
+      state.value = {
+        loggedIn: false,
+        id: null,
+        type: 'client',
+        forename: '',
+        lastname: '',
+      };
     })
   }
 });
