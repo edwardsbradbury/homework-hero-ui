@@ -41,7 +41,8 @@ function Message (props) {
 
   return (
     <div className='message'>
-      <p>{messageData.senderId === userId ? 'You' : `User ${messageData.senderId}`}</p>
+      {/* <p>{messageData.senderId === userId ? 'You' : `User ${messageData.senderId}`}</p> */}
+      {messageData.senderId === userId && <p>You</p>}
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
     </div>

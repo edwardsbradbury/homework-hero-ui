@@ -7,9 +7,8 @@ import Message from './Message';
 
 function Conversation (props) {
 
-  const [userId] = useState(useSelector(state => state.user.value.id));
+  const [user] = useState(useSelector(state => state.user.value));
   const [firstMessage] = useState(props.messages[0]);
-  const [recipient] = useState(firstMessage.senderId === userId ? firstMessage.recipId : firstMessage.senderId);
 
   /* Calls the showConversation method defined in Messaging component, passing it the first message in the conversation
     so it can search the conversations to check which set of messages to display */
@@ -17,9 +16,18 @@ function Conversation (props) {
     props.show(props.messages);
   }
 
+  // Method to display at the top of the component instance the name of the other participant in convo
+  function getOtherParticName() {
+    for (let message of props.messages) {
+      if (message.senderName !== user.forename) {
+        return message.senderName;
+      }
+    }
+  }
+
   return (
     <div className='conversation' onClick={showMessages}>
-      <h3>{`Chat with user: ${recipient}`}</h3>
+      <h3>{getOtherParticName()}</h3>
       {/* Display basic information about latest message in the conversation */}
       <Message data={firstMessage}/>
     </div>
