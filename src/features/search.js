@@ -1,11 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import API from './API';
 
-// const initialState = {
-//   value: {
-//     results: []
-//   }};
-
 export const doSearch = createAsyncThunk(
   'search/doSearch',
   async (searchParams, thunkAPI) => {
