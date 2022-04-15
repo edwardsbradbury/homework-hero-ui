@@ -8,10 +8,10 @@ function Message (props) {
 
   const messageData = props.data;
   const globalState = useSelector((state) => state);
-  // const messagingMode = useSelector((state) => state.messaging.value.mode);
   const messagingMode = globalState.messaging.value.mode;
   const userId = globalState.user.value.id;
   
+  // Method called on line 53, to show which participant sent the message
   function showSender() {
     if (messageData.senderId === userId) {
       return 'You';

@@ -11,15 +11,12 @@ function Messaging() {
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  // const [userId] = useState(state.user.value.id);
   const userId = useSelector(state => state.user.value.id);
-  // const mode = state.messaging.value.mode;
   const mode = useSelector(state => state.messaging.value.mode);
-  // const conversations = state.messaging.value.conversations;
   const conversations = useSelector(state => state.messaging.value.conversations);
-  // const convIndex = state.messaging.value.convIndex;
   const convIndex = useSelector(state => state.messaging.value.convIndex);
   const errors = state.messaging.value.errors;
+  const [newMessage, setNewMessage] = useState(false);
 
   // After component is mounted, fetch their conversations
   useEffect(() => {
@@ -36,6 +33,14 @@ function Messaging() {
       ));
     }
   }, [convIndex])
+
+  //
+  useEffect(() => {
+    if (newMessage) {
+      dispatch(getConversations(userId));
+      setNewMessage(false);
+    }
+  }, [newMessage])
 
   /* Method passed to MessageForm component instance when Messaging component is in 'from search' mode so that - after writing to a user
     from a search result, Messaging component can switch to 'messages' view, displaying the message the user just sent */
@@ -79,7 +84,7 @@ function Messaging() {
     if (mode === 'from search') {
       return (
         <>
-          <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild}/>
+          <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
         </>
       )
     } else if (mode === 'inbox' && conversations.length < 1) {
@@ -92,7 +97,7 @@ function Messaging() {
       return (
         <>
           {conversations.map(conversation => 
-            <Conversation key={conversation.convId} messages={conversation} show={showConversation}/>
+            <Conversation key={conversation.convId} messages={conversation} show={showConversation} />
           )}
         </>
       )
@@ -102,7 +107,7 @@ function Messaging() {
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
           <br />
-          <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} />
+          <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
           {conversations[convIndex].map(messageData => 
             <Message key={messageData.id} data={messageData} />
           )}
