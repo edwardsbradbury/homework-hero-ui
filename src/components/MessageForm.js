@@ -14,7 +14,6 @@ function MessageForm (props) {
   const [content, setContent] = useState('');
   const [characters, setCharacters] = useState(500);
   const [canSend, setCanSend] = useState(false);
-  // const [isSent, setIsSent] = useState(false);
 
   /* Watch the 'content' local state property for changes. When it changes, recalculate remaining characters and set characters state property
     also setCanSend controls whether the send button is clickable */
@@ -42,15 +41,6 @@ function MessageForm (props) {
       })
     }
   }, [])
-
-  /* Watch the isSent state variable; when it's true, fetch the user's conversations again, so that if MessageForm is
-    rendered alongside messages in an ongoing conversation, the new message should be present and displayed */
-  // useEffect(() => {
-  //   if (isSent) {
-  //     dispatch(getConversations(user.id));
-  //     setIsSent(false);
-  //   }
-  // }, [isSent])
   
   /* Method to recalculate how many of max 500 characters have been enterd in the textarea,
     called by useEffect whenever content changes */
@@ -81,7 +71,6 @@ function MessageForm (props) {
       .then(result => {
         if (result.outcome === 'success') {
           setContent('');
-          // setIsSent(true);
           props.setNewMessage(true);
         }
       }).catch(error => console.log(error))

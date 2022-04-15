@@ -34,7 +34,8 @@ function Messaging() {
     }
   }, [convIndex])
 
-  //
+   /* Whenever newMessage state property changes, if its new value is true, re-fetch user's conversations. Means a new message has
+    successfully been sent - conversations array should contain the new message so all messages in the convo are displayed */
   useEffect(() => {
     if (newMessage) {
       dispatch(getConversations(userId));

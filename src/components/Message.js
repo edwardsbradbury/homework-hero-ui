@@ -26,7 +26,8 @@ function Message (props) {
     let dateTimeString = '';
     const dayNum = timeStamp.getDate();
     dateTimeString += (dayNum < 10 ? `0${dayNum}/` : `${dayNum}/`);
-    const month = timeStamp.getMonth();
+    // Months are 0 indexed, meaning January is month 0
+    const month = timeStamp.getMonth() + 1;
     dateTimeString += (month < 10 ? `0${month}/` : `${month}/`);
     dateTimeString += timeStamp.getFullYear();
     const hours = timeStamp.getHours();
