@@ -10,6 +10,16 @@ function Conversation (props) {
   const [user] = useState(useSelector(state => state.user.value));
   const [firstMessage] = useState(props.messages[0]);
 
+  //
+  function hasUnread() {
+    for (let message of props.messages) {
+      if (message.isRead === 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   /* Calls the showConversation method defined in Messaging component, passing it the first message in the conversation
     so it can search the conversations to check which set of messages to display */
   function showMessages() {
@@ -26,7 +36,7 @@ function Conversation (props) {
   }
 
   return (
-    <div className='conversation' onClick={showMessages}>
+    <div className={`conversation ${hasUnread() === true ? 'unread' : ''}`} onClick={showMessages}>
       <h3>{getOtherParticName()}</h3>
       {/* Display basic information about latest message in the conversation */}
       <Message data={firstMessage}/>
