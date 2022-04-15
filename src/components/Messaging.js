@@ -65,10 +65,11 @@ function Messaging() {
   /* Method to switch from inbox view to conversation view (i.e. all messages in a given chat + MessageForm component)
     passed as prop to - and called by showMessages method of - Conversation component */
   function showConversation(conversation) {
-    console.log(conversations.indexOf(conversation));
-    dispatch(setConvIndex(conversations.indexOf(conversation)));
+    const index = conversations.indexOf(conversation);
+    dispatch(setConvIndex(index));
+    dispatch(setConvId(conversations[index][0].convId));
     console.log(`convIndex: ${convIndex}`);
-    // dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
+    dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
     console.log(`Sender is current user? ${conversation[0].senderId === userId}`);
     console.log(`recipId: ${state.messaging.value.recipId}`);
     dispatch(setMessagingMode('messages'));
