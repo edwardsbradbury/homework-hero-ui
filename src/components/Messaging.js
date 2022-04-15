@@ -77,7 +77,7 @@ function Messaging() {
 
   // Method to switch from a conversation view  back to inbox view
   function backToInbox() {
-    setConvIndex(null);
+    dispatch(setConvIndex(null));
     dispatch(setRecipId(null));
     dispatch(setMessagingMode('inbox'));
   } 
