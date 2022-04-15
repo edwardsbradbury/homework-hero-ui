@@ -11,7 +11,15 @@ function Message (props) {
   // const messagingMode = useSelector((state) => state.messaging.value.mode);
   const messagingMode = globalState.messaging.value.mode;
   const userId = globalState.user.value.id;
-
+  
+  function showSender() {
+    if (messageData.senderId === userId) {
+      return 'You';
+    } else {
+      return messageData.senderName;
+    }
+  }
+  
   // Method to format the sent date of message to be more readable to human eyes
   function formatSentDate() {
     const timeStamp = new Date(messageData.sent);
@@ -30,21 +38,18 @@ function Message (props) {
   // How much of the message data is displayed depends on the Messaging component's mode & length of message
   function showMessage() {
     if (messagingMode === 'messages') {
-      // console.log('messaging mode, full message')
       return messageData.message;
     } else if (messagingMode === 'inbox' && messageData.message.length > 100) {
-      // console.log('inbox mode, shortened message')
       return `${messageData.message.slice(0,97)}...`;
     } else if (messagingMode === 'inbox' && messageData.message.length < 100) {
-      // console.log('inbox mode, full message')
       return messageData.message;
     }
   }
 
   return (
     <div className='message'>
-      {/* <p>{messageData.senderId === userId ? 'You' : `User ${messageData.senderId}`}</p> */}
-      {messageData.senderId === userId && <p>You</p>}
+      {/* {messageData.senderId === userId && <p>You</p>} */}
+      <p>{showSender()}</p>
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
     </div>
