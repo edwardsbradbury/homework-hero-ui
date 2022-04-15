@@ -14,7 +14,7 @@ function Onboarding() {
 
   // const messageIfClient = useState(`Add a subject that you need help with and the level you're studying this subject at. This will help tutors who teach that subject to find you`);
   // const messageIfTutor = useState(`Choose a subject you want to teach and the level you're confident teaching this subject at`);
-  const [message] = useState(userType === 'client' ? messageIfClient : messageIfTutor);
+  // const [message] = useState(userType === 'client' ? messageIfClient : messageIfTutor);
   const [subject, setSubject] = useState('');
   const [level, setLevel] = useState('');
   const subjectPrompt = useState('Subject');
