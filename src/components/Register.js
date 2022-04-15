@@ -224,9 +224,6 @@ function Register() {
       if (response.data.outcome === 'success') {
         /* Update the necessary global state variables in Redux: mode and newUser properties in features/dash are updated, as are
           the mode property in fatures/home and the user data is updated in features/user */
-        dispatch(setDashMode('dash'));
-        dispatch(setNewUser(true));
-        dispatch(changeMode('dashboard'));
         dispatch(login(
           {
             loggedIn: true,
@@ -236,6 +233,9 @@ function Register() {
             lastname: lastname,
           }
         ))
+        dispatch(setDashMode('dash'));
+        dispatch(setNewUser(true));
+        dispatch(changeMode('dashboard'));
       } else if (Array.isArray(response.data.error)) {
         console.log('Server validation errors');
       } else {
