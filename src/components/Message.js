@@ -21,7 +21,9 @@ function Message (props) {
     const month = timeStamp.getMonth();
     dateTimeString += (month < 10 ? `0${month}/` : `${month}/`);
     dateTimeString += timeStamp.getFullYear();
-    dateTimeString += ` ${timeStamp.getHours()}:${timeStamp.getMinutes()}`;
+    const hours = timeStamp.getHours();
+    const minutes = timeStamp.getMinutes();
+    dateTimeString += ` ${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
     return dateTimeString;
   }
 
