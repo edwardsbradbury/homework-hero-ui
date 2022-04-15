@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setMessagingMode, getConversations, setRecipId, setConvIndex, setMessagingErrors, clearMessagingErrors} from '../features/messaging';
+import {setMessagingMode, getConversations, setConvId, setConvIndex, setRecipId, setMessagingErrors, clearMessagingErrors} from '../features/messaging';
 import Conversation from './Conversation';
 import MessageForm from './MessageForm';
 import Message from './Message';
@@ -25,12 +25,13 @@ function Messaging() {
     }
   }, [mode])
 
-  // Watch convIndex for changes and update recipient
+  // Watch convIndex for changes, updating recipId and convId accordingly
   useEffect(() => {
     if (convIndex){
       dispatch(setRecipId(
         conversations[convIndex][0].senderId === userId ? conversations[convIndex][0].recipId : conversations[convIndex][0].senderId
       ));
+      dispatch(setConvId(conversations[convIndex][0].convId));
     }
   }, [convIndex])
 
@@ -67,8 +68,8 @@ function Messaging() {
     console.log(conversations.indexOf(conversation));
     dispatch(setConvIndex(conversations.indexOf(conversation)));
     console.log(`convIndex: ${convIndex}`);
-    dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
-    console.log(`Sender is current user? ${conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId}`);
+    // dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
+    console.log(`Sender is current user? ${conversation[0].senderId === userId}`);
     console.log(`recipId: ${state.messaging.value.recipId}`);
     dispatch(setMessagingMode('messages'));
   }

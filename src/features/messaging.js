@@ -49,14 +49,17 @@ export const messagingReducer = createSlice({
     setMessagingMode: (state, action) => {
       state.value.mode = action.payload;
     },
-    setRecipId: (state, action) => {
-      state.value.recipId = action.payload;
-    },
     setConversations: (state, action) => {
       state.value.conversations = action.payload;
     },
+    setConvId: (state, action) => {
+      state.value.convId = action.payload;
+    },
     setConvIndex: (state, action) => {
       state.value.convIndex = action.payload;
+    },
+    setRecipId: (state, action) => {
+      state.value.recipId = action.payload;
     },
     setMessagingErrors: (state, action) => {
       if (Array.isArray(action.payload)) {
@@ -103,6 +106,6 @@ export const messagingReducer = createSlice({
   }
 });
 
-export const {setMessagingMode, setRecipId, setConversations, setConvIndex, setMessagingErrors, clearMessagingErrors, resetMessagingState} = messagingReducer.actions;
+export const {setMessagingMode, setRecipId, setConversations, setConvId, setConvIndex, setMessagingErrors, clearMessagingErrors, resetMessagingState} = messagingReducer.actions;
 
 export default messagingReducer.reducer;
