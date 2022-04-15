@@ -10,7 +10,7 @@ function Onboarding() {
   // Will need to dispatch some Redux state update actions
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.value);
-  const userType = user.type;
+  const [userType] = useState(user.type);
 
   const messageIfClient = useState(`Add a subject that you need help with and the level you're studying this subject at. This will help tutors who teach that subject to find you`);
   const messageIfTutor = useState(`Choose a subject you want to teach and the level you're confident teaching this subject at`);
@@ -26,6 +26,13 @@ function Onboarding() {
   const [error, setError] = useState('');
   const errMessage = useState('Please add a subject and level');
 
+  function displayMessage() {
+    if (userType === 'client') {
+      return `Add a subject that you need help with and the level you're studying this subject at. This will help tutors who teach that subject to find you`;
+    } else {
+      return `Choose a subject you want to teach and the level you're confident teaching this subject at`;
+    }
+  }
   
   // Method to submit the input data to API's /add_subject route. See features/dash for details of the addSubject action
   function addSubjectToProfile() {
@@ -48,7 +55,8 @@ function Onboarding() {
   
   return(
     <div id='onboarding'>
-      <p>{message}</p>
+      {/* <p>{message}</p> */}
+      <p>{displayMessage()}</p>
       <select defaultValue={subjectPrompt} onChange={e => setSubject(e.target.value)}>
         <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
         {subjectOptions}

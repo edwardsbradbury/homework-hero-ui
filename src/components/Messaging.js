@@ -39,8 +39,9 @@ function Messaging() {
     successfully been sent - conversations array should contain the new message so all messages in the convo are displayed */
   useEffect(() => {
     if (newMessage) {
+      dispatch(clearMessagingErrors());
       dispatch(getConversations(userId));
-      setNewMessage(false);
+      setNewMessage(!newMessage);
     }
   }, [newMessage])
 
@@ -68,10 +69,7 @@ function Messaging() {
     const index = conversations.indexOf(conversation);
     dispatch(setConvIndex(index));
     dispatch(setConvId(conversations[index][0].convId));
-    console.log(`convIndex: ${convIndex}`);
     dispatch(setRecipId(conversation[0].senderId === userId ? conversation[0].recipId : conversation[0].senderId));
-    console.log(`Sender is current user? ${conversation[0].senderId === userId}`);
-    console.log(`recipId: ${state.messaging.value.recipId}`);
     dispatch(setMessagingMode('messages'));
   }
 
