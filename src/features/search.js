@@ -21,8 +21,8 @@ export const searchReducer = createSlice({
   name: 'search',
   initialState: {value: {
     allUsers: [],
-    results: [],
-    errors: []
+    // results: [],
+    // errors: []
   }},
   reducers: {
     setResults: (state, action) => {
@@ -30,8 +30,8 @@ export const searchReducer = createSlice({
     },
     resetSearchState: (state) => {
       state.value.allUsers = [];
-      state.value.results = [];
-      state.value.errors = [];
+      // state.value.results = [];
+      // state.value.errors = [];
     }
   },
   extraReducers: builder => {
