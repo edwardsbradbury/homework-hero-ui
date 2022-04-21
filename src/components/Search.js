@@ -33,7 +33,9 @@ function Search() {
       return <p>No {userType === 'client' ? 'tutors' : 'students'} matched your search parameters</p>
     } else if (mode === 'filtered' && results.length > 0) {
       return (
-        results.map(result => <SearchResult key={result.id} resultData={result}/>)
+        <>
+          {results.map(result => <SearchResult key={result.id} resultData={result}/>)}
+        </>
       )
     }
   }
@@ -41,12 +43,12 @@ function Search() {
   return (
     <div id='search'>
       <h1>Search for {userType === 'client' ? 'tutors' : 'students'}</h1>
-      {errors.length &&
+      {errors.length > 0 &&
         <ul>
           {errors.map(error => <li className='error'>{error}</li>)}
         </ul>
       }
-      <SearchForm />
+      <SearchForm setMode={setMode} users={allUsers}/>
       {/* {(results.length > 0) && results.map(result => <SearchResult key={result.id} resultData={result}/>)} */}
       {displayContent()}
     </div>
