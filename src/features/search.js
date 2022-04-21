@@ -37,6 +37,7 @@ export const searchReducer = createSlice({
   extraReducers: builder => {
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       const response = action.payload.data;
+      console.log(response);
       if (response.outcome === 'success') {
         state.value.allUsers = response.users;
         state.value.errors = [];
