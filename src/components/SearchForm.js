@@ -1,12 +1,11 @@
 // Component for collecting and then submitting search criteria to API
 
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {doSearch, setResults} from '../features/search';
+import {useSelector} from 'react-redux';
 
 function SearchForm(props) {
-  const dispatch = useDispatch();
   const userType = useSelector(state => state.user.value.type);
+  const [targetType] = useState(userType === 'client' ? 'tutors' : 'students');
   const [subject, setSubject] = useState('');
   const [level, setLevel] = useState('');
   const subjects = ['Maths', 'English', 'Biology', 'Chemistry', 'Physics', 'Geography', 'History', 'Design and Technology', 'ICT', 'Computer Science', 'Religious Education', 'Art', 'French', 'German', 'Spanish', 'Italian'];
@@ -21,21 +20,17 @@ function SearchForm(props) {
 
     // Prevent browser redirecting/refreshing on form submission
     e.preventDefault();
-    /* See setResults method definition in ../features/search: essentially just clearing any previous search results here. Those are stored in the
-        Redux store */
-    dispatch(setResults([]));
+    // Clear any results remaining from a previous search
+    props.setResults([]);
 
     if (subject && level) {
       const tempResults = props.users.filter(user => user.subject === subject && user.level === level);
-      // dispatch(setResults(tempResults));
       props.setResults(tempResults);
     } else if (subject && !level) {
       const tempResults = props.users.filter(user => user.subject === subject);
-      // dispatch(setResults(tempResults));
       props.setResults(tempResults);
     } else if (!subject && level) {
       const tempResults = props.users.filter(user => user.level === level);
-      // dispatch(setResults(tempResults));
       props.setResults(tempResults);
     }
 
@@ -49,8 +44,9 @@ function SearchForm(props) {
   return (
     // JSX to render search form and user prompts
     <div id='searchForm'>
-      <p>All {userType === 'client' ? 'tutors' : 'students'} are displayed by default.</p>
+      <p>All {targetType} are displayed by default.</p>
       <p>Use the subject and/or level dropdowns and Search button to filter the search results.</p>
+      <p>To re-display all {targetType}, clear the dropdowns and click Search again.</p>
       <form onSubmit={filterUsers}>
         <select onChange={e => setSubject(e.target.value)}>
           <option key='subjPrompt' value={''} selected>Subject</option>

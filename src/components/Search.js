@@ -12,9 +12,6 @@ function Search() {
   const userType = useSelector(state => state.user.value.type);
   const allUsers = useSelector(state => state.search.value.allUsers);
   const [results, setResults] = useState([]);
-  // const [errors, setErrors] = useState([]);
-  // const results = useSelector(state => state.search.value.results);
-  // const errors = useSelector(state => state.search.value.errors);
   const [mode, setMode] = useState('unfiltered');
 
   // After component is created and mounted, fetch all of the users of the opposite type to current user
@@ -46,11 +43,6 @@ function Search() {
   return (
     <div id='search'>
       <h1>Search for {userType === 'client' ? 'tutors' : 'students'}</h1>
-      {/* {errors.length > 0 &&
-        <ul>
-          {errors.map(error => <li className='error'>{error}</li>)}
-        </ul>
-      } */}
       <SearchForm users={allUsers} setResults={setResults} setMode={setMode} />
       {displayContent()}
     </div>
