@@ -105,8 +105,6 @@ function SearchForm(props) {
     e.preventDefault();
     // Clear the warning prompt (may've been set on previous button click)
     setError('');
-    //
-    dispatch(setResults([]));
     /* See setResults method definition in ../features/search: essentially just clearing any previous search results here. Those are stored in the
         Redux store */
     dispatch(setResults([]));
@@ -124,6 +122,8 @@ function SearchForm(props) {
 
     if (subject || level) {
       props.setMode('filtered');
+    } else {
+      props.setMode('unfiltered');
     }
   }
   
@@ -134,11 +134,12 @@ function SearchForm(props) {
       {/* <form onSubmit={search}> */}
       <form onSubmit={filterUsers}>
         <select defaultValue={subjectPrompt} onChange={e => setSubject(e.target.value)}>
-          <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option>
+          {/* <option key='subjPrompt' value={subjectPrompt} disabled>{subjectPrompt}</option> */}
+          <option key='subjPrompt' value={''}>{subjectPrompt}</option>
           {subjectOptions}
         </select>
         <select defaultValue={levelPrompt} onChange={e => setLevel(e.target.value)}>
-          <option key='levelPrompt' value={levelPrompt} disabled>{levelPrompt}</option>
+          <option key='levelPrompt' value={''}>{levelPrompt}</option>
           {levelOptions}
         </select>
         {error && <p>{error}</p>}
