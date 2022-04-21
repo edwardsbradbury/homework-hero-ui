@@ -23,81 +23,6 @@ function SearchForm(props) {
   const levelOptions = levels.map((level, index) => <option key={index} value={level}>{level}</option>);
   const [error, setError] = useState('');
 
-  // Method to validate the input 
-  // function search(e) {
-
-    // // Prevent browser redirecting/refreshing on form submission
-    // e.preventDefault();
-    // // Clear the warning prompt (may've been set on previous button click)
-    // setError('');
-    // /* See setResults method definition in ../features/search: essentially just clearing any previous search results here. Those are stored in the
-    //     Redux store */
-    // dispatch(setResults([]));
-
-  //   /* I can probably simplify this logic somewhat. The mandatory paramaters for the search depend on whether the user is a  client or a tutor:
-  //     clients must choose both subject and level, tutors can choose both or omit level and find all students needing help with a subject at
-  //     any level of study. According to Redux and React docs, I should really be handling the API response and subsequent Redux state updates using
-  //     extraReducers in ../features/search */
-  //   if (userType === 'client') {
-  //     if (subject && level) {
-  //       dispatch(doSearch(
-  //         {
-  //           userType: userType,
-  //           subject: subject,
-  //           level: level
-  //         }
-  //       ))
-  //       // Unwrap returns the promise from the API's response so I can access the result. A Redux thunk doesn't directly return the promise
-  //       .unwrap()
-  //       .then(result => {
-  //         if (result.outcome === 'failure') {
-  //           setError('Something went wrong! Please check your input and try again');
-  //         } else {
-  //           // If the result.result is a string, it's a message saying nothing was found
-  //           if (typeof result.result === 'string') {
-  //             setError('No results matched your search criteria');
-  //           } else {
-  //             /* result.result should be an array; dispatch an action assigning this array to the results property in ../features/search
-  //               this part is what should really be moved into an extraReducer in aforementioned file */
-  //             dispatch(setResults(result.result));
-  //           }
-  //         }
-  //       })
-  //     } else {
-  //       // User is a client and hasn't entered both search parameters - display error prompt
-  //       setError('You must enter the subject and level of study before you can search for tutors');
-  //     }
-  //   } else {
-  //     // User isn't a client, so must be a tutor
-  //     if (subject) {
-  //       dispatch(doSearch(
-  //         {
-  //           userType: userType,
-  //           subject: subject,
-  //           level: level
-  //         }
-  //       ))
-  //       // redux asyncThunks don't directly return the promise response from API - have to unwrap to access it
-  //       .unwrap()
-  //       .then(result => {
-  //         if (result.outcome === 'error') {
-  //           setError('Something went wrong! Please check your input and try again');
-  //         } else if (typeof result.result === 'string') {
-  //           // If the result.result is a  string then it's a message that nothing as found
-  //           setError('No results matched your search criteria');
-  //         } else {
-  //           /* result.result should be an array; dispatch an action assigning this array to the results property in ../features/search
-  //               this part is what should really be moved into an extraReducer in aforementioned file. Really everything from line 94
-  //               to at least 113 should probably be in that file */
-  //           dispatch(setResults(result.result))
-  //         }
-  //       })
-  //     } else {
-  //       // The tutor hasn't entered any search parameters. They must at least choose a subject
-  //       setError('You must enter at least a subject before you can search for pupils');
-  //     }
-  //   }
-  // }
 
   function filterUsers(e) {
 
@@ -113,10 +38,10 @@ function SearchForm(props) {
       const tempResults = props.users.filter(user => user.subject === subject && user.level === level);
       dispatch(setResults(tempResults));
     } else if (subject && !level) {
-      const tempResults = props.users.filter(user => user.subject);
+      const tempResults = props.users.filter(user => user.subject === subject);
       dispatch(setResults(tempResults));
     } else if (!subject && level) {
-      const tempResults = props.users.filter(user => user.level);
+      const tempResults = props.users.filter(user => user.level === level);
       dispatch(setResults(tempResults));
     }
 
