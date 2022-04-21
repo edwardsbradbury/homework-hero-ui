@@ -250,6 +250,9 @@ function Register() {
     // JSX to render the form component and message prompts to users based on interaction
     <div id='register'>
       <h1>Register for an account</h1>
+      <p>Use the 'Account type' dropdown to choose whether to register as a student or as a tutor.</p>
+      <p>Students should be aged 11 or older and under 18.</p>
+      <p>Tutors should be aged 18 or older.</p>
       <form onSubmit={checkForm}>
         {errors.badResponse && <p>{errors.badResponse}</p>}
         <label htmlFor='accountType'>Account type </label>

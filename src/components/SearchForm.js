@@ -34,6 +34,7 @@ function SearchForm(props) {
       props.setResults(tempResults);
     }
 
+    // See displayContent method in Search component
     if (subject || level) {
       props.setMode('filtered');
     } else {
