@@ -1,14 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import API from './API';
 
-export const doSearch = createAsyncThunk(
-  'search/doSearch',
-  async (searchParams, thunkAPI) => {
-    const response = await API().post('search', searchParams);
-    return response.data;
-  }
-);
-
 export const getAllUsers = createAsyncThunk(
   'search/getAllUsers',
   async (userType, thunkAPI) => {
@@ -21,17 +13,12 @@ export const searchReducer = createSlice({
   name: 'search',
   initialState: {value: {
     allUsers: [],
-    // results: [],
-    // errors: []
+    error: ''
   }},
   reducers: {
-    setResults: (state, action) => {
-      state.value.results = action.payload;
-    },
     resetSearchState: (state) => {
       state.value.allUsers = [];
-      // state.value.results = [];
-      // state.value.errors = [];
+      state.value.error = '';
     }
   },
   extraReducers: builder => {
@@ -39,14 +26,14 @@ export const searchReducer = createSlice({
       const response = action.payload;
       if (response.outcome === 'success') {
         state.value.allUsers = response.users;
-        state.value.errors = [];
+        state.value.error = '';
       } else {
-        state.errors.push('Something went wrong fetching users');
+        state.error = 'Something went wrong fetching users';
       }
     })
   }
 });
 
-export const {setResults, resetSearchState} = searchReducer.actions;
+export const {resetSearchState} = searchReducer.actions;
 
 export default searchReducer.reducer;

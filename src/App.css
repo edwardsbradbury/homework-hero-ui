@@ -125,3 +125,8 @@ div.unread {
   border: 2px solid #007AFF;
   border-radius: 15px;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}

@@ -11,6 +11,7 @@ function Search() {
   const dispatch = useDispatch();
   const userType = useSelector(state => state.user.value.type);
   const allUsers = useSelector(state => state.search.value.allUsers);
+  const fetchingError = useSelector(state => state.search.value.error);
   const [results, setResults] = useState([]);
   const [mode, setMode] = useState('unfiltered');
 
@@ -44,6 +45,7 @@ function Search() {
     <div id='search'>
       <h1>Search for {userType === 'client' ? 'tutors' : 'students'}</h1>
       <SearchForm users={allUsers} setResults={setResults} setMode={setMode} />
+      {fetchingError && <p className='error'>{fetchingError}</p>}
       {displayContent()}
     </div>
   )
