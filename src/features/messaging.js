@@ -82,7 +82,7 @@ export const messagingReducer = createSlice({
       }
     }
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(sendMessage.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.outcome === 'failure') {

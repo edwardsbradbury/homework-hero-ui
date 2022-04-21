@@ -9,19 +9,40 @@ export const doSearch = createAsyncThunk(
   }
 );
 
+export const getAllUsers = createAsyncThunk(
+  'search/getAllUsers',
+  async (userType, thunkAPI) => {
+    const response = await API().get(`/all_users?userType=${userType}`);
+    return response.data;
+  }
+);
+
 export const searchReducer = createSlice({
   name: 'search',
   initialState: {value: {
-    results: []
+    allUsers: [],
+    results: [],
+    errors: []
   }},
   reducers: {
     setResults: (state, action) => {
       state.value.results = action.payload;
     },
     resetSearchState: (state) => {
+      state.value.allUsers = [];
       state.value.results = [];
     }
   },
+  extraReducers: builder => {
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      const response = action.payload.data;
+      if (response.outcome === 'success') {
+        state.allUsers = response.users;
+      } else {
+        state.errors.push('Something went wrong fetching users');
+      }
+    })
+  }
 });
 
 export const {setResults, resetSearchState} = searchReducer.actions;
