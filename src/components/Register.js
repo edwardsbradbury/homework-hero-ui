@@ -265,10 +265,12 @@ function Register() {
         <input id='forename' type='text' placeholder='First name' value={forename} onChange={e => setForename(e.target.value.trim())}></input>
         {errors.forenameMissing && <p>{errors.forenameMissing}</p>}
         {errors.forenameInvalid && <p>{errors.forenameInvalid}</p>}
+        <br />
         <label htmlFor='lastname'>Last name </label>
         <input id='lastname' type='text' placeholder='Last name' value={lastname} onChange={e => setLastname(e.target.value.trim())}></input>
         {errors.lastnameMissing && <p>{errors.lastnameMissing}</p>}
         {errors.lastnameInvalid && <p>{errors.lastnameInvalid}</p>}
+        <br />
         <label htmlFor='userEmail'>Email address </label>
         <input id='userEmail' type='text' placeholder='you@website.com' value={userEmail} onChange={e => setEmail(e.target.value.trim())}></input>
         {errors.userEmailMissing && <p>{errors.userEmailMissing}</p>}
@@ -278,6 +280,7 @@ function Register() {
         <input id='dob' type='date' value={dob} onChange={e => setDob(e.target.value)}></input>
         {errors.dobMissing && <p>{errors.dobMissing}</p>}
         {errors.dobInvalid && <p>{errors.dobInvalid}</p>}
+        <br />
         <label htmlFor='secondEmail'>{emailLabel} </label>
         <input id='secondEmail' type='text' placeholder={emailPlaceholder} value={secondEmail} onChange={e => setSecondEmail(e.target.value.trim())}></input>
         {errors.secondEmailMissing && <p>{errors.secondEmailMissing}</p>}
@@ -287,6 +290,7 @@ function Register() {
         <input id='password' type='password' value={password} onChange={e => setPassword(e.target.value)}></input>
         {errors.passwordMissing && <p>{errors.passwordMissing}</p>}
         {errors.passwordInvalid && <p>{errors.passwordInvalid}</p>}
+        <br />
         <label htmlFor='confPass'>Confirm password </label>
         <input id='confPass' type='password' value={confPassword} onChange={e => setConfPassword(e.target.value)}></input>
         {errors.confPasswordMissing && <p>{errors.confPasswordMissing}</p>}
