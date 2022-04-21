@@ -105,6 +105,8 @@ function SearchForm(props) {
     e.preventDefault();
     // Clear the warning prompt (may've been set on previous button click)
     setError('');
+    //
+    dispatch(setResults([]));
     /* See setResults method definition in ../features/search: essentially just clearing any previous search results here. Those are stored in the
         Redux store */
     dispatch(setResults([]));
