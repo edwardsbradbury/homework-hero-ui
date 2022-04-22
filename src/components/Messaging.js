@@ -27,7 +27,7 @@ function Messaging() {
       dispatch(markAsRead(
         {
           userId: userId,
-          condId: state.messaging.value.convId
+          convId: state.messaging.value.convId
         }
       ));
     }
