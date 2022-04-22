@@ -42,6 +42,9 @@ function Messaging() {
       dispatch(clearMessagingErrors());
       dispatch(getConversations(userId));
       setNewMessage(!newMessage);
+      if (mode === 'from search') {
+        dispatch(setMessagingMode('inbox'));
+      }
     }
   }, [newMessage])
 
