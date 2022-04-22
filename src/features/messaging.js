@@ -104,7 +104,6 @@ export const messagingReducer = createSlice({
       }
     }).addCase(markAsRead.fulfilled, (state, action) => {
       const response = action.payload;
-      console.log(response);
       if (response.outcome === 'failure') {
         state.value.errors.push('Failed to mark messages as read');
       }
