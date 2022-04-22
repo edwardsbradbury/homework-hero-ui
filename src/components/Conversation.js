@@ -13,7 +13,7 @@ function Conversation (props) {
   //
   function hasUnread() {
     for (let message of props.messages) {
-      if (message.isRead === 0) {
+      if (message.recipId === user.id && message.isRead === 0) {
         return true;
       }
     }

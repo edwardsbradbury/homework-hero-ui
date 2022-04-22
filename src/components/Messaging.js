@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setMessagingMode, getConversations, setConvId, setConvIndex, setRecipId, setMessagingErrors, clearMessagingErrors} from '../features/messaging';
+import {setMessagingMode, getConversations, setConvId, setConvIndex, setRecipId, setMessagingErrors, clearMessagingErrors, markAsRead} from '../features/messaging';
 import Conversation from './Conversation';
 import MessageForm from './MessageForm';
 import Message from './Message';
@@ -22,6 +22,14 @@ function Messaging() {
   useEffect(() => {
     if (mode !== 'from search') {
       dispatch(getConversations(userId));
+    }
+    if (mode === 'messages') {
+      dispatch(markAsRead(
+        {
+          userId: userId,
+          condId: state.messaging.value.convId
+        }
+      ));
     }
   }, [mode])
 

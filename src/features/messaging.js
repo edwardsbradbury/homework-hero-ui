@@ -18,22 +18,6 @@ export const getConvId = createAsyncThunk(
   }
 );
 
-export const getConversations = createAsyncThunk(
-  'messaging/getConversations',
-  async (userId, thunkAPI) => {
-    const response = await API().get(`conversations?userId=${userId}`);
-    return response.data;
-  }
-);
-
-export const getMessages = createAsyncThunk(
-  'messaging/getMessages',
-  async (convId, thunkAPI) => {
-    const response = await API().get(`messages/?convId=${convId}`);
-    return response.data;
-  }
-);
-
 export const sendMessage = createAsyncThunk(
   'messaging/sendMessage',
   async (data, thunkAPI) => {
@@ -42,15 +26,28 @@ export const sendMessage = createAsyncThunk(
   }
 );
 
+export const getConversations = createAsyncThunk(
+  'messaging/getConversations',
+  async (userId, thunkAPI) => {
+    const response = await API().get(`conversations?userId=${userId}`);
+    return response.data;
+  }
+);
+
+export const markAsRead = createAsyncThunk(
+  'messaging/markAsRead',
+  async (data, thunkAPI) => {
+    const response = await API().put(`mark_as_read/${data.userId}/${data.convId}`);
+    return response.data;
+  }
+)
+
 export const messagingReducer = createSlice({
   name: 'messaging',
   initialState,
   reducers: {
     setMessagingMode: (state, action) => {
       state.value.mode = action.payload;
-    },
-    setConversations: (state, action) => {
-      state.value.conversations = action.payload;
     },
     setConvId: (state, action) => {
       state.value.convId = action.payload;
@@ -60,6 +57,9 @@ export const messagingReducer = createSlice({
     },
     setRecipId: (state, action) => {
       state.value.recipId = action.payload;
+    },
+    setConversations: (state, action) => {
+      state.value.conversations = action.payload;
     },
     setMessagingErrors: (state, action) => {
       if (Array.isArray(action.payload)) {
@@ -101,6 +101,12 @@ export const messagingReducer = createSlice({
         state.value.errors.push('Failed to get conversation ID');
       } else {
         state.value.convId = response.data.convId;
+      }
+    }).addCase(markAsRead.fulfilled, (state, action) => {
+      const response = action.payload;
+      console.log(response);
+      if (response.outcome === 'failure') {
+        state.value.errors.push('Failed to mark messages as read');
       }
     })
   }
