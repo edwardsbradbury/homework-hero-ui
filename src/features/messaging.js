@@ -40,7 +40,15 @@ export const markAsRead = createAsyncThunk(
     const response = await API().put(`mark_as_read/${data.userId}/${data.convId}`);
     return response.data;
   }
-)
+);
+
+export const markAsDeleted = createAsyncThunk(
+  'messaging/markAsDeleted',
+  async (data, thunkAPI) => {
+    const response = await API().post('mark_as_deleted', data);
+    return response.data;
+  }
+);
 
 export const messagingReducer = createSlice({
   name: 'messaging',
@@ -106,6 +114,11 @@ export const messagingReducer = createSlice({
       const response = action.payload;
       if (response.outcome === 'failure') {
         state.value.errors.push('Failed to mark messages as read');
+      }
+    }).addCase(markAsDeleted.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.outcome === 'failure') {
+        state.value.errors.push(...response.errors);
       }
     })
   }

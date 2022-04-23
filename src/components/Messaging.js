@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setMessagingMode, getConversations, setConvId, setConvIndex, setRecipId, setMessagingErrors, clearMessagingErrors, markAsRead} from '../features/messaging';
+import {setMessagingMode, getConversations, setConvId, setConvIndex, setRecipId, setMessagingErrors, clearMessagingErrors, markAsRead, markAsDeleted} from '../features/messaging';
 import Conversation from './Conversation';
 import MessageForm from './MessageForm';
 import Message from './Message';
@@ -104,8 +104,32 @@ function Messaging() {
     setSelected(tempSelected);
   }
 
-  function markAsDeleted() {
+  //
+  function getDeletionArgs(message) {
+    if (selected.has(message.id)) {
+      const senderOrRecip = message.senderId === userId ? 'sender' : 'recipient';
+      return {
+        messageId: message.id,
 
+      }
+    }
+  }
+
+  // Method to update deletedBySender / deletedByRecip columns in messaging table via API
+  function markAsDeleted() {
+    let data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
+      ({
+        messageId: message.id,
+        senderOrRecip: message.senderId === userId ? 'sender' : 'recip'
+      })
+    );
+    // dispatch(markAsDeleted(
+    //   {
+    //     userId: userId,
+    //     messages: data
+    //   }
+    // ));
+    console.log(data);
   }
 
   // Method to conditionally return elements/components depending on state
@@ -135,7 +159,7 @@ function Messaging() {
         <>
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
-          {selected.size > 0 && <button>Delete selected</button>}
+          {selected.size > 0 && <button onClick={markAsDeleted}>Delete selected</button>}
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
           {conversations[convIndex].map(messageData => 
