@@ -52,7 +52,7 @@ function Message (props) {
       <p>{showSender()}</p>
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
-      {messagingMode === 'messages' && <input type='checkbox' value={props.messageData.id} onChange={props.setAsSelected(props.messageData.id)}></input>}
+      {messagingMode === 'messages' && <input type='checkbox' value={props.data.id} onChange={props.setAsSelected(props.data.id)}></input>}
     </div>
   )
 }
