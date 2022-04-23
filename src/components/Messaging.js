@@ -133,7 +133,7 @@ function Messaging() {
         <>
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
-          {selected.length > 0 && <button>Delete selected</button>}
+          {selected.size > 0 && <button>Delete selected</button>}
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
           {conversations[convIndex].map(messageData => 
