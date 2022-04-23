@@ -104,25 +104,20 @@ function Messaging() {
     setSelected(tempSelected);
   }
 
-  //
-  function getDeletionArgs(message) {
-    if (selected.has(message.id)) {
-      const senderOrRecip = message.senderId === userId ? 'sender' : 'recipient';
-      return {
-        messageId: message.id,
-
-      }
-    }
-  }
-
   // Method to update deletedBySender / deletedByRecip columns in messaging table via API
   function markAsDeleted() {
-    let data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
+    const data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
       ({
         messageId: message.id,
         senderOrRecip: message.senderId === userId ? 'sender' : 'recip'
       })
     );
+    const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender');
+    const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip');
+    data = {
+      asSender: msgsAsSender,
+      asRecip: msgsAsRecip
+    }
     // dispatch(markAsDeleted(
     //   {
     //     userId: userId,
