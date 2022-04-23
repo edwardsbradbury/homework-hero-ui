@@ -95,16 +95,15 @@ function Messaging() {
 
   // Method to be passed to Message components so they can add individual message IDs to the selected state set above
   function setAsSelected(id) {
-    console.log('setAsSelected called');
-    console.log(`ID: ${id}`);
     if (!selected.has(id)) {
-      console.log('Adding');
       selected.add(id);
     } else {
-      console.log('Deleting')
       selected.delete(id);
     }
-    console.log(selected);
+  }
+
+  function markAsDeleted() {
+
   }
 
   // Method to conditionally return elements/components depending on state
@@ -134,6 +133,7 @@ function Messaging() {
         <>
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
+          {selected.length > 0 && <button>Delete selected</button>}
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
           {conversations[convIndex].map(messageData => 
