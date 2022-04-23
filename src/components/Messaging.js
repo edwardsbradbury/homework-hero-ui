@@ -106,14 +106,14 @@ function Messaging() {
 
   // Method to update deletedBySender / deletedByRecip columns in messaging table via API
   function markAsDeleted() {
-    const data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
+    let data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
       ({
         messageId: message.id,
         senderOrRecip: message.senderId === userId ? 'sender' : 'recip'
       })
     );
-    const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender');
-    const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip');
+    const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender').map(message => message.id);
+    const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip').map(message => message.id);
     data = {
       asSender: msgsAsSender,
       asRecip: msgsAsRecip
