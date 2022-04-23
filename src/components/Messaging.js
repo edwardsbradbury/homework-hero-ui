@@ -104,6 +104,7 @@ function Messaging() {
       console.log('Deleting')
       selected.delete(id);
     }
+    console.log(selected);
   }
 
   // Method to conditionally return elements/components depending on state

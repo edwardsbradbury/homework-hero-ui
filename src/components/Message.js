@@ -47,6 +47,7 @@ function Message (props) {
     }
   }
 
+  // Method to add the message's ID to / remove it from the set of selected message ids in Messaging component
   function setAsSelected() {
     props.setAsSelected(props.data.id)
   }
