@@ -87,6 +87,7 @@ function Messaging() {
 
   // Method to switch from a conversation view  back to inbox view
   function backToInbox() {
+    setSelected(new Set());
     dispatch(setConvIndex(null));
     dispatch(setRecipId(null));
     dispatch(setMessagingMode('inbox'));
@@ -94,16 +95,13 @@ function Messaging() {
 
   // Method to be passed to Message components so they can add individual message IDs to the selected state set above
   function setAsSelected(id) {
-    // let tempSelected = new Set(selected);
-    // if (!selected.has(id)) {
-    //   tempSelected.add(id);
-    // } else {
-    //   tempSelected.delete(id);
-    // }
-    // setSelected(tempSelected);
+    console.log('setAsSelected called');
+    console.log(`ID: ${id}`);
     if (!selected.has(id)) {
+      console.log('Adding');
       selected.add(id);
     } else {
+      console.log('Deleting')
       selected.delete(id);
     }
   }
