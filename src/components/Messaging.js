@@ -97,7 +97,9 @@ function Messaging() {
     if (!selected.has(id)) {
       setSelected(new Set ([...selected, id]));
     } else {
-      setSelected(new Set ([...selected.delete(id)]));
+      let tempSelected = new Set(selected);
+      tempSelected.delete(id);
+      setSelected(new Set (tempSelected));
     }
   }
 
