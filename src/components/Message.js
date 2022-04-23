@@ -47,12 +47,16 @@ function Message (props) {
     }
   }
 
+  function setAsSelected() {
+    props.setAsSelected(props.data.id)
+  }
+
   return (
     <div className='message'>
       <p>{showSender()}</p>
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
-      {messagingMode === 'messages' && <input type='checkbox' value={props.data.id} onChange={props.setAsSelected(props.data.id)}></input>}
+      {messagingMode === 'messages' && <input type='checkbox' value={props.data.id} onChange={setAsSelected}></input>}
     </div>
   )
 }
