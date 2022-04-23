@@ -49,10 +49,10 @@ function Message (props) {
 
   return (
     <div className='message'>
-      {/* {messageData.senderId === userId && <p>You</p>} */}
       <p>{showSender()}</p>
       <p>{formatSentDate()}</p>
       <p>{showMessage()}</p>
+      {messagingMode === 'messages' && <input type='checkbox' value={props.messageData.id} onChange={props.setAsSelected(props.messageData.id)}></input>}
     </div>
   )
 }

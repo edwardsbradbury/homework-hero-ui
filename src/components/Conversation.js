@@ -10,7 +10,7 @@ function Conversation (props) {
   const [user] = useState(useSelector(state => state.user.value));
   const [firstMessage] = useState(props.messages[0]);
 
-  //
+  // Method to check whether the user has unread messages. Used to assign className 'unread'
   function hasUnread() {
     for (let message of props.messages) {
       if (message.recipId === user.id && message.isRead === 0) {
@@ -26,7 +26,8 @@ function Conversation (props) {
     props.show(props.messages);
   }
 
-  // Method to display at the top of the component instance the name of the other participant in convo
+  /* Method to display at the top of the component instance the name of the other participant in convo. Only works if both participants have
+    actually contributed messages to the conversation though */
   function getOtherParticName() {
     for (let message of props.messages) {
       if (message.senderName !== user.forename) {

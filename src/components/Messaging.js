@@ -17,6 +17,7 @@ function Messaging() {
   const convIndex = useSelector(state => state.messaging.value.convIndex);
   const errors = state.messaging.value.errors;
   const [newMessage, setNewMessage] = useState(false);
+  const [selected, setSelected] = useState(new Set());
 
   // After component is mounted, fetch their conversations
   useEffect(() => {
@@ -89,7 +90,16 @@ function Messaging() {
     dispatch(setConvIndex(null));
     dispatch(setRecipId(null));
     dispatch(setMessagingMode('inbox'));
-  } 
+  }
+
+  // Method to be passed to Message components so they can add individual message IDs to the selected state set above
+  function setAsSelected(id) {
+    if (!selected.includes(id)) {
+      setSelected(new Set ([...selected, id]));
+    } else {
+      setSelected(new Set ([...selected.delete(id)]));
+    }
+  }
 
   // Method to conditionally return elements/components depending on state
   function displayContent() {
@@ -121,7 +131,7 @@ function Messaging() {
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
           {conversations[convIndex].map(messageData => 
-            <Message key={messageData.id} data={messageData} />
+            <Message key={messageData.id} data={messageData} setAsSelected={setAsSelected} />
           )}
         </>
       )
