@@ -94,7 +94,7 @@ function Messaging() {
 
   // Method to be passed to Message components so they can add individual message IDs to the selected state set above
   function setAsSelected(id) {
-    if (!selected.includes(id)) {
+    if (!selected.has(id)) {
       setSelected(new Set ([...selected, id]));
     } else {
       setSelected(new Set ([...selected.delete(id)]));
