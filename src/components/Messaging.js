@@ -112,8 +112,9 @@ function Messaging() {
         senderOrRecip: message.senderId === userId ? 'sender' : 'recip'
       })
     );
-    const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender').map(message => message.id);
-    const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip').map(message => message.id);
+    const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender').map(message => message.messageId);
+    const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip').map(message => message.messageId);
+
     data = {
       asSender: msgsAsSender,
       asRecip: msgsAsRecip
