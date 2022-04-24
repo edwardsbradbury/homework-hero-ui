@@ -105,7 +105,7 @@ function Messaging() {
   }
 
   // Method to update deletedBySender / deletedByRecip columns in messaging table via API
-  function markAsDeleted() {
+  function markDeleted() {
     // let data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
     //   ({
     //     messageId: message.id,
@@ -160,7 +160,7 @@ function Messaging() {
         <>
           <h3 className='link' onClick={backToInbox}>&lt;</h3>
           <h3>{`Chat with user: ${state.messaging.value.recipId}`}</h3>
-          {selected.size > 0 && <button onClick={markAsDeleted}>Delete selected</button>}
+          {selected.size > 0 && <button onClick={markDeleted}>Delete selected</button>}
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
           {conversations[convIndex].map(messageData => 
