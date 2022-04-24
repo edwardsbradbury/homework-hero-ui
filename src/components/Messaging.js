@@ -106,26 +106,31 @@ function Messaging() {
 
   // Method to update deletedBySender / deletedByRecip columns in messaging table via API
   function markAsDeleted() {
-    let data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
-      ({
-        messageId: message.id,
-        senderOrRecip: message.senderId === userId ? 'sender' : 'recip'
-      })
-    );
-    const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender').map(message => message.messageId);
-    const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip').map(message => message.messageId);
-
-    data = {
-      asSender: msgsAsSender,
-      asRecip: msgsAsRecip
-    }
+    // let data = conversations[convIndex].filter(message => selected.has(message.id)).map(message =>
+    //   ({
+    //     messageId: message.id,
+    //     senderOrRecip: message.senderId === userId ? 'sender' : 'recip'
+    //   })
+    // );
+    // const msgsAsSender = data.filter(message => message.senderOrRecip === 'sender').map(message => message.messageId);
+    // const msgsAsRecip = data.filter(message => message.senderOrRecip === 'recip').map(message => message.messageId);
+    // data = {
+    //   asSender: msgsAsSender,
+    //   asRecip: msgsAsRecip
+    // }
     // dispatch(markAsDeleted(
     //   {
     //     userId: userId,
     //     messages: data
     //   }
     // ));
-    console.log(data);
+    // console.log(data);
+    dispatch(markAsDeleted(
+      {
+        userId: userId,
+        messageIds: Array.from(selected)
+      }
+    ));
   }
 
   // Method to conditionally return elements/components depending on state
