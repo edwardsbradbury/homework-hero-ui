@@ -57,6 +57,16 @@ function Messaging() {
     }
   }, [newMessage])
 
+  //
+  function displayMessage(message) {
+    if (message.senderId === userId && message.senderDeleted === 1) {
+      return;
+    } else if (message.recipId === userId && message.recipDeleted === 1) {
+      return;
+    }
+    return <Message key={message.id} data={message} setAsSelected={setAsSelected} />;
+  }
+  
   /* Method passed to MessageForm component instance when Messaging component is in 'from search' mode so that - after writing to a user
     from a search result, Messaging component can switch to 'messages' view, displaying the message the user just sent */
   function setConvIndexFrmChld(convId) {
@@ -119,7 +129,7 @@ function Messaging() {
     })
   }
 
-  //
+  // Method to check whether a given message has been marked as deleted by current user
   function msgIsDeleted(message) {
     if (message.senderId === userId && message.senderDeleted === 1) {
       return true;
@@ -159,8 +169,8 @@ function Messaging() {
           {selected.size > 0 && <button onClick={markDeleted}>Delete selected</button>}
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
-          {conversations[convIndex].map(messageData => 
-            {!msgIsDeleted(messageData) && <Message key={messageData.id} data={messageData} setAsSelected={setAsSelected} />}
+          {conversations[convIndex].map(messageData => displayMessage(messageData)
+            // <Message key={messageData.id} data={messageData} setAsSelected={setAsSelected} />
           )}
         </>
       )
