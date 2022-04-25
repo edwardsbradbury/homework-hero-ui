@@ -32,7 +32,7 @@ function Conversation (props) {
   //
   function getFirstMessage() {
     for (let msg of props.messages) {
-      if (!(msg.senderId === user.id && msg.senderDeleted === 1) || (msg.recipId === user.id && msg.recipDeleted === 1)) {
+      if (!(msg.senderId === user.id && msg.senderDeleted === 1 || msg.recipId === user.id && msg.recipDeleted === 1)) {
         return msg;
       }
     }
