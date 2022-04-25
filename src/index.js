@@ -14,51 +14,51 @@ import messagingReducer from './features/messaging';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
 
-const reducer = {
-  user: userReducer,
-  home: homeReducer,
-  dashboard: dashReducer,
-  search: searchReducer,
-  messaging: messagingReducer
-};
+// const reducer = {
+//   user: userReducer,
+//   home: homeReducer,
+//   dashboard: dashReducer,
+//   search: searchReducer,
+//   messaging: messagingReducer
+// };
 
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage
-}
+// const persistConfig = {
+//   key: 'root',
+//   version: 1,
+//   storage
+// }
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 
-const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-})
+// const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//       },
+//     }),
+// })
 
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 // Configure a Redux global state store, import the following state slices and their methods from features
-// const store = configureStore({
-//   reducer: {
-//     user: userReducer,
-//     home: homeReducer,
-//     dashboard: dashReducer,
-//     search: searchReducer,
-//     messaging: messagingReducer
-//   }
-// });
+const store = configureStore({
+  reducer: {
+    user: userReducer,
+    home: homeReducer,
+    dashboard: dashReducer,
+    search: searchReducer,
+    messaging: messagingReducer
+  }
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
         <App />
-      </PersistGate>
+      {/* </PersistGate> */}
     </Provider>  
   </React.StrictMode>,
   document.getElementById('root')
