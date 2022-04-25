@@ -57,7 +57,8 @@ function Messaging() {
     }
   }, [newMessage])
 
-  //
+  /* A method so that - when mode local state variable = 'messaging', only messages not marked as deleted by current user
+      will be displayed */
   function displayMessage(message) {
     if (message.senderId === userId && message.senderDeleted === 1) {
       return;
@@ -73,8 +74,6 @@ function Messaging() {
     for (let i = 0; i < conversations.length; i++) {
       if (conversations[i][0].convId === convId) {
         dispatch(setConvIndex(i));
-        console.log('Setting index from child');
-        console.log(`Index: ${convIndex}`);
         return;
       }
     }
@@ -129,16 +128,6 @@ function Messaging() {
     })
   }
 
-  // Method to check whether a given message has been marked as deleted by current user
-  function msgIsDeleted(message) {
-    if (message.senderId === userId && message.senderDeleted === 1) {
-      return true;
-    } else if (message.recipId === userId && message.recipDeleted === 1) {
-      return true;
-    }
-    return false;
-  }
-
   // Method to conditionally return elements/components depending on state
   function displayContent() {
     if (mode === 'from search') {
@@ -169,9 +158,7 @@ function Messaging() {
           {selected.size > 0 && <button onClick={markDeleted}>Delete selected</button>}
           <br />
           <MessageForm setIndex={setConvIndexFrmChld} setErrors={setErrsFromChild} setNewMessage={setNewMessage} />
-          {conversations[convIndex].map(messageData => displayMessage(messageData)
-            // <Message key={messageData.id} data={messageData} setAsSelected={setAsSelected} />
-          )}
+          {conversations[convIndex].map(messageData => displayMessage(messageData))}
         </>
       )
     }
