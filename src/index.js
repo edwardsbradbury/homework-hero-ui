@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './features/user';
 import homeReducer from './features/home';
@@ -24,11 +24,22 @@ const reducer = {
 
 const persistConfig = {
   key: 'root',
-  storage,
+  version: 1,
+  storage
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer);
-const store = createStore(persistedReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
+
 const persistor = persistStore(store);
 
 // Configure a Redux global state store, import the following state slices and their methods from features
