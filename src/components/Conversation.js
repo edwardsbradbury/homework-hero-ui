@@ -29,7 +29,7 @@ function Conversation (props) {
     }
   }
 
-  //
+  // Method to return the data of the latest message not marked as deleted by the current user
   function getFirstMessage() {
     for (let msg of props.messages) {
       if (!(msg.senderId === user.id && msg.senderDeleted === 1 || msg.recipId === user.id && msg.recipDeleted === 1)) {
@@ -48,7 +48,6 @@ function Conversation (props) {
     <div className={`conversation ${hasUnread() === true ? 'unread' : ''}`} onClick={showMessages}>
       <h3>{getOtherParticName()}</h3>
       {/* Display basic information about latest message in the conversation */}
-      {/* <Message data={firstMessage}/> */}
       <Message data={getFirstMessage()}/>
     </div>
   )
