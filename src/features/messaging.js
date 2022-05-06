@@ -1,3 +1,6 @@
+/* Slice of Redux state for Messaging, MessageForm, Conversation and Message components, with reducers and
+  async thunks for updating state properties with or without async logic */
+
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import API from './API';
 
@@ -10,6 +13,9 @@ const initialState = {value: {
   errors: []
 }}
 
+/* Method to retrieve a convId to facilitate messaging between the current user and another user.
+  The API's /new_message and mark_as_read routes require convId as a paramater. This method is called
+  by MessageForm component and possibly also Messaging */
 export const getConvId = createAsyncThunk(
   'messaging/getConvId',
   async (data, thunkAPI) => {
@@ -18,6 +24,8 @@ export const getConvId = createAsyncThunk(
   }
 );
 
+/* Method to post the input new message data to my API's /new_message route. There's an extraReducer
+  later in this file to handle the API's responses */
 export const sendMessage = createAsyncThunk(
   'messaging/sendMessage',
   async (data, thunkAPI) => {
@@ -26,6 +34,8 @@ export const sendMessage = createAsyncThunk(
   }
 );
 
+/* Method to query my API's /conversations route which should return either an array of subarrays representing
+  the user's distinct conversations, or an empty array because they haven't had any contact yet */
 export const getConversations = createAsyncThunk(
   'messaging/getConversations',
   async (userId, thunkAPI) => {
@@ -34,6 +44,7 @@ export const getConversations = createAsyncThunk(
   }
 );
 
+/* Method to mark all messages in the given conversation (where the recipId is current user's ID) as read */
 export const markAsRead = createAsyncThunk(
   'messaging/markAsRead',
   async (data, thunkAPI) => {
@@ -42,6 +53,7 @@ export const markAsRead = createAsyncThunk(
   }
 );
 
+/* Method to mark the messages with the specified IDs as deleted for the current user */
 export const markAsDeleted = createAsyncThunk(
   'messaging/markAsDeleted',
   async (data, thunkAPI) => {

@@ -6,14 +6,14 @@ import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { PersistGate } from 'redux-persist/es/integration/react';
 import userReducer from './features/user';
 import homeReducer from './features/home';
 import dashReducer from './features/dash';
 import searchReducer from './features/search';
 import messagingReducer from './features/messaging';
-import { PersistGate } from 'redux-persist/es/integration/react';
 
-
+// Here to line 45 is all configuration/set-up of the Redux global state store + state persistence
 const rootReducer = combineReducers(
   {
     user: userReducer,
@@ -42,18 +42,10 @@ const store = configureStore({
     }),
 })
 
+/* Persistor saves snapshot of the entire Redux state to browser's local storage on refresh or navigation away
+    and re-hydrates it (i.e. re-loads that state upon return to Homework Hero, so it appears as it did when they
+      were last using it */
 const persistor = persistStore(store);
-
-// Configure a Redux global state store, import the following state slices and their methods from features
-// const store = configureStore({
-//   reducer: {
-//     user: userReducer,
-//     home: homeReducer,
-//     dashboard: dashReducer,
-//     search: searchReducer,
-//     messaging: messagingReducer
-//   }
-// });
 
 ReactDOM.render(
   <React.StrictMode>

@@ -29,6 +29,7 @@ function Nav() {
     dispatch(resetSearchState());
   }
 
+  // Called when logo is clicked; returns user to splash/dashboard depending whether or not loggedIn
   function goHome() {
     dispatch(resetDashState());
     dispatch(resetMessagingState());

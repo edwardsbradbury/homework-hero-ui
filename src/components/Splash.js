@@ -1,3 +1,5 @@
+// The basic landing page displayed when soembody accesses Homework Hero without a logged in session
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { changeMode } from '../features/home';

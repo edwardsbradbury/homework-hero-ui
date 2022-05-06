@@ -1,4 +1,6 @@
-// Component to contain subcomponents needed to facilitate search functionality
+/* Component to contain subcomponents (SearchForm, SearchResult) needed to facilitate search functionality.
+  By default, displays all users of opposite type to the current user. SearchForm component can filter the
+  collection of users based on subject and level. The displayContent handles the conditional rendering */
 
 import React, {useState, useEffect, useReducer} from 'react';
 import {useSelector, useDispatch} from 'react-redux';

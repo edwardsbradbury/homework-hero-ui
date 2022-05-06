@@ -1,4 +1,6 @@
-// Component for collecting and then submitting search criteria to API
+/* Component to filter the list of all users of opposite type to current user.
+    The list of all users is stored in the search redux slice, ../features/search.js
+    however, results of filtering are kept locally within the Search component */
 
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';

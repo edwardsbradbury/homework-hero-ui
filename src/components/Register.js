@@ -1,4 +1,5 @@
-// This module is a React component consisting of a registration form with 
+/* This module is a React component consisting of a registration form with methods for input validation,
+  calling the API's /register route and handling the API's responses */
 
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';

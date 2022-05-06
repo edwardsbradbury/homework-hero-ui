@@ -1,4 +1,5 @@
-// Component into which subcomponents will be injected for facilitating messaging feature
+/* Component into which subcomponents (Conversation, MessageForm & Message) will be injected for facilitating
+messaging feature. Mode state property controls which components are nested within Messaging */
 
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
@@ -34,13 +35,15 @@ function Messaging() {
     }
   }, [mode])
 
-  // Watch convIndex for changes, updating recipId and convId accordingly
+  /* Watch convIndex for changes, updating recipId and convId accordingly. Those are requires by subcomponents, e.g. MessageForm must
+    pass convId when the new message action is dispatched */
   useEffect(() => {
     if (convIndex){
+      const lastMessage = conversations[convIndex][0];
       dispatch(setRecipId(
-        conversations[convIndex][0].senderId === userId ? conversations[convIndex][0].recipId : conversations[convIndex][0].senderId
+        lastMessage.senderId === userId ? lastMessage.recipId : lastMessage.senderId
       ));
-      dispatch(setConvId(conversations[convIndex][0].convId));
+      dispatch(setConvId(lastMessage.convId));
     }
   }, [convIndex])
 

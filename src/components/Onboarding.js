@@ -1,5 +1,6 @@
-/* Component to be displayed to newly registered users. Requires user to select a subject and level of study (either that they need
-    help with or are confident teaching). Posts this data to API to store in database. Search component uses this db table */
+/* Component to be displayed to newly registered users (within Dashboard component if newUser = true). Requires user to select
+  a subject and level of study (either that they need help with or are confident teaching). Posts this data to API to store in database.
+  Search component uses this db table */
 
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
@@ -11,10 +12,6 @@ function Onboarding() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.value);
   const [userType] = useState(user.type);
-
-  // const messageIfClient = useState(`Add a subject that you need help with and the level you're studying this subject at. This will help tutors who teach that subject to find you`);
-  // const messageIfTutor = useState(`Choose a subject you want to teach and the level you're confident teaching this subject at`);
-  // const [message] = useState(userType === 'client' ? messageIfClient : messageIfTutor);
   const [subject, setSubject] = useState('');
   const [level, setLevel] = useState('');
   const subjectPrompt = useState('Subject');
